@@ -1,0 +1,59 @@
+// VMCconfig.cpp
+
+#include "VMCconfig.h"
+//#include "Utilities/rand.h"
+
+using namespace QMC;
+
+VMCconfig::VMCconfig(unsigned NParticles, unsigned ndim, const std::valarray<double>& BoxSize, double ParticleRadius): m_NParticles(NParticles),
+			m_NDim(ndim), m_BoxSize(BoxSize), m_radius0(ParticleRadius)
+{
+	m_Energy = 0.0;
+	m_EnergySqd = 0.0;
+	m_EnergyComputed = false;
+	Initialize();
+}
+
+VMCconfig::~VMCconfig()
+{
+}
+
+double VMCconfig::GetEnergy()
+{
+	if(!m_EnergyComputed) {
+		m_Energy = ComputeEnergy();
+	}
+
+	return m_Energy;
+}
+
+double VMCconfig::GetEnergySqd()
+{
+	if(!m_EnergyComputed) {
+		m_EnergySqd = ComputeEnergySqd();
+	}
+
+	return m_EnergySqd;
+}
+
+unsigned VMCconfig::GetDimension() const
+{
+	return m_NDim;
+}
+
+unsigned VMCconfig::GetNParticles() const
+{
+	return m_NParticles;
+}
+
+void VMCconfig::Initialize()
+{
+	m_vPoints.clear();
+	VMCPoint point(m_NDim);
+	
+	// set coordinates for initial point
+	for(unsigned n=0;n<m_NDim;n++) {
+		point[n] = (ran2(m_Seed)-0.5)*m_BoxSize[n];
+	}
+	m_vPoints.push_back(point);	
+}

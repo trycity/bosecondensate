@@ -1,0 +1,67 @@
+// VMCconfig.h
+
+#ifndef _VMCCONFIG_H
+#define _VMCCONFIG_H
+
+
+#include <vector>
+#include <valarray>
+#include <cmath>
+
+
+namespace QMC{
+	//VMCPoint used to assign position for each particle
+	typedef std::valarray<double> VMCPoint; 
+	
+	//VMCconfig used to create basic phase space for monte carlo calculations.
+	class VMCconfig
+	{
+	public:
+		VMCconfig(unsigned NParticles, unsigned ndim, const std::valarray<double>& BoxSize, double ParticleRadius);
+
+		virtual int TrialMove(unsigned* pnk, VMCPoint& endPoint, double* pdq) = 0;
+		virtual int Move(unsigned k, const VMCPoint& newPoint, bool bComputeE) = 0;
+
+		double GetEnergy();
+		double GetEnergySqd();
+		unsigned GetDimension() const;
+		unsigned GetNParticles() const;
+		virtual void Initialize();
+
+		virtual ~VMCconfig();
+
+	protected:
+		double m_Density;
+		unsigned m_NParticles;
+		unsigned m_NDim;
+		std::valarray<double> m_BoxSize;
+		double m_radius0;
+		std::vector<VMCPoint> m_vPoints;
+		double m_Energy;
+		double m_EnergySqd;
+		bool m_EnergyComputed;
+		static const int m_Seed = -123456789;
+		
+		virtual double ComputeEnergy() = 0;
+		virtual double ComputeEnergySqd() = 0;
+		double VmcDistance(VMCPoint& Pointa, VMCPoint& Pointb);
+
+	private:
+		VMCconfig(const VMCconfig& rhsConfig);
+		VMCconfig& operator=(const VMCconfig& rhsConfig);
+	};
+
+	inline double
+	VMCconfig::VmcDistance(VMCPoint& Pointa, VMCPoint& Pointb){
+
+		if(Pointa.size() != Pointb.size()){
+			THROW_EXCEPTION("EXCEPTION: VmcDistance called with incorrect argument sizes");
+		}
+
+		std::valarray<double> x = Pointa-Pointb;
+		std::valarray<double> y = x*x;
+		return sqrt(y.sum());
+	}
+}; //end namespace
+
+#endif
