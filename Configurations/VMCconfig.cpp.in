@@ -51,9 +51,30 @@ void VMCconfig::Initialize()
 	m_vPoints.clear();
 	VMCPoint point(m_NDim);
 	
-	// set coordinates for initial point
-	for(unsigned n=0;n<m_NDim;n++) {
+	// set coordinates for first particle
+	for(unsigned n=0; n<m_NDim; n++) {
 		point[n] = (ran2(m_Seed)-0.5)*m_BoxSize[n];
 	}
-	m_vPoints.push_back(point);	
+	m_vPoints.push_back(point);
+	
+	//set coordinates for the remaining particles
+	do{
+		for(unsigned n=0; n<m_NDim; n++){
+			point[n] = (ran2(m_Seed)-0.5)*m_BoxSize[n];
+		}
+		bool Accept = true;
+		
+		double r = 0.0;
+		for(unsigned j=0; j<m_vPoints.size(); j++){
+			r = vmcDistance(point, m_vPoints[j])
+			if(r < m_radius0){
+				Accept = false;
+				break;
+			}
+		}
+		
+		if(Accept){
+			m_vPoints.push_back(point);
+		}
+	}while(m_vPoints.size()<m_NParticles);			
 }
