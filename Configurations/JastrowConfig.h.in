@@ -1,0 +1,108 @@
+// JastrowConfig.h
+
+/*
+Class used to create a jastrow configuration,
+requires 1-body wavefunction due to external potential
+and 2-body interaction term.
+localE, localEsqd are the local energy terms derived from the wavefunctions
+*/
+
+#ifndef _JASTROWCONFIG_H
+#define _JASTROWCONFIG_H
+
+#include "VMCconfig.h"
+
+namespace QMC{
+
+	template <typename Phi, typename InteractionF, typename localE>
+	class JastrowConfig : public VMCconfig
+	{
+	public:
+		JastrowConfig(unsigned NParticles, unsigned ndim, const std::valarray<double>& BoxSize, double ParticleRadius,
+					const Phi& wfnPhi, const InteractionF& wfnF, const localE& LE):
+					VMCconfig(NParticles, ndim, BoxSize, ParticleRadius), m_wfnPhi(wfnPhi),
+					m_wfnF(wfnF), m_localEn(LE) {}
+					
+		int TrialMove(unsigned* pnWalked, VMCPoint& endPoint, double* pdq)
+		{
+			// pick one particle at random
+			unsigned k = (unsigned)(ran2(m_Seed)*m_NParticles);
+			
+			// this is the one to be moved
+			*pnWalked = k;
+			
+			// compute its distance to other particles
+			std::valarray<double> rki(m_NParticles-1);
+			for(unsigned i=0; i<k; i++){
+				rki[i] = vmcDistance(m_vPoints[k], m_vPoints[i]);
+			}
+			for(unsigned i=k+1; i<m_NParticles; i++){
+				rki[i] = vmcDistance(m_vPoints[k], m_vPoints[i]);
+			}
+			
+			// make a trial move and re-compute distances to other particles
+			endPoint.resize(m_NDim);
+			std::valarray<double> rkiT(m_NParticles-1);
+			bool Accept = true;
+			do{
+				for(unsigned n=0; n<m_NDim; n++){
+					endPoint[n] = (ran2(m_Seed)-0.5)*m_BoxSize[n];
+				}
+				
+				for(unsigned i=0; i<k; i++){
+					rkiT[i] = vmcDistance(endPoint, m_vPoints[i]);
+					if(rkiT[i] < m_radius0){
+						Accept = false;
+						break;
+					}
+				}
+				if(Accept){
+					for(unsigned i=k+1; i<m_NParticles; i++){
+						rkiT[i] = vmcDistance(endPoint, m_vPoints[i]);
+						if(rkiT[i] < m_radius0){
+							Accept = false;
+							break;
+						}
+					}
+				}		
+			}while(!Accept);
+			
+			double w=1.0;
+			w *= m_wfnPhi(endPoint)/m_wfnPhi(m_vPoints[k]);
+			for(unsigned i=0; i<m_NParticles; i++){
+				w *= m_wfnF(rkiT[i])/m_wfnF(rki[i]);
+			}
+			
+			*pdq = w*w;
+			
+			return 0;
+		}
+		
+		int Move(unsigned k, const VMCPoint& newPoint, bool bComputeE){
+			if(k>m_vPoints.size()){
+				THROW_EXCEPTION("EXCEPTION: particle chosen is greater than total number of particles");
+			}
+			
+			m_vPoints[k] = newPoint;
+			
+			if(bComputeE && k<m_MaxCorrelation){
+				ComputeEnergy();
+			}
+			
+			return 0;
+		}	
+			
+	protected:
+		void ComputeEnergy(){
+			m_Energy = m_localEn(m_vPoints);
+			m_EnergyComputed = true;
+		}
+		
+		Phi m_wfnPhi;
+		InteractionF m_wfnF;
+		localE m_localEn;
+		static constant unsigned m_MaxCorrelation = 3;		
+	}; // end of class definition
+}; // end of namespace
+
+#endif

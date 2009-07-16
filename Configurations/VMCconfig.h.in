@@ -10,6 +10,7 @@
 
 
 namespace QMC{
+	
 	//VMCPoint used to assign position for each particle
 	typedef std::valarray<double> VMCPoint; 
 	
@@ -42,8 +43,8 @@ namespace QMC{
 		bool m_EnergyComputed;
 		static const int m_Seed = -123456789;
 		
-		virtual double ComputeEnergy() = 0;
-		virtual double ComputeEnergySqd() = 0;
+		virtual void ComputeEnergy() = 0;
+		virtual void ComputeEnergySqd() = 0;
 		double VmcDistance(VMCPoint& Pointa, VMCPoint& Pointb);
 
 	private:
