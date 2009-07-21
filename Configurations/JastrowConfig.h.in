@@ -2,8 +2,8 @@
 
 /*
 Class used to create a jastrow configuration,
-requires 1-body wavefunction due to external potential
-and 2-body interaction term.
+requires 1-body wavefunction due to external potential (Phi)
+and 2-body interaction term(InteractionF).
 localE, localEsqd are the local energy terms derived from the wavefunctions
 */
 
@@ -11,17 +11,18 @@ localE, localEsqd are the local energy terms derived from the wavefunctions
 #define _JASTROWCONFIG_H
 
 #include "VMCconfig.h"
+#include "Utilities/rand.h"
 
 namespace QMC{
 
-	template <typename Phi, typename InteractionF, typename localE>
+	template <typename Phi, typename InteractionF, typename localE, typename localESqd>
 	class JastrowConfig : public VMCconfig
 	{
 	public:
 		JastrowConfig(unsigned NParticles, unsigned ndim, const std::valarray<double>& BoxSize, double ParticleRadius,
-					const Phi& wfnPhi, const InteractionF& wfnF, const localE& LE):
+					const Phi& wfnPhi, const InteractionF& wfnF, const localE& LE, const localESqd& LESqd):
 					VMCconfig(NParticles, ndim, BoxSize, ParticleRadius), m_wfnPhi(wfnPhi),
-					m_wfnF(wfnF), m_localEn(LE) {}
+					m_wfnF(wfnF), m_localEn(LE), m_localEnSqd(LESqd) {}
 					
 		int TrialMove(unsigned* pnWalked, VMCPoint& endPoint, double* pdq)
 		{
@@ -87,6 +88,7 @@ namespace QMC{
 			
 			if(bComputeE && k<m_MaxCorrelation){
 				ComputeEnergy();
+				ComputeEnergySqd();
 			}
 			
 			return 0;
@@ -98,9 +100,14 @@ namespace QMC{
 			m_EnergyComputed = true;
 		}
 		
+		void ComputeEnergySqd(){
+			m_EnergySqd = m_localEnSqd(m_vPoints);
+		}
+		
 		Phi m_wfnPhi;
 		InteractionF m_wfnF;
 		localE m_localEn;
+		localESqd m_localEnSqd;
 		static constant unsigned m_MaxCorrelation = 3;		
 	}; // end of class definition
 }; // end of namespace

@@ -1,7 +1,7 @@
 // VMCconfig.cpp
 
 #include "VMCconfig.h"
-//#include "Utilities/rand.h"
+#include "Utilities/rand.h"
 
 using namespace QMC;
 
