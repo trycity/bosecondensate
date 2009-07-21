@@ -1,0 +1,22 @@
+## configuration file
+
+AC_INIT([QMC], 0.0)
+
+## set build directory
+BUILD_DIR=`pwd`
+AC_SUBST([BUILD_DIR], [$BUILD_DIR])
+
+## Configuration files
+AC_CONFIG_FILES([Configurations/VMCconfig.h])
+AC_CONFIG_FILES([Configurations/VMCconfig.cpp])
+AC_CONFIG_FILES([Configurations/JastrowConfig.h])
+##AC_CONFIG_FILES([Energy_Terms/])
+##AC_CONFIG_FILES([Gui/])
+##AC_CONFIG_FILES([Metropolis_Walker/])
+##AC_CONFIG_FILES([Socket/])
+##AC_CONFIG_FILES([System/])
+AC_CONFIG_FILES([Utilities/rand.h])
+AC_CONFIG_FILES([Utilities/rand.cpp])
+##AC_CONFIG_FILES([Wavefunctions/])
+
+AC_OUTPUT
