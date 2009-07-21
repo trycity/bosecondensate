@@ -1,0 +1,14 @@
+// rand.h
+
+#ifndef _RAND_H
+#define _RAND_H
+
+// Call with an integer variable initialized to a negative value, 
+// and don't touch it for successive calls in a sequence.
+double ran2(int &idum);
+
+// Returns a normally distributed deviate with zero mean and unit variance
+double gasdev(int &idum);
+
+
+#endif // RAND_H
