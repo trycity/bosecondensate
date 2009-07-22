@@ -1719,16 +1719,15 @@ ac_config_files="$ac_config_files Configurations/VMCconfig.cpp"
 
 ac_config_files="$ac_config_files Configurations/JastrowConfig.h"
 
-##AC_CONFIG_FILES([Energy_Terms/])
-##AC_CONFIG_FILES([Gui/])
-##AC_CONFIG_FILES([Metropolis_Walker/])
-##AC_CONFIG_FILES([Socket/])
-##AC_CONFIG_FILES([System/])
 ac_config_files="$ac_config_files Utilities/rand.h"
 
 ac_config_files="$ac_config_files Utilities/rand.cpp"
 
 ac_config_files="$ac_config_files Wavefunctions/SymHoPhi.h"
+
+ac_config_files="$ac_config_files Wavefunctions/SymHoPhi.cpp"
+
+ac_config_files="$ac_config_files Wavefunctions/Test/SymHoPhi_test.cpp"
 
 
 cat >confcache <<\_ACEOF
@@ -2345,6 +2344,8 @@ do
     "Utilities/rand.h") CONFIG_FILES="$CONFIG_FILES Utilities/rand.h" ;;
     "Utilities/rand.cpp") CONFIG_FILES="$CONFIG_FILES Utilities/rand.cpp" ;;
     "Wavefunctions/SymHoPhi.h") CONFIG_FILES="$CONFIG_FILES Wavefunctions/SymHoPhi.h" ;;
+    "Wavefunctions/SymHoPhi.cpp") CONFIG_FILES="$CONFIG_FILES Wavefunctions/SymHoPhi.cpp" ;;
+    "Wavefunctions/Test/SymHoPhi_test.cpp") CONFIG_FILES="$CONFIG_FILES Wavefunctions/Test/SymHoPhi_test.cpp" ;;
 
   *) { { $as_echo "$as_me:$LINENO: error: invalid argument: $ac_config_target" >&5
 $as_echo "$as_me: error: invalid argument: $ac_config_target" >&2;}

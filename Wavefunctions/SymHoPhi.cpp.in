@@ -1,0 +1,27 @@
+// SymHoPhy.cpp
+
+#include <valarray>
+#include <cmath>
+#include "SymHoPhi.h"
+
+using namespace QMC;
+
+SymHoPhi::SymHoPhi(double alpha):m_Alpha(alpha)
+{
+}
+
+SymHoPhi::~SymHoPhi()
+{
+}
+
+double SymHoPhi::getAlpha()const
+{
+	return m_Alpha;
+}
+
+double SymHoPhi::operator()(const ::QMC::VMCPoint& x)const
+{
+	std::valarray<double> y = x*x;
+	return exp(-m_Alpha*y.sum());
+}
+

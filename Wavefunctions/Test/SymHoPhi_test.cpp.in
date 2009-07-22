@@ -1,0 +1,18 @@
+// test.cpp
+
+#include <iostream>
+
+#include "Wavefunctions/SymHoPhi.h"
+
+
+using namespace QMC;
+using namespace std;
+
+int main()
+{
+	double alpha = 0.5;	
+	::QMC::SymHoPhi testPhi(alpha);
+
+	::std::cout<<"m_Alpha = "<<testPhi.getAlpha()<<::std::endl;
+	return 0;
+}
