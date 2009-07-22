@@ -1728,7 +1728,8 @@ ac_config_files="$ac_config_files Utilities/rand.h"
 
 ac_config_files="$ac_config_files Utilities/rand.cpp"
 
-##AC_CONFIG_FILES([Wavefunctions/])
+ac_config_files="$ac_config_files Wavefunctions/SymHoPhi.h"
+
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -2343,6 +2344,7 @@ do
     "Configurations/JastrowConfig.h") CONFIG_FILES="$CONFIG_FILES Configurations/JastrowConfig.h" ;;
     "Utilities/rand.h") CONFIG_FILES="$CONFIG_FILES Utilities/rand.h" ;;
     "Utilities/rand.cpp") CONFIG_FILES="$CONFIG_FILES Utilities/rand.cpp" ;;
+    "Wavefunctions/SymHoPhi.h") CONFIG_FILES="$CONFIG_FILES Wavefunctions/SymHoPhi.h" ;;
 
   *) { { $as_echo "$as_me:$LINENO: error: invalid argument: $ac_config_target" >&5
 $as_echo "$as_me: error: invalid argument: $ac_config_target" >&2;}
