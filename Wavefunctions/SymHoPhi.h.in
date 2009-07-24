@@ -25,6 +25,8 @@ namespace QMC{
 	private:
 		// variational parameter
 		double m_Alpha;	
+		SymHoPhi(const SymHoPhi& rhsPhi);
+		SymHoPhi& operator=(const SymHoPhi& rhsPhi);
 	};
 };
 #endif

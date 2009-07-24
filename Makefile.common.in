@@ -1,0 +1,43 @@
+# common
+
+CXX = g++
+
+
+## variables defined via configure
+QMC_SRC_DIR = @abs_top_srcdir@
+QMC_BUILD_DIR = @BUILD_DIR@
+
+INCDIRS = -I.
+INCDIRS += -I$(QMC_SRC_DIR)
+INCDIRS += -I$(QMC_BUILD_DIR)
+
+
+# LIB C++ FLAGS
+LIBCXXFLAGS = -fPIC
+
+# C++ flags
+CXXFLAGS = -MD
+CXXFLAGS += -Wall
+CXXFLAGS += -m32
+ifeq ("$(IS_DEBUG_BUILD)", "y")
+CXXFLAGS += -g
+else
+CXXFLAGS += -DNDEBUG
+endif
+CXXFLAGS += $(INCDIRS)
+
+# LD flags
+SHLIBFLAGS = -shared
+SHLIBFLAGS += -m32
+
+# directories for libraries
+LIBRARY_DIRECTORIES = $(QMC_BUILD_DIR)/Wavefunctions
+
+
+LIBDIRS = $(foreach dir, $(LIBRARY_DIRECTORIES), -L$(dir))
+RPATH_FLAGS = $(foreach dir, $(LIBRARY_DIRECTORIES), -Wl,--rpath -Wl,$(dir))
+
+%.o : %.cpp
+	$(CXX) $(CXXFLAGS) -c $<
+	@sed -i 's,\($*\.o\)[ :]*\(.*\),$@ : $$\(wildcard \2,g' $*.d
+	@sed -i '$$ s/$$/ \)/' $*.d

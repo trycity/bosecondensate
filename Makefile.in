@@ -1,0 +1,53 @@
+QMC_ROOT = @abs_top_srcdir@
+QMC_BUILD_DIR = @BUILD_DIR@
+
+PREFIX = @prefix@
+
+# use this to have separate build and source directories
+VPATH = $(QMC_BUILD_DIR)
+
+CPP_TARGETS = common
+ifeq ("$(HAS_CUSTOM_FILES)", "y")
+CPP_TARGETS := $(CPP_TARGETS) custom
+else
+CPP_TARGETS := $(CPP_TARGETS) exe
+endif
+
+
+TARGETS = $(CPP_TARGETS)
+
+COMMON_DIRS = Wavefunctions
+
+
+TEST_DIRS = $(shell find $(QMC_BUILD_DIR) -name Makefile.in | sed "s|Makefile.in||g" | grep "/Test/" | sed "s|@BUILD_DIR@/||g")
+
+.PHONY: all clean common tests c++
+
+all: $(TARGETS)
+	echo $(TARGETS)
+
+c++: $(CPP_TARGETS)
+
+clean:
+	for dir in $(COMMON_DIRS); do \
+	 (echo $$dir; cd $$dir; make clean)||exit;\
+	done
+	for dir in $(TEST_DIRS); do \
+	 (echo $$dir; cd $$dir; make clean)||exit;\
+	done
+
+common:
+	for dir in $(COMMON_DIRS); do \
+	 (echo $$dir; cd $$dir; make)||exit;\
+	done
+
+custom:
+	for dir in $(CUSTOM_DIRS); do \
+	 (echo $$dir; cd $$dir; make)||exit;\
+	done
+
+
+tests:
+	for dir in $(TEST_DIRS); do \
+	 (echo $$dir; cd $$dir; make)||exit;\
+	done

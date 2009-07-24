@@ -7,13 +7,17 @@ BUILD_DIR=`pwd`
 AC_SUBST([BUILD_DIR], [$BUILD_DIR])
 
 ## Configuration files
+AC_CONFIG_FILES([Makefile])
+AC_CONFIG_FILES([Makefile.common])
 AC_CONFIG_FILES([Configurations/VMCconfig.h])
 AC_CONFIG_FILES([Configurations/VMCconfig.cpp])
 AC_CONFIG_FILES([Configurations/JastrowConfig.h])
 AC_CONFIG_FILES([Utilities/rand.h])
 AC_CONFIG_FILES([Utilities/rand.cpp])
+AC_CONFIG_FILES([Wavefunctions/Makefile])
 AC_CONFIG_FILES([Wavefunctions/SymHoPhi.h])
 AC_CONFIG_FILES([Wavefunctions/SymHoPhi.cpp])
+AC_CONFIG_FILES([Wavefunctions/Test/Makefile])
 AC_CONFIG_FILES([Wavefunctions/Test/SymHoPhi_test.cpp])
 
 AC_OUTPUT
