@@ -1,0 +1,18 @@
+// Homogeneous.cpp
+
+#include "HomogeneousPhi.h"
+
+using namespace QMC;
+
+HomogeneousPhi::HomogeneousPhi()
+{
+}
+
+HomogeneousPhi::~HomogeneousPhi()
+{
+}
+
+double HomogeneousPhi::operator()(const ::QMC::VMCPoint& x)const
+{
+	return 1.0;
+}

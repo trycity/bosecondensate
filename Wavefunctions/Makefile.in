@@ -13,7 +13,7 @@ SHLIBFLAGS += -m32
 
 .PHONY: all clean lib
 
-all: $(OBJECTS)
+all: $(OBJECTS) lib
 
 lib:
 	@echo $(OBJECTS)

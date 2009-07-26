@@ -1,0 +1,27 @@
+// HardSphereF.h
+
+/*
+class used to describe a hard sphere interaction between particles
+*/
+
+#ifndef _HARDSPHEREF_H
+#define _HARDSPHEREf_H
+
+
+namespace QMC{
+	class HardSphereF
+	{
+	public:
+		HardSphereF(double as, double healing_distance, double Kconstant);
+		~HardSphereF();
+		
+		double operator()(double rij)const;
+		
+	private:
+		double m_as;              // S-wave scattering length	
+		double m_HealingDistance; // Healing distance
+		double m_Kconstant;       // Constant associated with amplitude of wavefunction
+	};
+};
+
+#endif

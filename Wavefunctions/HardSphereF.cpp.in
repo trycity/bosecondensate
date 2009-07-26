@@ -1,0 +1,29 @@
+// HardSphereF.cpp
+
+#include <cmath>
+
+#include "HardSphereF.h"
+
+using namespace QMC;
+
+HardSphereF::HardSphereF(double as, double distance, double Kconstant):m_as(as), m_HealingDistance(distance),
+	m_Kconstant(Kconstant)
+{
+}
+
+HardSphereF::~HardSphereF()
+{
+}
+
+double HardSphereF::operator()(double rij)const
+{
+	double n = 1.0;
+	
+	if(rij<=m_HealingDistance)
+	{
+		n = (m_HealingDistance/rij)*(sin(m_Kconstant*(rij-m_as))/sin(m_Kconstant*(m_HealingDistance-m_as)));
+	}
+		
+	return n;
+}
+	

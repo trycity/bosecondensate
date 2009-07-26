@@ -1,0 +1,18 @@
+// EffectiveRangeF.cpp
+
+#include "EffectiveRangeF.h"
+
+using namespace QMC;
+
+EffectiveRangeF::EffectiveRangeF(double as):m_as(as)
+{
+}
+
+EffectiveRangeF::~EffectiveRangeF()
+{
+}
+
+double EffectiveRangeF::operator()(double rij)
+{
+	return (1.0 - m_as/rij);
+}

@@ -1,0 +1,25 @@
+// HomogeneousPhi.h
+
+/* 
+Class depicting homogeneous (System without external potential) 
+*/
+
+#ifndef _HOMOGENEOUSPHI_H
+#define _HOMOGENEOUSPHI_H
+
+#include <valarray>
+
+namespace QMC{
+	typedef ::std::valarray<double> VMCPoint;
+	
+	class HomogeneousPhi
+	{
+	public:
+		HomogeneousPhi();
+		~HomogeneousPhi();
+		
+		double operator()(const VMCPoint& x)const;
+	};
+};
+
+#endif
