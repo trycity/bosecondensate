@@ -24,6 +24,8 @@ namespace QMC{
 					VMCconfig(NParticles, ndim, BoxSize, ParticleRadius), m_wfnPhi(wfnPhi),
 					m_wfnF(wfnF), m_localEn(LE), m_localEnSqd(LESqd) {}
 					
+		virtual ~JastrowConfig(){}
+					
 		int TrialMove(unsigned* pnWalked, VMCPoint& endPoint, double* pdq)
 		{
 			// pick one particle at random
@@ -35,10 +37,10 @@ namespace QMC{
 			// compute its distance to other particles
 			std::valarray<double> rki(m_NParticles-1);
 			for(unsigned i=0; i<k; i++){
-				rki[i] = vmcDistance(m_vPoints[k], m_vPoints[i]);
+				rki[i] = VmcDistance(m_vPoints[k], m_vPoints[i]);
 			}
 			for(unsigned i=k+1; i<m_NParticles; i++){
-				rki[i] = vmcDistance(m_vPoints[k], m_vPoints[i]);
+				rki[i] = VmcDistance(m_vPoints[k], m_vPoints[i]);
 			}
 			
 			// make a trial move and re-compute distances to other particles
@@ -51,7 +53,7 @@ namespace QMC{
 				}
 				
 				for(unsigned i=0; i<k; i++){
-					rkiT[i] = vmcDistance(endPoint, m_vPoints[i]);
+					rkiT[i] = VmcDistance(endPoint, m_vPoints[i]);
 					if(rkiT[i] < m_radius0){
 						Accept = false;
 						break;
@@ -59,7 +61,7 @@ namespace QMC{
 				}
 				if(Accept){
 					for(unsigned i=k+1; i<m_NParticles; i++){
-						rkiT[i] = vmcDistance(endPoint, m_vPoints[i]);
+						rkiT[i] = VmcDistance(endPoint, m_vPoints[i]);
 						if(rkiT[i] < m_radius0){
 							Accept = false;
 							break;
@@ -81,7 +83,7 @@ namespace QMC{
 		
 		int Move(unsigned k, const VMCPoint& newPoint, bool bComputeE){
 			if(k>m_vPoints.size()){
-				THROW_EXCEPTION("EXCEPTION: particle chosen is greater than total number of particles");
+				//THROW_EXCEPTION("EXCEPTION: particle chosen is greater than total number of particles");
 			}
 			
 			m_vPoints[k] = newPoint;
@@ -108,7 +110,7 @@ namespace QMC{
 		InteractionF m_wfnF;
 		localE m_localEn;
 		localESqd m_localEnSqd;
-		static constant unsigned m_MaxCorrelation = 3;		
+		static const unsigned m_MaxCorrelation = 3;		
 	}; // end of class definition
 }; // end of namespace
 

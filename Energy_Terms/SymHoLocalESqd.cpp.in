@@ -1,0 +1,24 @@
+// SymHoLocalESqd.cpp
+
+#include "SymHoLocalESqd.h"
+#include "Configurations/VMCconfig.h"
+
+using namespace QMC;
+
+SymHoLocalESqd::SymHoLocalESqd(double alpha):m_Alpha(alpha)
+{
+}
+
+SymHoLocalESqd::~SymHoLocalESqd()
+{
+}
+
+double SymHoLocalESqd::operator()(const ::std::vector<VMCPoint>& vPoints)
+{
+	//unsigned N = (unsigned)vPoints.size();
+	::std::valarray<double> y = vPoints[0]*vPoints[0];
+	double r1sqd = y.sum();
+	double eSqd = 3.0*m_Alpha+0.5*(1-4*m_Alpha*m_Alpha)*r1sqd;
+	
+	return (eSqd*eSqd);
+}

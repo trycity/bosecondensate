@@ -1,0 +1,32 @@
+LIBNAME = Configurations
+
+QMC_BUILD_DIR = @BUILD_DIR@
+
+CXX = g++
+
+SOURCES = $(shell ls $(QMC_BUILD_DIR)/$(LIBNAME)/*.cpp | sed "s|$(QMC_BUILD_DIR)/$(LIBNAME)/||g")
+HEADERS = $(shell ls $(QMC_BUILD_DIR)/$(LIBNAME)/*.h | sed s"|$(QMC_BUILD_DIR)/$(LIBNAME)/||g")
+OBJECTS = $(SOURCES:.cpp=.o)
+
+LIBS = -lQMCUtilities
+
+# LD flags
+SHLIBFLAGS = -shared
+SHLIBFLAGS += -m32 
+
+%: %.o
+	$(CXX) $(CXXFLAGS) -o $@ $< $(LIBS)
+
+.PHONY: all clean lib
+
+all: $(OBJECTS) lib
+
+lib:
+	@echo $(OBJECTS)
+	$(CXX) $(SHLIBFLAGS) -o libQMC$(LIBNAME).so $(OBJECTS)
+
+
+clean:
+	$(shell rm *.o *.d)
+
+-include $(OBJECTS:.o=.d)

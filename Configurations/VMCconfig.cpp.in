@@ -1,7 +1,9 @@
 // VMCconfig.cpp
 
+
+
 #include "VMCconfig.h"
-#include "Utilities/rand.h"
+#include "@BUILD_DIR@/Utilities/rand.h"
 
 using namespace QMC;
 
@@ -21,7 +23,7 @@ VMCconfig::~VMCconfig()
 double VMCconfig::GetEnergy()
 {
 	if(!m_EnergyComputed) {
-		m_Energy = ComputeEnergy();
+		ComputeEnergy();
 	}
 
 	return m_Energy;
@@ -30,7 +32,7 @@ double VMCconfig::GetEnergy()
 double VMCconfig::GetEnergySqd()
 {
 	if(!m_EnergyComputed) {
-		m_EnergySqd = ComputeEnergySqd();
+		ComputeEnergySqd();
 	}
 
 	return m_EnergySqd;
@@ -66,7 +68,7 @@ void VMCconfig::Initialize()
 		
 		double r = 0.0;
 		for(unsigned j=0; j<m_vPoints.size(); j++){
-			r = vmcDistance(point, m_vPoints[j])
+			r = VmcDistance(point, m_vPoints[j]);
 			if(r < m_radius0){
 				Accept = false;
 				break;

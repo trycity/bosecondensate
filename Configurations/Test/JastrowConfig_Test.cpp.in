@@ -1,0 +1,23 @@
+// JastrowConfig_Test.cpp
+
+#include <iostream>
+
+#include "Configurations/JastrowConfig.h"
+#include "Wavefunctions/SymHoPhi.h"
+#include "Wavefunctions/NonInteractingF.h"
+
+using namespace QMC;
+using namespace std;
+
+
+int main()
+{
+	double alpha = 0.5;
+	
+	SymHoPhi phi(alpha);
+	NonInteractingF F();
+
+	
+	
+	return 0;
+}

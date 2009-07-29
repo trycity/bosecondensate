@@ -2,11 +2,11 @@
 
 #ifndef _VMCCONFIG_H
 #define _VMCCONFIG_H
-
-
+
 #include <vector>
 #include <valarray>
 #include <cmath>
+#include <exception>
 
 
 namespace QMC{
@@ -28,6 +28,7 @@ namespace QMC{
 		unsigned GetDimension() const;
 		unsigned GetNParticles() const;
 		virtual void Initialize();
+		double VmcDistance(VMCPoint& Pointa, VMCPoint& Pointb);
 
 		virtual ~VMCconfig();
 
@@ -45,7 +46,7 @@ namespace QMC{
 		
 		virtual void ComputeEnergy() = 0;
 		virtual void ComputeEnergySqd() = 0;
-		double VmcDistance(VMCPoint& Pointa, VMCPoint& Pointb);
+		
 
 	private:
 		VMCconfig(const VMCconfig& rhsConfig);
@@ -56,7 +57,7 @@ namespace QMC{
 	VMCconfig::VmcDistance(VMCPoint& Pointa, VMCPoint& Pointb){
 
 		if(Pointa.size() != Pointb.size()){
-			THROW_EXCEPTION("EXCEPTION: VmcDistance called with incorrect argument sizes");
+			throw ("Error");//exception();
 		}
 
 		std::valarray<double> x = Pointa-Pointb;

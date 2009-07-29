@@ -1,0 +1,22 @@
+// NonINteractingF.h
+
+/*
+Class describes non interacting particles
+*/
+
+#ifndef _NONINTERACTINGF_H
+#define _NONINTERACTINGF_H
+
+
+namespace QMC{
+	class NonInteractingF
+	{
+	public:
+		NonInteractingF();
+		~NonInteractingF();
+		
+		double operator()(double rij) const;
+	};
+};
+
+#endif

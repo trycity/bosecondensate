@@ -1,0 +1,24 @@
+// SymHoLocalE.h
+
+/*
+Class used to describe local energy of non-Interacting particles
+*/
+
+#ifndef _SYMHOLOCALE_H
+#define _SYMHOLOCALE_H
+
+namespace QMC{
+	class SymHoLocalE
+	{
+	public:
+		SymHoLocalE(double alpha);
+		virtual ~SymHoLocalE();
+		
+		double operator()(const ::std::vector<VMCPoint>& vPoints);
+	
+	private:
+		double m_Alpha;
+	};
+};
+
+#endif

@@ -1,0 +1,20 @@
+// SymHoLocalESqd.h
+
+#ifndef _SYMHOLOCALESQD_H
+#define _SYMHOLOCALESQD_H
+
+namespace QMC{
+	class SymHoLocalESqd
+	{
+	public:
+		SymHoLocalESqd(double alpha);
+		virtual ~SymHoLocalESqd();
+		
+		double operator()(const ::std::vector<VMCPoint>& vPoints);
+		
+	private:
+		double m_Alpha;
+	};
+};
+
+#endif

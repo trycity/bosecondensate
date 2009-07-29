@@ -32,6 +32,9 @@ SHLIBFLAGS += -m32
 
 # directories for libraries
 LIBRARY_DIRECTORIES = $(QMC_BUILD_DIR)/Wavefunctions
+LIBRARY_DIRECTORIES += $(QMC_BUILD_DIR)/Utilities
+LIBRARY_DIRECTORIES += $(QMC_BUILD_DIR)/Configurations
+LIBRARY_DIRECTORIES += $(QMC_BUILD_DIR)/Energy_Terms
 
 
 LIBDIRS = $(foreach dir, $(LIBRARY_DIRECTORIES), -L$(dir))

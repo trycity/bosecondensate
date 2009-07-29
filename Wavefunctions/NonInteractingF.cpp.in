@@ -1,0 +1,18 @@
+// NonInteractingF.cpp
+
+#include "NonInteractingF.h"
+
+using namespace QMC;
+
+NonInteractingF::NonInteractingF()
+{
+}
+
+NonInteractingF::~NonInteractingF()
+{
+}
+
+double NonInteractingF::operator()(double rij) const
+{
+	return 1.0;
+}

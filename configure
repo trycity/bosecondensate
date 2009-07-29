@@ -1717,15 +1717,35 @@ ac_config_files="$ac_config_files Makefile"
 
 ac_config_files="$ac_config_files Makefile.common"
 
+ac_config_files="$ac_config_files Configurations/Makefile"
+
 ac_config_files="$ac_config_files Configurations/VMCconfig.cpp"
 
 ac_config_files="$ac_config_files Configurations/VMCconfig.h"
 
 ac_config_files="$ac_config_files Configurations/JastrowConfig.h"
 
+ac_config_files="$ac_config_files Configurations/Test/JastrowConfig_Test.cpp"
+
+ac_config_files="$ac_config_files Configurations/Test/Makefile"
+
+ac_config_files="$ac_config_files Energy_Terms/Makefile"
+
+ac_config_files="$ac_config_files Energy_Terms/SymHoLocalE.cpp"
+
+ac_config_files="$ac_config_files Energy_Terms/SymHoLocalE.h"
+
+ac_config_files="$ac_config_files Energy_Terms/SymHoLocalESqd.cpp"
+
+ac_config_files="$ac_config_files Energy_Terms/SymHoLocalESqd.h"
+
+ac_config_files="$ac_config_files Utilities/Makefile"
+
 ac_config_files="$ac_config_files Utilities/rand.cpp"
 
 ac_config_files="$ac_config_files Utilities/rand.h"
+
+ac_config_files="$ac_config_files Metropolis_Walker/VMCMetropolisWalker.h"
 
 ac_config_files="$ac_config_files Wavefunctions/Makefile"
 
@@ -1740,6 +1760,10 @@ ac_config_files="$ac_config_files Wavefunctions/HardSphereF.h"
 ac_config_files="$ac_config_files Wavefunctions/HomogeneousPhi.cpp"
 
 ac_config_files="$ac_config_files Wavefunctions/HomogeneousPhi.h"
+
+ac_config_files="$ac_config_files Wavefunctions/NonInteractingF.cpp"
+
+ac_config_files="$ac_config_files Wavefunctions/NonInteractingF.h"
 
 ac_config_files="$ac_config_files Wavefunctions/SymHoPhi.cpp"
 
@@ -2362,11 +2386,21 @@ do
   case $ac_config_target in
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
     "Makefile.common") CONFIG_FILES="$CONFIG_FILES Makefile.common" ;;
+    "Configurations/Makefile") CONFIG_FILES="$CONFIG_FILES Configurations/Makefile" ;;
     "Configurations/VMCconfig.cpp") CONFIG_FILES="$CONFIG_FILES Configurations/VMCconfig.cpp" ;;
     "Configurations/VMCconfig.h") CONFIG_FILES="$CONFIG_FILES Configurations/VMCconfig.h" ;;
     "Configurations/JastrowConfig.h") CONFIG_FILES="$CONFIG_FILES Configurations/JastrowConfig.h" ;;
+    "Configurations/Test/JastrowConfig_Test.cpp") CONFIG_FILES="$CONFIG_FILES Configurations/Test/JastrowConfig_Test.cpp" ;;
+    "Configurations/Test/Makefile") CONFIG_FILES="$CONFIG_FILES Configurations/Test/Makefile" ;;
+    "Energy_Terms/Makefile") CONFIG_FILES="$CONFIG_FILES Energy_Terms/Makefile" ;;
+    "Energy_Terms/SymHoLocalE.cpp") CONFIG_FILES="$CONFIG_FILES Energy_Terms/SymHoLocalE.cpp" ;;
+    "Energy_Terms/SymHoLocalE.h") CONFIG_FILES="$CONFIG_FILES Energy_Terms/SymHoLocalE.h" ;;
+    "Energy_Terms/SymHoLocalESqd.cpp") CONFIG_FILES="$CONFIG_FILES Energy_Terms/SymHoLocalESqd.cpp" ;;
+    "Energy_Terms/SymHoLocalESqd.h") CONFIG_FILES="$CONFIG_FILES Energy_Terms/SymHoLocalESqd.h" ;;
+    "Utilities/Makefile") CONFIG_FILES="$CONFIG_FILES Utilities/Makefile" ;;
     "Utilities/rand.cpp") CONFIG_FILES="$CONFIG_FILES Utilities/rand.cpp" ;;
     "Utilities/rand.h") CONFIG_FILES="$CONFIG_FILES Utilities/rand.h" ;;
+    "Metropolis_Walker/VMCMetropolisWalker.h") CONFIG_FILES="$CONFIG_FILES Metropolis_Walker/VMCMetropolisWalker.h" ;;
     "Wavefunctions/Makefile") CONFIG_FILES="$CONFIG_FILES Wavefunctions/Makefile" ;;
     "Wavefunctions/EffectiveRangeF.cpp") CONFIG_FILES="$CONFIG_FILES Wavefunctions/EffectiveRangeF.cpp" ;;
     "Wavefunctions/EffectiveRangeF.h") CONFIG_FILES="$CONFIG_FILES Wavefunctions/EffectiveRangeF.h" ;;
@@ -2374,6 +2408,8 @@ do
     "Wavefunctions/HardSphereF.h") CONFIG_FILES="$CONFIG_FILES Wavefunctions/HardSphereF.h" ;;
     "Wavefunctions/HomogeneousPhi.cpp") CONFIG_FILES="$CONFIG_FILES Wavefunctions/HomogeneousPhi.cpp" ;;
     "Wavefunctions/HomogeneousPhi.h") CONFIG_FILES="$CONFIG_FILES Wavefunctions/HomogeneousPhi.h" ;;
+    "Wavefunctions/NonInteractingF.cpp") CONFIG_FILES="$CONFIG_FILES Wavefunctions/NonInteractingF.cpp" ;;
+    "Wavefunctions/NonInteractingF.h") CONFIG_FILES="$CONFIG_FILES Wavefunctions/NonInteractingF.h" ;;
     "Wavefunctions/SymHoPhi.cpp") CONFIG_FILES="$CONFIG_FILES Wavefunctions/SymHoPhi.cpp" ;;
     "Wavefunctions/SymHoPhi.h") CONFIG_FILES="$CONFIG_FILES Wavefunctions/SymHoPhi.h" ;;
     "Wavefunctions/Test/Makefile") CONFIG_FILES="$CONFIG_FILES Wavefunctions/Test/Makefile" ;;
