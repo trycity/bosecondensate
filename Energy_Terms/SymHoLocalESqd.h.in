@@ -3,7 +3,12 @@
 #ifndef _SYMHOLOCALESQD_H
 #define _SYMHOLOCALESQD_H
 
+#include <valarray>
+#include <vector>
+
 namespace QMC{
+
+	typedef std::valarray<double> VMCPoint;
 	class SymHoLocalESqd
 	{
 	public:

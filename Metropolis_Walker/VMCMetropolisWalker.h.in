@@ -8,8 +8,9 @@ Class describes behaviour of a variational Monte Carlo (VMC) Metropolis walker, 
 #define _VMCMETROPOLISWALKER_H
 
 #include <cmath>
+#include <valarray>
 
-#include "@BUILD_DIR@/Utilities/rand.h"
+#include "/Utilities/rand.h"
 
 namespace QMC{
 

@@ -7,7 +7,12 @@ Class used to describe local energy of non-Interacting particles
 #ifndef _SYMHOLOCALE_H
 #define _SYMHOLOCALE_H
 
+#include <valarray>
+#include <vector>
+
 namespace QMC{
+
+	typedef std::valarray<double> VMCPoint;
 	class SymHoLocalE
 	{
 	public:

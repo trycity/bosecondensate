@@ -38,5 +38,8 @@ AC_CONFIG_FILES([Wavefunctions/SymHoPhi.h])
 AC_CONFIG_FILES([Wavefunctions/Test/Makefile])
 AC_CONFIG_FILES([Wavefunctions/Test/HomogeneousPhi_test.cpp])
 AC_CONFIG_FILES([Wavefunctions/Test/SymHoPhi_test.cpp])
+AC_CONFIG_FILES([Wavefunctions/Test/EffectiveRangeF_test.cpp])
+AC_CONFIG_FILES([Wavefunctions/Test/NonInteractingF_test.cpp])
+AC_CONFIG_FILES([Wavefunctions/Test/HardSphereF_test.cpp])
 
 AC_OUTPUT

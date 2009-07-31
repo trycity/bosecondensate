@@ -1,0 +1,30 @@
+/* 
+ * File:   EffectiveRangeF_test.cpp.in
+ * Author: ikhan
+ *
+ * Created on July 31, 2009, 12:09 PM
+ */
+
+#include <iostream>
+#include <cmath>
+
+#include "Wavefunctions/EffectiveRangeF.h"
+/*
+ * 
+ */
+
+using namespace QMC;
+using namespace std;
+
+int main()
+{
+    double a0s = 0.5;
+    double rij = 10.0*a0s;
+
+    EffectiveRangeF jastrowF(a0s);
+
+    ::std::cout<<"Operator value = "<<jastrowF(rij)<<::std::endl;
+
+    return 0;
+}
+

@@ -1,0 +1,23 @@
+// HardSphereF_test.cpp
+
+#include <iostream>
+
+#include "Wavefunctions/HardSphereF.h"
+
+using namespace QMC;
+using namespace std;
+
+int main()
+{
+    double a0s = 0.005;
+    double d = 100.0*a0s;
+    double k = d/10.0;
+
+    double rij = 2.0*d;
+
+    HardSphereF testSphere(a0s, d, k);
+
+    ::std::cout<<"operator value = "<<testSphere(rij)<<::std::endl;
+
+    return 0;
+}
