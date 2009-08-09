@@ -10,21 +10,25 @@ localE, localEsqd are the local energy terms derived from the wavefunctions
 #ifndef _JASTROWCONFIG_H
 #define _JASTROWCONFIG_H
 
+#include <iostream>
+#include <valarray>
+
 #include "VMCconfig.h"
 #include "Utilities/rand.h"
+#include "Utilities/VMCPoint.h"
 
 namespace QMC{
+
+        //typedef std::valarray<double> VMCPoint;
 
 	template <typename Phi, typename InteractionF, typename localE, typename localESqd>
 	class JastrowConfig : public VMCconfig
 	{
 	public:
-		JastrowConfig(unsigned NParticles, unsigned ndim, const std::valarray<double>& BoxSize, double ParticleRadius,
-					const Phi& wfnPhi, const InteractionF& wfnF, const localE& LE, const localESqd& LESqd):
-					VMCconfig(NParticles, ndim, BoxSize, ParticleRadius), m_wfnPhi(wfnPhi),
-					m_wfnF(wfnF), m_localEn(LE), m_localEnSqd(LESqd) {}
-					
-		virtual ~JastrowConfig(){}
+		JastrowConfig(unsigned NParticles, unsigned ndim, const std::valarray<double>& BoxSize, 
+				double ParticleRadius, const Phi& wfnPhi, const InteractionF& wfnF, const localE& LE, const localESqd& LESqd): VMCconfig(NParticles, ndim, BoxSize, ParticleRadius), m_wfnPhi(wfnPhi), m_wfnF(wfnF), m_localEn(LE), m_localEnSqd(LESqd) {}
+                   			
+		~JastrowConfig(){}
 					
 		int TrialMove(unsigned* pnWalked, VMCPoint& endPoint, double* pdq)
 		{
@@ -40,7 +44,7 @@ namespace QMC{
 				rki[i] = VmcDistance(m_vPoints[k], m_vPoints[i]);
 			}
 			for(unsigned i=k+1; i<m_NParticles; i++){
-				rki[i] = VmcDistance(m_vPoints[k], m_vPoints[i]);
+				rki[i-1] = VmcDistance(m_vPoints[k], m_vPoints[i]);
 			}
 			
 			// make a trial move and re-compute distances to other particles
@@ -61,8 +65,8 @@ namespace QMC{
 				}
 				if(Accept){
 					for(unsigned i=k+1; i<m_NParticles; i++){
-						rkiT[i] = VmcDistance(endPoint, m_vPoints[i]);
-						if(rkiT[i] < m_radius0){
+						rkiT[i-1] = VmcDistance(endPoint, m_vPoints[i]);
+						if(rkiT[i-1] < m_radius0){
 							Accept = false;
 							break;
 						}
@@ -82,9 +86,9 @@ namespace QMC{
 		}
 		
 		int Move(unsigned k, const VMCPoint& newPoint, bool bComputeE){
-			if(k>m_vPoints.size()){
+			//if(k>m_vPoints.size()){
 				//THROW_EXCEPTION("EXCEPTION: particle chosen is greater than total number of particles");
-			}
+			//}
 			
 			m_vPoints[k] = newPoint;
 			
@@ -94,9 +98,8 @@ namespace QMC{
 			}
 			
 			return 0;
-		}	
-			
-	protected:
+		}
+
 		void ComputeEnergy(){
 			m_Energy = m_localEn(m_vPoints);
 			m_EnergyComputed = true;
@@ -104,7 +107,10 @@ namespace QMC{
 		
 		void ComputeEnergySqd(){
 			m_EnergySqd = m_localEnSqd(m_vPoints);
-		}
+		}	
+			
+	protected:
+		
 		
 		Phi m_wfnPhi;
 		InteractionF m_wfnF;

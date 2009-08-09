@@ -9,8 +9,10 @@ Class depicting homogeneous (System without external potential)
 
 #include <valarray>
 
+#include "@BUILD_DIR@/Utilities/VMCPoint.h"
+
 namespace QMC{
-	typedef ::std::valarray<double> VMCPoint;
+	//typedef ::std::valarray<double> VMCPoint;
 	
 	class HomogeneousPhi
 	{

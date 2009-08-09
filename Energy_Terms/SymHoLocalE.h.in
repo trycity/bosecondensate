@@ -10,14 +10,16 @@ Class used to describe local energy of non-Interacting particles
 #include <valarray>
 #include <vector>
 
+#include "@BUILD_DIR@/Utilities/VMCPoint.h"
+
 namespace QMC{
 
-	typedef std::valarray<double> VMCPoint;
+	//typedef std::valarray<double> VMCPoint;
 	class SymHoLocalE
 	{
 	public:
 		SymHoLocalE(double alpha);
-		virtual ~SymHoLocalE();
+		~SymHoLocalE();
 		
 		double operator()(const ::std::vector<VMCPoint>& vPoints);
 	

@@ -2,17 +2,20 @@
 
 #ifndef _VMCCONFIG_H
 #define _VMCCONFIG_H
-
+
+
 #include <vector>
 #include <valarray>
-#include <cmath>
-#include <exception>
+//#include <cmath>
+//#include <exception>
+
+#include "@BUILD_DIR@/Utilities/VMCPoint.h"
 
 
 namespace QMC{
 	
 	//VMCPoint used to assign position for each particle
-	typedef std::valarray<double> VMCPoint; 
+	//typedef std::valarray<double> VMCPoint; 
 	
 	//VMCconfig used to create basic phase space for monte carlo calculations.
 	class VMCconfig
@@ -28,7 +31,12 @@ namespace QMC{
 		unsigned GetDimension() const;
 		unsigned GetNParticles() const;
 		virtual void Initialize();
-		double VmcDistance(VMCPoint& Pointa, VMCPoint& Pointb);
+
+		virtual void ComputeEnergy() = 0;
+		virtual void ComputeEnergySqd() = 0;
+		//double VmcDistance(VMCPoint& Pointa, VMCPoint& Pointb);
+
+                static const int m_Seed = -123456789;
 
 		virtual ~VMCconfig();
 
@@ -42,28 +50,12 @@ namespace QMC{
 		double m_Energy;
 		double m_EnergySqd;
 		bool m_EnergyComputed;
-		static const int m_Seed = -123456789;
-		
-		virtual void ComputeEnergy() = 0;
-		virtual void ComputeEnergySqd() = 0;
-		
-
+				
 	private:
-		VMCconfig(const VMCconfig& rhsConfig);
-		VMCconfig& operator=(const VMCconfig& rhsConfig);
+		//VMCconfig(const VMCconfig& rhsConfig);
+		//VMCconfig& operator=(const VMCconfig& rhsConfig);
 	};
 
-	inline double
-	VMCconfig::VmcDistance(VMCPoint& Pointa, VMCPoint& Pointb){
-
-		if(Pointa.size() != Pointb.size()){
-			throw ("Error");//exception();
-		}
-
-		std::valarray<double> x = Pointa-Pointb;
-		std::valarray<double> y = x*x;
-		return sqrt(y.sum());
-	}
 }; //end namespace
 
 #endif

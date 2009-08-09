@@ -6,14 +6,16 @@
 #include <valarray>
 #include <vector>
 
+#include "@BUILD_DIR@/Utilities/VMCPoint.h"
+
 namespace QMC{
 
-	typedef std::valarray<double> VMCPoint;
+	//typedef std::valarray<double> VMCPoint;
 	class SymHoLocalESqd
 	{
 	public:
 		SymHoLocalESqd(double alpha);
-		virtual ~SymHoLocalESqd();
+		~SymHoLocalESqd();
 		
 		double operator()(const ::std::vector<VMCPoint>& vPoints);
 		
