@@ -5,7 +5,7 @@
 
 // Call with an integer variable initialized to a negative value, 
 // and don't touch it for successive calls in a sequence.
-double ran2(int idum)
+double ran2(int& idum)
 {
 	const int IM1=2147483563,IM2=2147483399;
 	const int IA1=40014,IA2=40692,IQ1=53668,IQ2=52774;
@@ -43,7 +43,7 @@ double ran2(int idum)
 }
 
 // Returns a normally distributed deviate with zero mean and unit variance
-double gasdev(int idum)
+double gasdev(int& idum)
 {
 	static int iset=0;
 	static double gset;

@@ -5,10 +5,10 @@
 
 // Call with an integer variable initialized to a negative value, 
 // and don't touch it for successive calls in a sequence.
-double ran2(int idum);
+double ran2(int& idum);
 
 // Returns a normally distributed deviate with zero mean and unit variance
-double gasdev(int idum);
+double gasdev(int& idum);
 
 
 #endif // RAND_H

@@ -17,6 +17,8 @@ localE, localEsqd are the local energy terms derived from the wavefunctions
 #include "Utilities/rand.h"
 #include "Utilities/VMCPoint.h"
 
+//using namespace QMC;
+
 namespace QMC{
 
         //typedef std::valarray<double> VMCPoint;
@@ -25,10 +27,9 @@ namespace QMC{
 	class JastrowConfig : public VMCconfig
 	{
 	public:
-		JastrowConfig(unsigned NParticles, unsigned ndim, const std::valarray<double>& BoxSize, 
-				double ParticleRadius, const Phi& wfnPhi, const InteractionF& wfnF, const localE& LE, const localESqd& LESqd): VMCconfig(NParticles, ndim, BoxSize, ParticleRadius), m_wfnPhi(wfnPhi), m_wfnF(wfnF), m_localEn(LE), m_localEnSqd(LESqd) {}
+		JastrowConfig(unsigned NParticles, unsigned ndim, const std::valarray<double>& BoxSize,               				double ParticleRadius, const Phi& wfnPhi, const InteractionF& wfnF, const localE& LE, 				const localESqd& LESqd): VMCconfig(NParticles, ndim, BoxSize, ParticleRadius), m_wfnPhi(wfnPhi), 					m_wfnF(wfnF), m_localEn(LE), m_localEnSqd(LESqd) {}
                    			
-		~JastrowConfig(){}
+		//~JastrowConfig(){}
 					
 		int TrialMove(unsigned* pnWalked, VMCPoint& endPoint, double* pdq)
 		{
@@ -99,19 +100,21 @@ namespace QMC{
 			
 			return 0;
 		}
+	protected:
 
-		void ComputeEnergy(){
+		double ComputeEnergy(){
 			m_Energy = m_localEn(m_vPoints);
 			m_EnergyComputed = true;
+			
+			return m_Energy;
 		}
 		
-		void ComputeEnergySqd(){
+		double ComputeEnergySqd(){
 			m_EnergySqd = m_localEnSqd(m_vPoints);
+
+			return m_EnergySqd;
 		}	
-			
-	protected:
-		
-		
+					
 		Phi m_wfnPhi;
 		InteractionF m_wfnF;
 		localE m_localEn;
