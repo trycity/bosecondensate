@@ -1,0 +1,20 @@
+// VMCPoint.h
+
+#ifndef _VMCPOINT_H
+#define _VMCPOINT_H
+
+#include <valarray>
+#include <cmath>
+
+typedef ::std::valarray<double> VMCPoint;
+
+inline double
+VmcDistance(VMCPoint& Pa, VMCPoint& Pb)
+{
+	std::valarray<double> x = Pa-Pb;
+	std::valarray<double> y = x*x;
+	return sqrt(y.sum());
+	
+}
+
+#endif

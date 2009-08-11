@@ -1739,10 +1739,8 @@ ac_config_files="$ac_config_files Energy_Terms/SymHoLocalESqd.cpp"
 
 ac_config_files="$ac_config_files Energy_Terms/SymHoLocalESqd.h"
 
-ac_config_files="$ac_config_files Energy_Terms/Test/Makefile"
-
-ac_config_files="$ac_config_files Energy_Terms/Test/Energy_test.cpp"
-
+##AC_CONFIG_FILES([Energy_Terms/Test/Makefile])
+##AC_CONFIG_FILES([Energy_Terms/Test/Energy_test.cpp])
 ac_config_files="$ac_config_files Utilities/Makefile"
 
 ac_config_files="$ac_config_files Utilities/rand.cpp"
@@ -1751,7 +1749,6 @@ ac_config_files="$ac_config_files Utilities/rand.h"
 
 ac_config_files="$ac_config_files Utilities/VMCPoint.h"
 
-##AC_CONFIG_FILES([Metropolis_Walker/Makefile])
 ac_config_files="$ac_config_files Metropolis_Walker/VMCMetropolisWalker.h"
 
 ac_config_files="$ac_config_files Metropolis_Walker/Test/Makefile"
@@ -2414,8 +2411,6 @@ do
     "Energy_Terms/SymHoLocalE.h") CONFIG_FILES="$CONFIG_FILES Energy_Terms/SymHoLocalE.h" ;;
     "Energy_Terms/SymHoLocalESqd.cpp") CONFIG_FILES="$CONFIG_FILES Energy_Terms/SymHoLocalESqd.cpp" ;;
     "Energy_Terms/SymHoLocalESqd.h") CONFIG_FILES="$CONFIG_FILES Energy_Terms/SymHoLocalESqd.h" ;;
-    "Energy_Terms/Test/Makefile") CONFIG_FILES="$CONFIG_FILES Energy_Terms/Test/Makefile" ;;
-    "Energy_Terms/Test/Energy_test.cpp") CONFIG_FILES="$CONFIG_FILES Energy_Terms/Test/Energy_test.cpp" ;;
     "Utilities/Makefile") CONFIG_FILES="$CONFIG_FILES Utilities/Makefile" ;;
     "Utilities/rand.cpp") CONFIG_FILES="$CONFIG_FILES Utilities/rand.cpp" ;;
     "Utilities/rand.h") CONFIG_FILES="$CONFIG_FILES Utilities/rand.h" ;;

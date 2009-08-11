@@ -3,6 +3,7 @@
 #include <valarray>
 #include <cmath>
 #include "SymHoPhi.h"
+#include "@BUILD_DIR@/Utilities/VMCPoint.h"
 
 using namespace QMC;
 
@@ -19,7 +20,7 @@ double SymHoPhi::getAlpha()const
 	return m_Alpha;
 }
 
-double SymHoPhi::operator()(const ::QMC::VMCPoint& x)const
+double SymHoPhi::operator()(const VMCPoint& x)const
 {
 	std::valarray<double> y = x*x;
 	return exp(-m_Alpha*y.sum());

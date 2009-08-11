@@ -1,6 +1,7 @@
 // Homogeneous.cpp
 
 #include "HomogeneousPhi.h"
+#include "@BUILD_DIR@/Utilities/VMCPoint.h"
 
 using namespace QMC;
 
@@ -12,7 +13,7 @@ HomogeneousPhi::~HomogeneousPhi()
 {
 }
 
-double HomogeneousPhi::operator()(const ::QMC::VMCPoint& x)const
+double HomogeneousPhi::operator()(const VMCPoint& x)const
 {
 	return 1.0;
 }

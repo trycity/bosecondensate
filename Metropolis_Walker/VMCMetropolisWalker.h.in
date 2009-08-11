@@ -78,8 +78,8 @@ namespace QMC{
 				EnergySqdSum += EnergySqd;
 			}
 			
-			m_EAve = Energy/m_nConfig;
-			m_EAveSqd = EnergySqd/m_nConfig;
+			m_EAve = EnergySum/m_nConfig;
+			m_EAveSqd = EnergySqdSum/m_nConfig;
 			m_EDev = sqrt(m_EAveSqd/m_nConfig - m_EAve*m_EAve);
 			
 			return m_nConfig;

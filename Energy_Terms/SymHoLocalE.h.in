@@ -9,6 +9,7 @@ Class used to describe local energy of non-Interacting particles
 
 #include <valarray>
 #include <vector>
+#include <cmath>
 
 #include "@BUILD_DIR@/Utilities/VMCPoint.h"
 
