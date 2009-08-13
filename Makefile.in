@@ -26,7 +26,7 @@ COMMON_DIRS += Energy_Terms
 
 TEST_DIRS = $(shell find $(QMC_BUILD_DIR) -name Makefile.in | sed "s|Makefile.in||g" | grep "/Test/" | sed "s|@BUILD_DIR@/||g")
 
-.PHONY: all clean common tests c++
+.PHONY: all clean common doxygen tests c++
 
 all: $(TARGETS)
 	echo $(TARGETS)
@@ -56,3 +56,6 @@ tests:
 	for dir in $(TEST_DIRS); do \
 	 (echo $$dir; cd $$dir; make)||exit;\
 	done
+
+doxygen:
+	doxygen ${QMC_ROOT}/Doxyfile
