@@ -12,6 +12,11 @@ EffectiveRangeF::~EffectiveRangeF()
 {
 }
 
+EffectiveRangeF::setScatteringLength(double as)
+{
+	m_as = as;
+}
+
 double EffectiveRangeF::operator()(double rij)
 {
 	return (1.0 - m_as/rij);

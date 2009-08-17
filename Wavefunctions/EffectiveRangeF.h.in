@@ -12,9 +12,11 @@ namespace QMC{
 	class EffectiveRangeF
 	{
 	public:
+		EffectiveRangeF(){}	
 		EffectiveRangeF(double as);
 		~EffectiveRangeF();
-		
+
+		void setScatteringLength(double as);		
 		double operator()(double rij);
 		
 	private:

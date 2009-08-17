@@ -20,6 +20,11 @@ double SymHoPhi::getAlpha()const
 	return m_Alpha;
 }
 
+void SymHoPhi::setAlpha(double alpha)
+{
+	m_Alpha = alpha;
+}
+
 double SymHoPhi::operator()(const VMCPoint& x)const
 {
 	std::valarray<double> y = x*x;

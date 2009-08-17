@@ -12,8 +12,13 @@ namespace QMC{
 	class HardSphereF
 	{
 	public:
+		HardSphereF(){}		
 		HardSphereF(double as, double healing_distance, double Kconstant);
 		~HardSphereF();
+
+		void setScatteringLength(double as);
+		void setHealingDistance(double hDistance);
+		void setKconstant(double kConstant);
 		
 		double operator()(double rij)const;
 		

@@ -1,0 +1,52 @@
+// TIntF.cpp
+
+#include "TIntF.h"
+#include "EffectiveRangeF.h"
+#include "HardSphereF.h"
+#include "NonINteractingF.h"
+#include "/Utilities/StringUtilities.h"
+
+using namespace QMC;
+
+namespace{
+	EffectiveRangeF effectF;
+	HardSphereF HSF;
+	NonInteractingF nonIntF;
+};
+
+TIntF::TIntF(::std::string TypeOfF):m_TypeOfF(TypeOfF)
+{
+
+}
+
+TIntF::~TIntF()
+{
+}
+
+void TIntF::setVariationParams(const ArgType& args)
+{
+	if(m_TypeOfF == "EffectiveRangeF")
+	{
+		double as = convertFromString<double>(args[0]);
+		effectF.setScatteringLength(as);
+	}else if(m_TypeOfF == "HardSphereF")
+	{
+		double as = convertFromString<double>(args[0]);
+		double hDistance = convertFromString<double>(args[1]);
+		double kconst = convertFromString<double>(args[2]);
+
+		HSF.setScatteringLength(as);
+		HSF.setHealingDistance(hDistance);
+		HSF.setKconstant(kconst);		
+	}
+}
+
+
+double TInt::operator()(double rij)const
+{
+}
+
+
+
+
+

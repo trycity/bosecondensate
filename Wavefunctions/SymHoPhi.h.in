@@ -17,10 +17,12 @@ namespace QMC{
 	class SymHoPhi
 	{
 	public:
+		SymHoPhi(){}
 		explicit SymHoPhi(double alpha);
 		~SymHoPhi();
 
 		double getAlpha()const;
+		void setAlpha(double alpha);
 		
 		double operator()(const VMCPoint& x)const;
 		

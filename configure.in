@@ -1,6 +1,6 @@
 ## configuration file
 
-AC_INIT([QMC], 0.0)
+AC_INIT([QMC], 0.1)
 
 ## set build directory
 BUILD_DIR=`pwd`
@@ -25,6 +25,7 @@ AC_CONFIG_FILES([Energy_Terms/SymHoLocalESqd.h])
 AC_CONFIG_FILES([Utilities/Makefile])
 AC_CONFIG_FILES([Utilities/rand.cpp])
 AC_CONFIG_FILES([Utilities/rand.h])
+AC_CONFIG_FILES([Utilities/StringUtilities.h])
 AC_CONFIG_FILES([Utilities/VMCPoint.h])
 AC_CONFIG_FILES([Metropolis_Walker/VMCMetropolisWalker.h])
 AC_CONFIG_FILES([Metropolis_Walker/Test/Makefile])
@@ -38,6 +39,8 @@ AC_CONFIG_FILES([Wavefunctions/HomogeneousPhi.cpp])
 AC_CONFIG_FILES([Wavefunctions/HomogeneousPhi.h])
 AC_CONFIG_FILES([Wavefunctions/NonInteractingF.cpp])
 AC_CONFIG_FILES([Wavefunctions/NonInteractingF.h])
+AC_CONFIG_FILES([Wavefunctions/Phi.cpp])
+AC_CONFIG_FILES([Wavefunctions/Phi.h])
 AC_CONFIG_FILES([Wavefunctions/SymHoPhi.cpp])
 AC_CONFIG_FILES([Wavefunctions/SymHoPhi.h])
 AC_CONFIG_FILES([Wavefunctions/Test/Makefile])

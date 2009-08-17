@@ -1,0 +1,32 @@
+// TIntF.h
+
+#ifndef _TINTF_H
+#define _TINTF_H
+
+#include <string>
+#include <vector>
+
+
+namespace QMC{
+	class EffectiveRangeF
+	class HardSphereF
+	class NonInteractingF
+
+	typedef ::std::vector< ::std::string > ArgType;
+    	typedef ArgType::const_iterator ArgItr;
+
+	class TIntF
+	{
+	public:
+		explicit TIntF(::std::string TypeOfF);
+		~TIntF();
+
+		void setVariationParams(const ArgType& args);
+		double operator()(double rij)const;
+
+	private:
+		::std::string m_TypeOfF;
+	};
+};
+
+#endif
