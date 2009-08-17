@@ -1,0 +1,54 @@
+// StringUtilities.h
+
+#ifndef _STRINGUTILITIES_H_
+#define _STRINGUTILITIES_H_
+
+#include <cassert>
+#include <vector>
+#include <string>
+#include <sstream>
+
+//#include "Utilities/Exception.h"
+
+namespace QMC {
+    template< typename T >
+    T convertFromString( const ::std::string& stringToConvert ) {
+	::std::istringstream stringStream( stringToConvert );
+	T convertedValue;
+	
+        return convertedValue;
+    }
+
+    template<>
+    inline ::std::string convertFromString( const ::std::string& stringToConvert ) {
+        return stringToConvert;
+    }
+
+    template< typename T >
+    ::std::string convertToString( const T& inputValue ) {
+      ::std::ostringstream os;
+      os << inputValue;
+
+      return os.str();
+    }
+
+    template<>
+    inline ::std::string convertToString( const ::std::string& inputValue ) {
+        return inputValue;
+    }
+
+    template< typename T >
+    ::std::string convertToString( const T*& inputValue ) {
+        // do not want conversions of arbitrary array types (float[100])
+        // - excluding char arrays, which is handled in explicit specification
+        //assert( sizeof( char ) > sizeof( long ) );
+        return ::std::string();
+    }
+
+    template<>
+    inline ::std::string convertToString< const char >( const char*& inputValue ) {
+        return ::std::string( inputValue );
+    }
+}; // end namespace
+
+#endif
