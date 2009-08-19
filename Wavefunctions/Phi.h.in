@@ -11,13 +11,14 @@ class used as a wrapper to create the 1-body external potential wavefunction ter
 #include <vector>
 
 #include "@BUILD_DIR@/Utilities/VMCPoint.h"
+#include "@BUILD_DIR@/Utilities/StringUtilities.h"
 
 namespace QMC{
 	class HomogeneousPhi;
 	class SymHoPhi;
 
-	typedef ::std::vector< ::std::string > ArgType;
-    	typedef ArgType::const_iterator ArgItr;
+	//typedef ::std::vector< ::std::string > ArgType;
+    	//typedef ArgType::const_iterator ArgItr;
 
 	class Phi
 	{

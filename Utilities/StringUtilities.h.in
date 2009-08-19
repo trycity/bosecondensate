@@ -8,7 +8,8 @@
 #include <string>
 #include <sstream>
 
-//#include "Utilities/Exception.h"
+typedef ::std::vector< ::std::string > ArgType;
+typedef ArgType::const_iterator ArgItr;
 
 namespace QMC {
     template< typename T >

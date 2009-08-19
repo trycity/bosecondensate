@@ -12,7 +12,7 @@ EffectiveRangeF::~EffectiveRangeF()
 {
 }
 
-EffectiveRangeF::setScatteringLength(double as)
+void EffectiveRangeF::setScatteringLength(double as)
 {
 	m_as = as;
 }

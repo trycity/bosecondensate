@@ -1783,6 +1783,10 @@ ac_config_files="$ac_config_files Wavefunctions/SymHoPhi.cpp"
 
 ac_config_files="$ac_config_files Wavefunctions/SymHoPhi.h"
 
+ac_config_files="$ac_config_files Wavefunctions/TIntF.cpp"
+
+ac_config_files="$ac_config_files Wavefunctions/TIntF.h"
+
 ac_config_files="$ac_config_files Wavefunctions/Test/Makefile"
 
 ac_config_files="$ac_config_files Wavefunctions/Test/HomogeneousPhi_test.cpp"
@@ -2438,6 +2442,8 @@ do
     "Wavefunctions/Phi.h") CONFIG_FILES="$CONFIG_FILES Wavefunctions/Phi.h" ;;
     "Wavefunctions/SymHoPhi.cpp") CONFIG_FILES="$CONFIG_FILES Wavefunctions/SymHoPhi.cpp" ;;
     "Wavefunctions/SymHoPhi.h") CONFIG_FILES="$CONFIG_FILES Wavefunctions/SymHoPhi.h" ;;
+    "Wavefunctions/TIntF.cpp") CONFIG_FILES="$CONFIG_FILES Wavefunctions/TIntF.cpp" ;;
+    "Wavefunctions/TIntF.h") CONFIG_FILES="$CONFIG_FILES Wavefunctions/TIntF.h" ;;
     "Wavefunctions/Test/Makefile") CONFIG_FILES="$CONFIG_FILES Wavefunctions/Test/Makefile" ;;
     "Wavefunctions/Test/HomogeneousPhi_test.cpp") CONFIG_FILES="$CONFIG_FILES Wavefunctions/Test/HomogeneousPhi_test.cpp" ;;
     "Wavefunctions/Test/SymHoPhi_test.cpp") CONFIG_FILES="$CONFIG_FILES Wavefunctions/Test/SymHoPhi_test.cpp" ;;

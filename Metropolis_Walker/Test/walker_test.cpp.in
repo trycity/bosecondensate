@@ -17,9 +17,9 @@ using namespace std;
 
 int main()
 {
-	static unsigned nConfigInit = 100;
-	static unsigned nConfigs = 10000;
-	static unsigned nRuns = 100;
+	static unsigned nConfigInit = 1000;
+	static unsigned nConfigs = 100000;
+	static unsigned nRuns = 300;
 
 	double alpha = 0.5;
         unsigned NAtoms = 10;
@@ -28,7 +28,7 @@ int main()
         BOXSIZES[0] = 5.1;
         BOXSIZES[1] = 5.1;
         BOXSIZES[2] = 5.1;
-        double r0 = 0.00433;
+        double r0 = 0.0;
 	
 	SymHoPhi phi(alpha);
 	NonInteractingF F;

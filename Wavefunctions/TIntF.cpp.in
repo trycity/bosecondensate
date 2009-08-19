@@ -3,12 +3,13 @@
 #include "TIntF.h"
 #include "EffectiveRangeF.h"
 #include "HardSphereF.h"
-#include "NonINteractingF.h"
-#include "/Utilities/StringUtilities.h"
+#include "NonInteractingF.h"
+#include "@BUILD_DIR@/Utilities/StringUtilities.h"
 
 using namespace QMC;
 
 namespace{
+	// Find a better way to do this
 	EffectiveRangeF effectF;
 	HardSphereF HSF;
 	NonInteractingF nonIntF;
@@ -42,8 +43,18 @@ void TIntF::setVariationParams(const ArgType& args)
 }
 
 
-double TInt::operator()(double rij)const
+double TIntF::operator()(double rij)const
 {
+	double P=1.0;	
+	if(m_TypeOfF == "EffectiveRangeF")
+	{
+		P = effectF(rij);
+	}else if(m_TypeOfF == "HardSphereF")
+	{
+		P = HSF(rij);		
+	}
+
+	return P;
 }
 
 

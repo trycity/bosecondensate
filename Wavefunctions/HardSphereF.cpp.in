@@ -15,17 +15,17 @@ HardSphereF::~HardSphereF()
 {
 }
 
-HardSphere::setScatteringLength(double as)
+void HardSphereF::setScatteringLength(double as)
 {
 	m_as = as;
 }
 
-HardSphere::setHealingDistance(double hDistance)
+void HardSphereF::setHealingDistance(double hDistance)
 {
 	m_HealingDistance = hDistance;
 }
 
-HardSphere::setScatteringLength(double Kconstant)
+void HardSphereF::setKconstant(double Kconstant)
 {
 	m_Kconstant = Kconstant;
 }

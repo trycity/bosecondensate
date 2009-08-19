@@ -6,14 +6,16 @@
 #include <string>
 #include <vector>
 
+#include "@BUILD_DIR@/Utilities/VMCPoint.h"
+#include "@BUILD_DIR@/Utilities/StringUtilities.h"
 
 namespace QMC{
-	class EffectiveRangeF
-	class HardSphereF
-	class NonInteractingF
+	class EffectiveRangeF;
+	class HardSphereF;
+	class NonInteractingF;
 
-	typedef ::std::vector< ::std::string > ArgType;
-    	typedef ArgType::const_iterator ArgItr;
+	//typedef ::std::vector< ::std::string > ArgType;
+    	//typedef ArgType::const_iterator ArgItr;
 
 	class TIntF
 	{
