@@ -1,0 +1,65 @@
+// TParser.h
+
+#ifndef _TPARSER_H_
+#define _TPARSER_H_
+
+#include "HandlerIndex.h"
+
+#include <iostream>
+#include <string>
+#include <xercesc/sax2/SAX2XMLReader.hpp>
+#include <xercesc/sax/SAXParseException.hpp>
+#include <xercesc/util/OutOfMemoryException.hpp>
+#include <xercesc/util/XMLUni.hpp>
+
+namespace QMC {
+    /**
+     * class for setting up parsing of XML files related to
+     * QMC
+     */
+    class TParser {
+    public:
+        TParser();
+        ~TParser();
+
+        template< typename T >
+        int parse( const ::std::string& xmlFileName );
+    private:
+        XERCES_CPP_NAMESPACE::SAX2XMLReader* m_saxParser;
+    }; // end class TParser
+
+    // implementation
+    template< typename T >
+    inline int TParser::parse( const ::std::string& xmlFileName )
+    try {
+        T handler;
+        m_saxParser->setFeature(XERCES_CPP_NAMESPACE::XMLUni::fgSAX2CoreNameSpaces, true);
+        m_saxParser->setFeature(XERCES_CPP_NAMESPACE::XMLUni::fgSAX2CoreValidation, true);
+        m_saxParser->setFeature(XERCES_CPP_NAMESPACE::XMLUni::fgXercesSchema,       true);
+        m_saxParser->setFeature(XERCES_CPP_NAMESPACE::XMLUni::fgXercesSchemaFullChecking, true);
+        m_saxParser->setFeature(XERCES_CPP_NAMESPACE::XMLUni::fgSAX2CoreNameSpacePrefixes, true);
+        m_saxParser->setContentHandler( &handler );
+        m_saxParser->setErrorHandler  ( &handler );
+        m_saxParser->setEntityResolver( &handler );
+        m_saxParser->parse( xmlFileName.c_str() );
+
+        return m_saxParser->getErrorCount();
+
+    } catch (const XERCES_CPP_NAMESPACE::OutOfMemoryException&) {
+        ::std::cerr << "OutOfMemoryException" << ::std::endl;
+        throw;
+    } catch (const XERCES_CPP_NAMESPACE::SAXParseException& toCatch) {
+        ::std::cerr << "\nAn error occurred\n  Error in TParser::parse for file "
+                    << xmlFileName
+                    << " line: " << toCatch.getLineNumber()
+                    << " column: " << toCatch.getColumnNumber()
+                    << ::std::endl;
+        throw;
+    } catch (const XERCES_CPP_NAMESPACE::XMLException& toCatch) {
+        ::std::cerr << "\nAn error occurred\n  Error: "
+                    << "\n" << ::std::endl;
+        throw;
+    }
+
+}; // end namespace QMC
+#endif

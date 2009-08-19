@@ -1,9 +1,11 @@
+// HandlerIndex.h
+
 #ifndef _HANDLERINDEX_H_
 #define _HANDLERINDEX_H_
 
 namespace QMC {
     struct HandlerIndex {
-        enum { MATERIAL, SPECTRUM, VOLUME };
+        //enum {  };
 
         // taken from Modern C++ Design (Alexandrescu)
         template< int v >
