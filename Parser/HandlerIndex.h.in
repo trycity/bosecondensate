@@ -11,5 +11,5 @@ namespace QMC {
             enum { value = v };
         };
     }; // end struct HandlerIndex
-}; // end namespace SWORD
+}; // end namespace QMC
 #endif
