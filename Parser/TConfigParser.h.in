@@ -1,0 +1,147 @@
+// TConfigParser.h
+
+#ifndef _TCONFIGPARSER_H_
+#define _TCONFIGPARSER_H_
+
+#include <iostream>
+#include <string>
+#include <vector>
+
+#include "TParser.h"
+#include "Utilities/StringUtilities.h"
+#include "Utilities/TSimpleIniFile.h"
+
+namespace QMC {
+    class TConfigParser {
+    public:
+        explicit TConfigParser( const ::std::string& filename );
+        ~TConfigParser();
+
+        template< typename T >
+        void parseXmlFiles( const ::std::string& section ) const;
+
+        template< typename T >
+        void parseXmlFiles( const ::std::string& section,
+                            const ::std::string& key ) const;
+
+        ///
+        /// used to determine if value is "y" or not
+        ///
+        bool useFlag( const ::std::string& section,
+                      const ::std::string& key ) const;
+
+        ::std::vector< ::std::string > getSectionKeys( const ::std::string& section ) const;
+        ::std::vector< ::std::string > getKeyValues( const ::std::string& section,
+                                                     const ::std::string& key ) const;
+
+        template< typename T >
+        T getValue( const ::std::string& section,
+                    const ::std::string& key,
+                    const T& defaultValue ) const;
+
+        template< typename T >
+        bool checkValue( const ::std::string& section,
+                         const ::std::string& key,
+                         const T& defaultValue,
+                         const T& checkedValue ) const;
+
+    private:
+        ::std::string   m_filename;
+        TSimpleIniFile* m_fileParser;
+        TParser*        m_xmlParser;
+        ::std::string   m_rootXMLDir;
+        
+
+        template< typename T >
+        void parseXmlFile( const ::std::string& file ) const;
+        
+
+        // unimplemented functions
+        TConfigParser();
+        TConfigParser( const TConfigParser& rhs );
+        TConfigParser& operator=( const TConfigParser& rhs );
+    }; // end class TConfigParser
+
+    // implementation
+    template< typename T >
+    inline void
+    TConfigParser::parseXmlFiles( const ::std::string& section ) const {
+        ::std::vector< ::std::string > keys = getSectionKeys( section );
+
+        if( keys.empty() ) {
+            ::std::cout << "ERROR in TConfigParser::parseFiles(): section "
+                        << section
+                        << " not defined in "
+                        << m_filename
+                        << ::std::endl;
+            return;
+        } else {
+            for( ::std::vector< ::std::string >::iterator keyItr = keys.begin();
+                 keyItr != keys.end(); keyItr++ ) {
+                parseXmlFiles<T>( section, *keyItr );
+            }
+        }
+    }
+
+    template< typename T >
+    inline void
+    TConfigParser::parseXmlFiles( const ::std::string& section,
+                                  const ::std::string& key ) const {
+        ::std::vector< ::std::string > files =  m_fileParser->getVector< ::std::string >( section,
+                                                                                          key,
+                                                                                          ::std::string( "," ) );
+
+        if( files.empty() ) {
+            ::std::cout << "ERROR in TConfigParser::parseFiles(): no files defined in " 
+                        << m_filename
+                        << " for "
+                        << section
+                        << " and "
+                        << key
+                        << ::std::endl;
+            return;
+        } else {
+            for( ::std::vector< ::std::string >::iterator fileItr = files.begin();
+                 fileItr != files.end(); fileItr++ ) {
+                ::std::string filename = (*fileItr);
+                        //// ::std::cout << "Parsing " << filename << ::std::endl;
+                try {
+                    if( filename.c_str()[0] ==  '/' ) {
+                        parseXmlFile< T >( filename );
+                    } else {
+                        // TODO: tack on root path if not fully qualified directory
+                        parseXmlFile< T >( m_rootXMLDir + filename );
+                    }
+                } catch (const XERCES_CPP_NAMESPACE::SAXParseException& toCatch) {
+                    ::std::cout << ::std::endl << ::std::endl;
+                }
+            }
+        }
+    }
+
+    template< typename T >
+    inline T
+    TConfigParser::getValue( const ::std::string& section,
+                             const ::std::string& key,
+                             const T&             defaultValue ) const {
+        return m_fileParser->getVal( section, key, defaultValue );
+    }
+
+    template< typename T >
+    inline bool
+    TConfigParser::checkValue( const ::std::string& section,
+                               const ::std::string& key,
+                               const T&             defaultValue,
+                               const T&             checkedValue ) const {
+        return ciEqual( m_fileParser->getVal( section, key, defaultValue ), checkedValue );
+    }
+
+    ////// implementation for private member functions /////
+    template< typename T >
+    inline void
+    TConfigParser::parseXmlFile( const ::std::string& xmlFile ) const {
+        m_xmlParser->parse< T >( xmlFile );
+    }
+
+}; // end namespace SWORD
+#endif

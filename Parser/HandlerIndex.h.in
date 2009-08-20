@@ -5,7 +5,7 @@
 
 namespace QMC {
     struct HandlerIndex {
-        //enum {  };
+        enum {HomogeneousPhi, SymHoPhi, EffectiveRangeF, HardSphereF, NonInteractingF};
 
         // taken from Modern C++ Design (Alexandrescu)
         template< int v >
