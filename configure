@@ -1757,6 +1757,18 @@ ac_config_files="$ac_config_files Metropolis_Walker/Test/Makefile"
 
 ac_config_files="$ac_config_files Metropolis_Walker/Test/walker_test.cpp"
 
+ac_config_files="$ac_config_files Parser/HandlerIndex.h"
+
+ac_config_files="$ac_config_files Parser/TParser.cpp"
+
+ac_config_files="$ac_config_files Parser/TParser.h"
+
+ac_config_files="$ac_config_files Parser/TConfigParser.cpp"
+
+ac_config_files="$ac_config_files Parser/TConfigParser.h"
+
+ac_config_files="$ac_config_files Parser/Makefile"
+
 ac_config_files="$ac_config_files Wavefunctions/Makefile"
 
 ac_config_files="$ac_config_files Wavefunctions/EffectiveRangeF.cpp"
@@ -2429,6 +2441,12 @@ do
     "Metropolis_Walker/VMCMetropolisWalker.h") CONFIG_FILES="$CONFIG_FILES Metropolis_Walker/VMCMetropolisWalker.h" ;;
     "Metropolis_Walker/Test/Makefile") CONFIG_FILES="$CONFIG_FILES Metropolis_Walker/Test/Makefile" ;;
     "Metropolis_Walker/Test/walker_test.cpp") CONFIG_FILES="$CONFIG_FILES Metropolis_Walker/Test/walker_test.cpp" ;;
+    "Parser/HandlerIndex.h") CONFIG_FILES="$CONFIG_FILES Parser/HandlerIndex.h" ;;
+    "Parser/TParser.cpp") CONFIG_FILES="$CONFIG_FILES Parser/TParser.cpp" ;;
+    "Parser/TParser.h") CONFIG_FILES="$CONFIG_FILES Parser/TParser.h" ;;
+    "Parser/TConfigParser.cpp") CONFIG_FILES="$CONFIG_FILES Parser/TConfigParser.cpp" ;;
+    "Parser/TConfigParser.h") CONFIG_FILES="$CONFIG_FILES Parser/TConfigParser.h" ;;
+    "Parser/Makefile") CONFIG_FILES="$CONFIG_FILES Parser/Makefile" ;;
     "Wavefunctions/Makefile") CONFIG_FILES="$CONFIG_FILES Wavefunctions/Makefile" ;;
     "Wavefunctions/EffectiveRangeF.cpp") CONFIG_FILES="$CONFIG_FILES Wavefunctions/EffectiveRangeF.cpp" ;;
     "Wavefunctions/EffectiveRangeF.h") CONFIG_FILES="$CONFIG_FILES Wavefunctions/EffectiveRangeF.h" ;;
