@@ -1717,6 +1717,8 @@ ac_config_files="$ac_config_files Makefile"
 
 ac_config_files="$ac_config_files Makefile.common"
 
+ac_config_files="$ac_config_files runConfigTest.sh"
+
 ac_config_files="$ac_config_files Configurations/Makefile"
 
 ac_config_files="$ac_config_files Configurations/VMCconfig.cpp"
@@ -2422,6 +2424,7 @@ do
   case $ac_config_target in
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
     "Makefile.common") CONFIG_FILES="$CONFIG_FILES Makefile.common" ;;
+    "runConfigTest.sh") CONFIG_FILES="$CONFIG_FILES runConfigTest.sh" ;;
     "Configurations/Makefile") CONFIG_FILES="$CONFIG_FILES Configurations/Makefile" ;;
     "Configurations/VMCconfig.cpp") CONFIG_FILES="$CONFIG_FILES Configurations/VMCconfig.cpp" ;;
     "Configurations/VMCconfig.h") CONFIG_FILES="$CONFIG_FILES Configurations/VMCconfig.h" ;;
@@ -2930,6 +2933,11 @@ $as_echo "$as_me: error: could not create $ac_file" >&2;}
 
   esac
 
+
+  case $ac_file$ac_mode in
+    "runConfigTest.sh":F) chmod a+x runConfigTest.sh ;;
+
+  esac
 done # for ac_tag
 
 

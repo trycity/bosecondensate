@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+clear
+
+echo "Running Configuration test..."
+cd Configurations/Test
+make
+./JastrowConfig_Test
+echo "End of configuration test..."
+
+

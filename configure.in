@@ -9,6 +9,7 @@ AC_SUBST([BUILD_DIR], [$BUILD_DIR])
 ## Configuration files
 AC_CONFIG_FILES([Makefile])
 AC_CONFIG_FILES([Makefile.common])
+AC_CONFIG_FILES([runConfigTest.sh],	[chmod a+x runConfigTest.sh])
 AC_CONFIG_FILES([Configurations/Makefile])
 AC_CONFIG_FILES([Configurations/VMCconfig.cpp])
 AC_CONFIG_FILES([Configurations/VMCconfig.h])
