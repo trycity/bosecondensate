@@ -6,6 +6,27 @@ AC_INIT([QMC], 0.1)
 BUILD_DIR=`pwd`
 AC_SUBST([BUILD_DIR], [$BUILD_DIR])
 
+AC_ARG_WITH([EXT],
+	AC_HELP_STRING([--with-EXT=DIR],
+	[directory containing external QMC libraries]),
+[
+	case "$with_EXT" in
+	     yes|no|'')
+	     AC_MSG_RESULT([failed.])
+	     AC_MSG_ERROR([--with-EXT requires an argument])
+	     ;;
+	     *)
+	     with_EXT_src="command line"
+	     ;;
+	esac
+],[
+        if test "x$with_EXT" == "x"; then
+           with_EXT="`pwd`/../SWORD_EXT"
+           with_EXT_src="`pwd`/../SWORD_EXT"
+           AC_MSG_RESULT([Using default directory for EXT: $with_EXT])
+        fi
+])
+
 ## Configuration files
 AC_CONFIG_FILES([Makefile])
 AC_CONFIG_FILES([Makefile.common])

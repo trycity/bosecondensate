@@ -641,6 +641,7 @@ SHELL'
 ac_subst_files=''
 ac_user_opts='
 enable_option_checking
+with_EXT
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1262,6 +1263,11 @@ if test -n "$ac_init_help"; then
    esac
   cat <<\_ACEOF
 
+Optional Packages:
+  --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
+  --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
+  --with-EXT=DIR          directory containing external QMC libraries
+
 _ACEOF
 ac_status=$?
 fi
@@ -1710,6 +1716,35 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 ## set build directory
 BUILD_DIR=`pwd`
 BUILD_DIR=$BUILD_DIR
+
+
+
+# Check whether --with-EXT was given.
+if test "${with_EXT+set}" = set; then
+  withval=$with_EXT;
+	case "$with_EXT" in
+	     yes|no|'')
+	     { $as_echo "$as_me:$LINENO: result: failed." >&5
+$as_echo "failed." >&6; }
+	     { { $as_echo "$as_me:$LINENO: error: --with-EXT requires an argument" >&5
+$as_echo "$as_me: error: --with-EXT requires an argument" >&2;}
+   { (exit 1); exit 1; }; }
+	     ;;
+	     *)
+	     with_EXT_src="command line"
+	     ;;
+	esac
+
+else
+
+        if test "x$with_EXT" == "x"; then
+           with_EXT="`pwd`/../SWORD_EXT"
+           with_EXT_src="`pwd`/../SWORD_EXT"
+           { $as_echo "$as_me:$LINENO: result: Using default directory for EXT: $with_EXT" >&5
+$as_echo "Using default directory for EXT: $with_EXT" >&6; }
+        fi
+
+fi
 
 
 ## Configuration files
