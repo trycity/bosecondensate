@@ -601,6 +601,7 @@ PACKAGE_BUGREPORT=''
 ac_subst_vars='LTLIBOBJS
 LIBOBJS
 BUILD_DIR
+EXT
 target_alias
 host_alias
 build_alias
@@ -1713,9 +1714,6 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 
 
-## set build directory
-BUILD_DIR=`pwd`
-BUILD_DIR=$BUILD_DIR
 
 
 
@@ -1738,8 +1736,8 @@ $as_echo "$as_me: error: --with-EXT requires an argument" >&2;}
 else
 
         if test "x$with_EXT" == "x"; then
-           with_EXT="`pwd`/../SWORD_EXT"
-           with_EXT_src="`pwd`/../SWORD_EXT"
+           with_EXT="`pwd`/../QMC_EXT"
+           with_EXT_src="`pwd`/../QMC_EXT"
            { $as_echo "$as_me:$LINENO: result: Using default directory for EXT: $with_EXT" >&5
 $as_echo "Using default directory for EXT: $with_EXT" >&6; }
         fi
@@ -1747,7 +1745,15 @@ $as_echo "Using default directory for EXT: $with_EXT" >&6; }
 fi
 
 
-## Configuration files
+EXT=$with_EXT
+
+
+
+## set build directory
+BUILD_DIR=`pwd`
+BUILD_DIR=$BUILD_DIR
+
+## Source files
 ac_config_files="$ac_config_files Makefile"
 
 ac_config_files="$ac_config_files Makefile.common"
@@ -1780,6 +1786,7 @@ ac_config_files="$ac_config_files Energy_Terms/SymHoLocalESqd.h"
 ##AC_CONFIG_FILES([Energy_Terms/Test/Energy_test.cpp])
 ac_config_files="$ac_config_files Utilities/Makefile"
 
+##AC_CONFIG_FILES([Utilities/install_xerces.sh],	[chmod a+x Utilities/install_xerces.sh])
 ac_config_files="$ac_config_files Utilities/rand.cpp"
 
 ac_config_files="$ac_config_files Utilities/rand.h"

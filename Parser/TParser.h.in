@@ -12,6 +12,7 @@
 #include <xercesc/util/OutOfMemoryException.hpp>
 #include <xercesc/util/XMLUni.hpp>
 
+
 namespace QMC {
     /**
      * class for setting up parsing of XML files related to
@@ -25,7 +26,7 @@ namespace QMC {
         template< typename T >
         int parse( const ::std::string& xmlFileName );
     private:
-        XERCES_CPP_NAMESPACE::SAX2XMLReader* m_saxParser;
+        XERCES_CPP_NAMESPACE_USE::SAX2XMLReader* m_saxParser;
     }; // end class TParser
 
     // implementation
@@ -33,7 +34,7 @@ namespace QMC {
     inline int TParser::parse( const ::std::string& xmlFileName )
     try {
         T handler;
-        m_saxParser->setFeature(XERCES_CPP_NAMESPACE::XMLUni::fgSAX2CoreNameSpaces, true);
+        m_saxParser->setFeature(XERCES_CPP_NAMESPACE_USE::XMLUni::fgSAX2CoreNameSpaces, true);
         m_saxParser->setFeature(XERCES_CPP_NAMESPACE::XMLUni::fgSAX2CoreValidation, true);
         m_saxParser->setFeature(XERCES_CPP_NAMESPACE::XMLUni::fgXercesSchema,       true);
         m_saxParser->setFeature(XERCES_CPP_NAMESPACE::XMLUni::fgXercesSchemaFullChecking, true);

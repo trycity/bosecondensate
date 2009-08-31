@@ -60,7 +60,7 @@ ext:
 	(make xerces)
 
 xerces:
-	(EXT/install-xerces.sh)
+	(Utilities/install_xerces.sh)
 
 doxygen:
 	doxygen ${QMC_ROOT}/Doxyfile

@@ -2,9 +2,7 @@
 
 AC_INIT([QMC], 0.1)
 
-## set build directory
-BUILD_DIR=`pwd`
-AC_SUBST([BUILD_DIR], [$BUILD_DIR])
+
 
 AC_ARG_WITH([EXT],
 	AC_HELP_STRING([--with-EXT=DIR],
@@ -21,13 +19,19 @@ AC_ARG_WITH([EXT],
 	esac
 ],[
         if test "x$with_EXT" == "x"; then
-           with_EXT="`pwd`/../SWORD_EXT"
-           with_EXT_src="`pwd`/../SWORD_EXT"
+           with_EXT="`pwd`/../QMC_EXT"
+           with_EXT_src="`pwd`/../QMC_EXT"
            AC_MSG_RESULT([Using default directory for EXT: $with_EXT])
         fi
 ])
 
-## Configuration files
+AC_SUBST([EXT], [$with_EXT])
+
+
+## set build directory
+BUILD_DIR=`pwd`
+AC_SUBST([BUILD_DIR], [$BUILD_DIR])
+## Source files
 AC_CONFIG_FILES([Makefile])
 AC_CONFIG_FILES([Makefile.common])
 AC_CONFIG_FILES([runConfigTest.sh],	[chmod a+x runConfigTest.sh])
@@ -45,6 +49,7 @@ AC_CONFIG_FILES([Energy_Terms/SymHoLocalESqd.h])
 ##AC_CONFIG_FILES([Energy_Terms/Test/Makefile])
 ##AC_CONFIG_FILES([Energy_Terms/Test/Energy_test.cpp])
 AC_CONFIG_FILES([Utilities/Makefile])
+##AC_CONFIG_FILES([Utilities/install_xerces.sh],	[chmod a+x Utilities/install_xerces.sh])
 AC_CONFIG_FILES([Utilities/rand.cpp])
 AC_CONFIG_FILES([Utilities/rand.h])
 AC_CONFIG_FILES([Utilities/StringUtilities.h])
