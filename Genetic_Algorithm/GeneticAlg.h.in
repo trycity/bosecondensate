@@ -18,7 +18,7 @@ namespace QMC{
 		// GeneticAlg(unsigned size, unsigned precision, unsigned iterations, unsigned NParams, ::std::vector<double> domain);
 		~GeneticAlg();
 
-		// Determines the chromosome length required to obtain the desired precision
+		// Determines the chromosome length required to obtain the desired precision in each dimension
 		int cLength(unsigned precision, double rangeStart, double rangeEnd);
 		void setup(int** farm, unsigned size, unsigned length);
 		double xValue(int* chromosome, int xLength, double* domain);
@@ -31,6 +31,7 @@ namespace QMC{
 		void crossing(int** farm, int size, int length);
 		void mutate(int** farm, int size, int length);
 		void run();
+		int calcLength();
 
 	private:
 		unsigned m_Size;

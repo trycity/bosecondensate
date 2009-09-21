@@ -1,0 +1,28 @@
+// GeneticAlg.cpp
+
+#include "GeneticAlg.h"
+
+using namespace QMC;
+
+GeneticAlg::GeneticAlg(unsigned size, unsigned precision, unsigned iterations, ::std::vector<double> domain):
+	m_Size(size), m_Precision(precision), m_Iterations(iterations), m_Domain(domain)
+{
+	m_Length = calcLength();
+	m_Farm = new int*[m_Size];
+	for(int i=0; i<m_Size; i++)
+	{
+		m_Farm[i] = new int[m_Length];
+	}
+}
+
+
+GeneticAlg::~GeneticAlg()
+{
+	for(int k=0; k<m_Size; k++)
+	{
+		delete[] m_Farm[k];
+	}
+	
+	delete m_Farm;
+	m_Farm = 0;
+}
