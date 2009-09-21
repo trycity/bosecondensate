@@ -1,6 +1,7 @@
 // GeneticAlg.cpp
 
 #include "GeneticAlg.h"
+#include <cmath>
 
 using namespace QMC;
 
@@ -34,4 +35,18 @@ int GeneticAlg::calcLength()
 	int yLength = cLength(m_Precision, m_Domain[2], m_Domain[3]);
 	
 	return (xLength + yLength);
+}
+
+
+int GeneticAlg::cLength(unsigned precision, double rangeStart, double rangeEnd)
+{
+	int length = 0;
+	double total = (rangeEnd - rangeStart)*pow(10.0, m_Precision);
+
+	while(total > pow(2.0, length))
+	{
+		length++;
+	}
+
+	return length;
 }
