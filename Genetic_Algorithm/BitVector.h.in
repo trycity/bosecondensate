@@ -23,7 +23,15 @@ namespace QMC{
 		void ToggleBit(int bit);
 		void SetLength(int nbits);
 
-		
+		BitVector operator&(const BitVector&) const;
+		BitVector& operator&=(const BitVector&);
+		BitVector operator | (const BitVector&) const;
+		BitVector& operator |=(const BitVector&);
+		BitVector operator ^(const BitVector&) const;
+		BitVector& operator ^=(const BitVector&);
+		friend BitVector operator ~ (const BitVector&)
+		BitVector& operator = (const BitVector&);
+		int operator[](int bit) const;
 
 	protected:
 		int m_Len;
