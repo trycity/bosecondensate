@@ -26,3 +26,12 @@ GeneticAlg::~GeneticAlg()
 	delete m_Farm;
 	m_Farm = 0;
 }
+
+
+int GeneticAlg::calcLength()
+{
+	int xLength = cLength(m_Precision, m_Domain[0], m_Domain[1]);
+	int yLength = cLength(m_Precision, m_Domain[2], m_Domain[3]);
+	
+	return (xLength + yLength);
+}
