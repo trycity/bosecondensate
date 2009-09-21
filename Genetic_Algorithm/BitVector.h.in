@@ -1,0 +1,33 @@
+// BitVector.h
+
+/*
+BitVector header file
+*/
+
+#ifndef _BITVECTOR_H
+#define _BITVECTOR_H
+
+#include <string>
+
+namespace QMC{
+	class BitVector
+	{
+	public:
+		BitVector();
+		BitVector(int nbits);
+		BitVector(const BitVector&)
+		~BitVector();
+
+		void SetBit(int bit, int val=1);
+		int GetBit(int bit) const;
+		void ToggleBit(int bit);
+		void SetLength(int nbits);
+
+		
+
+	protected:
+		int m_Len;
+		unsigned char* m_BitVec;
+		const unsigned char _BV_BITS[8] = {1, 2, 4, 8, 16, 32, 64, 128};
+	};
+};
