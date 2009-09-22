@@ -21,17 +21,17 @@ namespace QMC{
 		int calcLength();
 
 		// Determines the chromosome length required to obtain the desired precision in each dimension
-		int cLength(unsigned precision, double rangeStart, double rangeEnd);
-		void setup(int** farm, unsigned size, unsigned length);
+		int cLength(double rangeStart, double rangeEnd);
+		void setup();
 		double xValue(int* chromosome, int xLength, double* domain);
-		double yValue(int* chromosome, int yLength, int length, double* domain);
+		double yValue(int* chromosome, int yLength, double* domain);
 		double fitnessValue(double (*function)(double, double), int* chromosome, int length, double* domain,
 					int xLength, int yLength);
 		
 		// New farm is set up by using a roulette wheel parent selection
-		void roulette(int** farm, int length, int size, double* domain, int xLength, int yLength);
-		void crossing(int** farm, int size, int length);
-		void mutate(int** farm, int size, int length);
+		void roulette(double* domain, int xLength, int yLength);
+		void crossing();
+		void mutate();
 		void run();
 
 

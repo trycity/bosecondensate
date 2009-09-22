@@ -40,7 +40,7 @@ int GeneticAlg::calcLength()
 }
 
 
-int GeneticAlg::cLength(unsigned precision, double rangeStart, double rangeEnd)
+int GeneticAlg::cLength(double rangeStart, double rangeEnd)
 {
 	int length = 0;
 	double total = (rangeEnd - rangeStart)*pow(10.0, m_Precision);
@@ -54,7 +54,7 @@ int GeneticAlg::cLength(unsigned precision, double rangeStart, double rangeEnd)
 }
 
 
-void GeneticAlg::setup(int** farm, unsigned size, unsigned length)
+void GeneticAlg::setup()
 {
 	srand((unsigned long) time(NULL));
 
