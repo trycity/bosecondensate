@@ -2,6 +2,8 @@
 
 #include "GeneticAlg.h"
 #include <cmath>
+#include <ctime>
+#include <cstdlib>
 
 using namespace QMC;
 
@@ -49,4 +51,18 @@ int GeneticAlg::cLength(unsigned precision, double rangeStart, double rangeEnd)
 	}
 
 	return length;
+}
+
+
+void GeneticAlg::setup(int** farm, unsigned size, unsigned length)
+{
+	srand((unsigned long) time(NULL));
+
+	for(int i=0; i<m_Size; i++)
+	{
+		for(int j=0; j<m_Length; j++)
+		{
+			m_Farm[i][j] = rand()%2;
+		}
+	}
 }
