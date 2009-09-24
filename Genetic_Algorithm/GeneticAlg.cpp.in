@@ -100,7 +100,12 @@ double yValue(int* chromosome, int yLength)
 
 double fitnessValue(int* chromosome, int xLength, int yLength)
 {
-	return 1.0;
+	double x = xValue(chromosome, xLength);
+	double y = yValue(chromosome, yLength);
+
+	double result = func(x, y);
+
+	return result;
 }
 
 
