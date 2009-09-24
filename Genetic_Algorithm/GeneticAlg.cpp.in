@@ -98,7 +98,7 @@ double yValue(int* chromosome, int yLength)
 }
 
 
-double fitnessValue(double (*function)(double, double), int* chromosome, int xLength, int yLength)
+double fitnessValue(int* chromosome, int xLength, int yLength)
 {
 	return 1.0;
 }
@@ -106,7 +106,96 @@ double fitnessValue(double (*function)(double, double), int* chromosome, int xLe
 
 void roulette(int xLength, int yLength)
 {
+	int i = 0;
+	int j = 0;
 
+	// fitness matrix contains the fitness of each individual chromosome on farm
+	// fitnessVector contains the fitness of each individual chromosome of the farm
+	double* fitnessVector = new double[m_Size];
+
+	for(i=0; i<m_Size; i++)
+	{
+		fitnessVector[i] = fitnessValue(m_Farm[i], xLength, yLength);
+	}
+
+	double totalFitness = 0.0;
+
+	for(i=0; i<m_Size; i++)
+	{
+		totalFitness += fitnessVector[i];
+	}
+
+	// calculate the probability vector
+	double* probabilityVector = new double[m_Size];
+	double cumulativeProb = 0.0;			// cumulative probability
+	double* cum_prob_Vector = new double[m_Size];	// cumulative probability vector
+
+	for(i=0; i<m_Size; i++)
+	{
+		probabilityVector[i] = fitnessVector[i]/totalFitness;
+		cumulativeProb += probabilityVector[i];
+		cum_prob_Vector = cumulativeProb;
+	}
+
+	// setup random vector
+	double* randomVector = new double[m_Size];
+	srand((unsigned long) time(NULL));
+
+	for(i=0; i<m_Size; i++)
+	{
+		randomVector[i] = rand()/double(RAND_MAX);
+	}
+
+	// create new population
+	int count;
+	int** newFarm = new int*[m_Size];
+
+	for(i=0; i<m_Size; i++)
+	{
+		newFarm[i] = new int[m_Length];
+	}
+
+	for(i=0; i<m_Size; i++)
+	{
+		count = 0;
+		while(randomVector[i] > cum_prob_Vector[count])
+		{
+			count++;
+		}
+
+		for(j=0; j<m_Length; j++)
+		{
+			newFarm[i][j] = m_Farm[count][j];
+		}
+	}
+
+	for(i=0; i<m_Size; i++)
+	{
+		for(j=0; j<m_Length; j++)
+		{
+			m_Farm[i][j] = newFarm[i][j];
+		}
+	}
+
+	delete[] fitnessVector;
+	fitnessVector = NULL;
+
+	delete[] probabilityVector;
+	probabilityVector = NULL:
+
+	delete[] cum_prob_Vector;
+	cum_prob_Vector = NULL;
+
+	delete[] randomVector;
+	randomVector = NULL;
+
+	for(i=0; i<m_Size; i++)
+	{
+		delete[] newFarm[i];
+	}
+
+	delete[] newFarm;
+	newFarm = NULL;
 }
 
 
