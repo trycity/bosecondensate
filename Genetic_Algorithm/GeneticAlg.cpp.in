@@ -66,3 +66,63 @@ void GeneticAlg::setup()
 		}
 	}
 }
+
+
+double xValue(int* chromosome, int xLength)
+{
+	double m = 0.0;
+	
+	for(int i=0; i<xLength, i++)
+	{
+		m += chromosome[xLength-i-1]*pow(2.0, i);
+	}
+
+	double x = m_Domain[0] + m*(m_Domain[1] - m_Domain[0])/pow(2.0, xLength)-1.0);
+
+	return x;
+}
+
+
+double yValue(int* chromosome, int yLength)
+{
+	double m = 0.0;
+
+	for(int i=0; i<xLength, i++)
+	{
+		m += chromosome[m_Length-i-1]*pow(2.0, i);
+	}
+
+	double y = m_Domain[2] + m*(m_Domain[3] - m_Domain[2])/pow(2.0, yLength)-1.0);
+
+	return y;
+}
+
+
+double fitnessValue(double (*function)(double, double), int* chromosome, int xLength, int yLength)
+{
+	return 1.0;
+}
+
+
+void roulette(int xLength, int yLength)
+{
+
+}
+
+
+void crossing()
+{
+
+}
+		
+
+void mutate()
+{
+
+}
+
+
+void run()
+{
+
+}
