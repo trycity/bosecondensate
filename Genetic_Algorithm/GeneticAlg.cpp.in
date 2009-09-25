@@ -289,7 +289,43 @@ void crossing()
 
 void mutate()
 {
+	int totalbits = m_Size*m_Length;
+	double* randomVector = new double[totalbits];
 
+	srand((unsigned long) time(NULL));
+
+	for(int i=0; i<totalbits; i++)
+	{
+		randomVector[i] = rand()/double(RAND_MAX);
+	}
+
+	int a = 0, b = 0;
+	for(int i=0; i<totalbits; i++)
+	{
+		if(randomVector[i] < 0.01)
+		{
+			if(i >= m_Length)
+			{
+				a = i/m_Length;
+				b = i%m_Length;
+			}else
+			{
+				a = 0;
+				b = i;
+			}
+
+			if(m_Farm[a][b] == 0)
+			{
+				m_Farm[a][b] = 1;
+			}else
+			{
+				m_Farm[a][b] = 0;
+			}
+		}
+	}
+
+	delete[] randomVector;
+	randomVector = NULL;
 }
 
 
