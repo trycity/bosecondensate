@@ -16,6 +16,8 @@ GeneticAlg::GeneticAlg(unsigned size, unsigned precision, unsigned iterations, :
 	{
 		m_Farm[i] = new int[m_Length];
 	}
+
+	setup();
 }
 
 
@@ -331,5 +333,16 @@ void mutate()
 
 void run()
 {
+	int xLength = cLength(m_Domain[0], m_Domain[1]);
+	int yLength = cLength(m_Domain[2], m_Domain[3]);
+	
+	for(int t=0; t<m_Interations; t++)
+	{
+		roulette(xLength, yLength);
+		crossing();
 
+		roulette(xLength, yLength);
+		mutate();
+
+	}
 }

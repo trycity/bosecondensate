@@ -8,7 +8,7 @@ Header file for genetic algortihm
 #define _GENETICALG_H
 
 #include "BitVector.h"
-
+#include <vector>
 
 namespace QMC{
 	class GeneticAlg
@@ -40,7 +40,7 @@ namespace QMC{
 		unsigned m_Iterations;
 		::std::vector<double> m_Domain;
 		int m_Length;
-		int** m_Farm;			
+		int** m_Farm;	
 	};
 };
 
