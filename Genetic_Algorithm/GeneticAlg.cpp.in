@@ -206,7 +206,84 @@ void roulette(int xLength, int yLength)
 
 void crossing()
 {
+	int i = 0;
+	int count = 0;
 
+	int* chosen = new int[m_Size];
+	double* randomVector = new double[m_Size];
+
+	srand((unsigned, long) time(NULL));
+
+	for(i=0; i<m_Size; i++)
+	{
+		randomVector[i] = rand()/double(RAND_MAX);
+	}
+
+	// fill chosen with indexes of all random values < 0.25
+
+	for(i=0; i<m_Size; i++)
+	{
+		if(randomVector[i] < 0.25)
+		{
+			chosen[count] = i;
+			count++;
+		}
+	}
+
+	// if chosen contains an odd number of chromosomes, then one more chromosome is to be selected
+	if((count%2 != 0) || (count == 1))
+	{
+		int index = 0;
+		while(randomVector[index] < 0.25)
+		{
+			index++;
+		}
+		count++
+		chosen[count-1] = index;
+	}
+
+	// cross chromosomes with index given in chosen
+	int** temp = new int*[2];
+	for(i=0; i<2; i++)
+	{
+		temp[i] = new int[m_Length];
+	}
+
+	for(i=0; i<count; i=i+2)
+	{
+		for(int j=0; j<m_Length; j++)
+		{
+			temp[0][j] = m_Farm[chosen[i]][j];
+			temp[1][j] = m_Farm[chosen[i+1]][j];
+		}
+		
+		int position = rand()%m_Length;
+
+		for(int k=position; k<m_Length; k++)
+		{
+			temp[0][k] = m_Farm[chosen[i+1][k];
+			temp[1][k] = m_Farm[chosen[i][k];
+		}
+
+		for(int m=0; m < m_Length; m++)
+		{
+			m_Farm[chosen[i]][m] = temp[0][m];
+			m_Farm[chosen[i+1][m] = temp[0][m];
+		}
+	}
+
+	delete[] chosen;
+	chosen = NULL;
+
+	delete[] randomVector;
+	randomVector = NULL;
+
+	for(i=0; i<2; i++)
+	{
+		delete[] temp[i];
+	}
+	delete[] temp;
+	temp = NULL;	
 }
 		
 
