@@ -343,6 +343,5 @@ void run()
 
 		roulette(xLength, yLength);
 		mutate();
-
 	}
 }

@@ -33,7 +33,7 @@ BitVector::~BitVector()
 	m_BitVec = NULL:
 }
 
-void BitVector::SetBit(int bit, bool val)
+void BitVector::SetBit(int bit, int val)
 {
 	if(bit < 8*m_Len)
 	{
