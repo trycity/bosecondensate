@@ -7,7 +7,9 @@ BitVector header file
 #ifndef _BITVECTOR_H
 #define _BITVECTOR_H
 
-#include <string>
+
+
+static const unsigned char _BV_BITS[8] = {1, 2, 4, 8, 16, 32, 64, 128};
 
 namespace QMC{
 	class BitVector
@@ -15,7 +17,7 @@ namespace QMC{
 	public:
 		BitVector();
 		BitVector(int nbits);
-		BitVector(const BitVector&)
+		BitVector(const BitVector&);
 		~BitVector();
 
 		void SetBit(int bit, int val=1);
@@ -29,13 +31,19 @@ namespace QMC{
 		BitVector& operator |=(const BitVector&);
 		BitVector operator ^(const BitVector&) const;
 		BitVector& operator ^=(const BitVector&);
-		friend BitVector operator ~ (const BitVector&)
+		friend BitVector operator ~(const BitVector&);
 		BitVector& operator = (const BitVector&);
 		int operator[](int bit) const;
 
-	protected:
+		//accessor methods
+		int getLen();
+		unsigned char* getBitVec();
+
+	//protected:
 		int m_Len;
 		unsigned char* m_BitVec;
-		const unsigned char _BV_BITS[8] = {1, 2, 4, 8, 16, 32, 64, 128};
+		//static const unsigned char _BV_BITS[8] = {1, 2, 4, 8, 16, 32, 64, 128};
 	};
 };
+
+#endif

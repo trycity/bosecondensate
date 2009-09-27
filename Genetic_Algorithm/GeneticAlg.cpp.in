@@ -35,8 +35,8 @@ GeneticAlg::~GeneticAlg()
 
 int GeneticAlg::calcLength()
 {
-	int xLength = cLength(m_Precision, m_Domain[0], m_Domain[1]);
-	int yLength = cLength(m_Precision, m_Domain[2], m_Domain[3]);
+	int xLength = cLength(m_Domain[0], m_Domain[1]);
+	int yLength = cLength(m_Domain[2], m_Domain[3]);
 	
 	return (xLength + yLength);
 }
@@ -70,48 +70,48 @@ void GeneticAlg::setup()
 }
 
 
-double xValue(int* chromosome, int xLength)
+double GeneticAlg::xValue(int* chromosome, int xLength)
 {
 	double m = 0.0;
 	
-	for(int i=0; i<xLength, i++)
+	for(int i=0; i<xLength; i++)
 	{
 		m += chromosome[xLength-i-1]*pow(2.0, i);
 	}
 
-	double x = m_Domain[0] + m*(m_Domain[1] - m_Domain[0])/pow(2.0, xLength)-1.0);
+	double x = m_Domain[0] + m*(m_Domain[1] - m_Domain[0])/(pow(2.0, xLength)-1.0);
 
 	return x;
 }
 
 
-double yValue(int* chromosome, int yLength)
+double GeneticAlg::yValue(int* chromosome, int yLength)
 {
 	double m = 0.0;
 
-	for(int i=0; i<xLength, i++)
+	for(int i=0; i<yLength; i++)
 	{
 		m += chromosome[m_Length-i-1]*pow(2.0, i);
 	}
 
-	double y = m_Domain[2] + m*(m_Domain[3] - m_Domain[2])/pow(2.0, yLength)-1.0);
+	double y = m_Domain[2] + m*(m_Domain[3] - m_Domain[2])/(pow(2.0, yLength)-1.0);
 
 	return y;
 }
 
 
-double fitnessValue(int* chromosome, int xLength, int yLength)
+double GeneticAlg::fitnessValue(int* chromosome, int xLength, int yLength)
 {
 	double x = xValue(chromosome, xLength);
 	double y = yValue(chromosome, yLength);
 
-	double result = func(x, y);
+	double result = 0.0;//func(x, y);
 
 	return result;
 }
 
 
-void roulette(int xLength, int yLength)
+void GeneticAlg::roulette(int xLength, int yLength)
 {
 	int i = 0;
 	int j = 0;
@@ -141,7 +141,7 @@ void roulette(int xLength, int yLength)
 	{
 		probabilityVector[i] = fitnessVector[i]/totalFitness;
 		cumulativeProb += probabilityVector[i];
-		cum_prob_Vector = cumulativeProb;
+		cum_prob_Vector[i] = cumulativeProb;
 	}
 
 	// setup random vector
@@ -188,7 +188,7 @@ void roulette(int xLength, int yLength)
 	fitnessVector = NULL;
 
 	delete[] probabilityVector;
-	probabilityVector = NULL:
+	probabilityVector = NULL;
 
 	delete[] cum_prob_Vector;
 	cum_prob_Vector = NULL;
@@ -206,7 +206,7 @@ void roulette(int xLength, int yLength)
 }
 
 
-void crossing()
+void GeneticAlg::crossing()
 {
 	int i = 0;
 	int count = 0;
@@ -214,7 +214,7 @@ void crossing()
 	int* chosen = new int[m_Size];
 	double* randomVector = new double[m_Size];
 
-	srand((unsigned, long) time(NULL));
+	srand((unsigned long) time(NULL));
 
 	for(i=0; i<m_Size; i++)
 	{
@@ -240,7 +240,7 @@ void crossing()
 		{
 			index++;
 		}
-		count++
+		count++;
 		chosen[count-1] = index;
 	}
 
@@ -263,14 +263,14 @@ void crossing()
 
 		for(int k=position; k<m_Length; k++)
 		{
-			temp[0][k] = m_Farm[chosen[i+1][k];
-			temp[1][k] = m_Farm[chosen[i][k];
+			temp[0][k] = m_Farm[chosen[i+1]][k];
+			temp[1][k] = m_Farm[chosen[i]][k];
 		}
 
 		for(int m=0; m < m_Length; m++)
 		{
 			m_Farm[chosen[i]][m] = temp[0][m];
-			m_Farm[chosen[i+1][m] = temp[0][m];
+			m_Farm[chosen[i+1]][m] = temp[0][m];
 		}
 	}
 
@@ -289,7 +289,7 @@ void crossing()
 }
 		
 
-void mutate()
+void GeneticAlg::mutate()
 {
 	int totalbits = m_Size*m_Length;
 	double* randomVector = new double[totalbits];
@@ -331,12 +331,12 @@ void mutate()
 }
 
 
-void run()
+void GeneticAlg::run()
 {
 	int xLength = cLength(m_Domain[0], m_Domain[1]);
 	int yLength = cLength(m_Domain[2], m_Domain[3]);
 	
-	for(int t=0; t<m_Interations; t++)
+	for(int t=0; t<m_Iterations; t++)
 	{
 		roulette(xLength, yLength);
 		crossing();

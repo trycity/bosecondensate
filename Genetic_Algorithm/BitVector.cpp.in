@@ -1,6 +1,7 @@
 // BitVector.cpp
 
 #include "BitVector.h"
+#include <cstring>
 
 using namespace QMC;
 
@@ -30,7 +31,7 @@ BitVector::~BitVector()
 		delete[] m_BitVec;
 	}
 	
-	m_BitVec = NULL:
+	m_BitVec = NULL;
 }
 
 void BitVector::SetBit(int bit, int val)
@@ -39,10 +40,10 @@ void BitVector::SetBit(int bit, int val)
 	{
 		if(val)
 		{
-			m_BitVec[bit/8] |= _BV_BIT[bit%8];
+			m_BitVec[bit/8] |= _BV_BITS[bit%8];
 		}else
 		{
-			m_BitVec[bit/8] &= ~_BV_BIT[bit%8];
+			m_BitVec[bit/8] &= ~_BV_BITS[bit%8];
 		}
 	}
 }
@@ -52,7 +53,7 @@ int BitVector::GetBit(int bit) const
 {
 	if(bit < 8*m_Len)
 	{
-		return ((m_BitVec[bit/8]& _BV_BIT[bit%8])?1:0);
+		return ((m_BitVec[bit/8]& _BV_BITS[bit%8])?1:0);
 	}
 
 	return -1;
@@ -63,7 +64,7 @@ void BitVector::ToggleBit(int bit)
 {
 	if(bit <8*m_Len)
 	{
-		m_BitVec[bit/8] ^= _BV_BIT[bit%8];
+		m_BitVec[bit/8] ^= _BV_BITS[bit%8];
 	}
 }
 
@@ -159,11 +160,11 @@ BitVector& BitVector::operator ^=(const BitVector& b)
 	return *this;
 }
 		
-BitVector operator ~ (const BitVector& b)
+BitVector operator ~(const BitVector& b)
 {
 	BitVector ret(b.m_Len*8);
 	
-	for(int i=0; i<m_Len; i++)
+	for(int i=0; i < b.m_Len; i++)
 	{
 		ret.m_BitVec[i] = ~b.m_BitVec[i];
 	}
