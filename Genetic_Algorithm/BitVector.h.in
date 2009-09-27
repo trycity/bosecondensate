@@ -39,7 +39,8 @@ namespace QMC{
 		int getLen();
 		unsigned char* getBitVec();
 
-	//protected:
+	//private:	
+		// These should be made private.
 		int m_Len;
 		unsigned char* m_BitVec;
 		//static const unsigned char _BV_BITS[8] = {1, 2, 4, 8, 16, 32, 64, 128};
