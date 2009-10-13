@@ -27,6 +27,8 @@ namespace QMC{
 		~Phi();
 
 		void setVariationParams(const ArgType& args);
+		double getVariationParams();
+		::std::string getTypePhi();
 				
 		double operator()(const VMCPoint& x)const;
 

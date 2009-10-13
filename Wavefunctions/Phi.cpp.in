@@ -29,6 +29,29 @@ void Phi::setVariationParams(const ArgType& args)
 		double alpha = convertFromString<double>(args[0]);
 		symPhi.setAlpha(alpha);
 	}
+
+	if(m_TypeOfPhi == "HomogeneousPhi")
+	{
+	}
+}
+
+double Phi::getVariationParams()
+{
+	
+	if(m_TypeOfPhi == "SymHoPhi")
+	{
+		double alpha = 0.0;
+		alpha = symPhi.getAlpha();
+		return alpha;	
+	}
+
+	return 0.0;
+}
+	
+
+::std::string Phi::getTypePhi()
+{
+	return m_TypeOfPhi;
 }
 
 double Phi::operator()(const VMCPoint& x)const

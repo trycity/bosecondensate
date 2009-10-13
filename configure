@@ -1865,6 +1865,8 @@ ac_config_files="$ac_config_files Wavefunctions/Test/NonInteractingF_test.cpp"
 
 ac_config_files="$ac_config_files Wavefunctions/Test/HardSphereF_test.cpp"
 
+ac_config_files="$ac_config_files Wavefunctions/Test/Phi_test.cpp"
+
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -2528,6 +2530,7 @@ do
     "Wavefunctions/Test/EffectiveRangeF_test.cpp") CONFIG_FILES="$CONFIG_FILES Wavefunctions/Test/EffectiveRangeF_test.cpp" ;;
     "Wavefunctions/Test/NonInteractingF_test.cpp") CONFIG_FILES="$CONFIG_FILES Wavefunctions/Test/NonInteractingF_test.cpp" ;;
     "Wavefunctions/Test/HardSphereF_test.cpp") CONFIG_FILES="$CONFIG_FILES Wavefunctions/Test/HardSphereF_test.cpp" ;;
+    "Wavefunctions/Test/Phi_test.cpp") CONFIG_FILES="$CONFIG_FILES Wavefunctions/Test/Phi_test.cpp" ;;
 
   *) { { $as_echo "$as_me:$LINENO: error: invalid argument: $ac_config_target" >&5
 $as_echo "$as_me: error: invalid argument: $ac_config_target" >&2;}
