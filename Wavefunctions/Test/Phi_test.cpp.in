@@ -1,0 +1,32 @@
+// Phi_test.cpp
+
+#include <iostream>
+#include <cstring>
+
+#include "Wavefunctions/Phi.h"
+#include "Utilities/VMCPoint.h"
+#include "Utilities/StringUtilities.h"
+
+using namespace QMC;
+using namespace std;
+
+int main()
+{
+	::std::string PhiString1 = "SymHoPhi";
+	::std::string PhiString2 = "HomogeneousPhi";
+	//const ArgType Alpha;
+	//Alpha[0] = "0.5";
+
+	Phi phi1(PhiString1);
+	Phi phi2(PhiString2);
+
+	//phi1.setVariationParams(Alpha[0]&);
+
+	::std::cout<<"Type of Phi = ";	
+	::std::cout<<phi1.getTypePhi()<<::std::endl;
+	//::std::cout<<"Alpha = "<<phi1.getVariationParams();
+	
+	return 0;
+}
+
+
