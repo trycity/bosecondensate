@@ -1,5 +1,6 @@
 // Phi.cpp
 
+//#include <iostream>
 
 #include "Phi.h"
 #include "HomogeneousPhi.h"
@@ -27,6 +28,7 @@ void Phi::setVariationParams(const ArgType& args)
 	if(m_TypeOfPhi == "SymHoPhi")
 	{
 		double alpha = convertFromString<double>(args[0]);
+		//::std::cout<<"alpha = "<<alpha<<::std::endl;
 		symPhi.setAlpha(alpha);
 	}
 
@@ -36,16 +38,16 @@ void Phi::setVariationParams(const ArgType& args)
 }
 
 double Phi::getVariationParams()
-{
+{	
+	double alpha = 0.0;
 	
 	if(m_TypeOfPhi == "SymHoPhi")
 	{
-		double alpha = 0.0;
 		alpha = symPhi.getAlpha();
 		return alpha;	
 	}
 
-	return 0.0;
+	return alpha;
 }
 	
 

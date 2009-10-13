@@ -14,17 +14,17 @@ int main()
 {
 	::std::string PhiString1 = "SymHoPhi";
 	::std::string PhiString2 = "HomogeneousPhi";
-	//const ArgType Alpha;
-	//Alpha[0] = "0.5";
+	ArgType Alpha;
+	Alpha.push_back("0.5");
 
 	Phi phi1(PhiString1);
 	Phi phi2(PhiString2);
 
-	//phi1.setVariationParams(Alpha[0]&);
+	phi1.setVariationParams(Alpha);
 
 	::std::cout<<"Type of Phi = ";	
 	::std::cout<<phi1.getTypePhi()<<::std::endl;
-	//::std::cout<<"Alpha = "<<phi1.getVariationParams();
+	::std::cout<<"Alpha = "<<phi1.getVariationParams()<<::std::endl;
 	
 	return 0;
 }

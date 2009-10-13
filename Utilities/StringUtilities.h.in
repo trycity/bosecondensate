@@ -3,6 +3,7 @@
 #ifndef _STRINGUTILITIES_H_
 #define _STRINGUTILITIES_H_
 
+#include <iostream>
 #include <cassert>
 #include <vector>
 #include <string>
@@ -16,6 +17,10 @@ namespace QMC {
     T convertFromString( const ::std::string& stringToConvert ) {
 	::std::istringstream stringStream( stringToConvert );
 	T convertedValue;
+
+	if( !( stringStream >> convertedValue ) ) {
+	    ::std::cout<<"Invalid conversion for "<<stringToConvert<<::std::endl;
+	}
 	
         return convertedValue;
     }
