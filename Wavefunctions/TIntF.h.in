@@ -24,6 +24,9 @@ namespace QMC{
 		~TIntF();
 
 		void setVariationParams(const ArgType& args);
+		double getVariationParams();
+		::std::string getTypeF();
+
 		double operator()(double rij)const;
 
 	private:

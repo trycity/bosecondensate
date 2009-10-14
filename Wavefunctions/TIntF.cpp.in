@@ -42,6 +42,17 @@ void TIntF::setVariationParams(const ArgType& args)
 	}
 }
 
+double TIntF::getVariationParams()
+{
+	double r = 0.0;
+	
+	return r;
+}
+
+::std::string TIntF::getTypeF()
+{
+	return m_TypeOfF;
+}
 
 double TIntF::operator()(double rij)const
 {

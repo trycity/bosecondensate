@@ -90,5 +90,6 @@ AC_CONFIG_FILES([Wavefunctions/Test/EffectiveRangeF_test.cpp])
 AC_CONFIG_FILES([Wavefunctions/Test/NonInteractingF_test.cpp])
 AC_CONFIG_FILES([Wavefunctions/Test/HardSphereF_test.cpp])
 AC_CONFIG_FILES([Wavefunctions/Test/Phi_test.cpp])
+AC_CONFIG_FILES([Wavefunctions/Test/TIntF_test.cpp])
 
 AC_OUTPUT
