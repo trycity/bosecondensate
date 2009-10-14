@@ -1794,6 +1794,10 @@ ac_config_files="$ac_config_files Genetic_Algorithm/GeneticAlg.cpp"
 
 ac_config_files="$ac_config_files Genetic_Algorithm/GeneticAlg.h"
 
+ac_config_files="$ac_config_files Genetic_Algorithm/Test/Makefile"
+
+ac_config_files="$ac_config_files Genetic_Algorithm/Test/BitVector_test.cpp"
+
 ac_config_files="$ac_config_files Utilities/Makefile"
 
 ##AC_CONFIG_FILES([Utilities/install_xerces.sh],	[chmod a+x Utilities/install_xerces.sh])
@@ -2497,6 +2501,8 @@ do
     "Genetic_Algorithm/BitVector.h") CONFIG_FILES="$CONFIG_FILES Genetic_Algorithm/BitVector.h" ;;
     "Genetic_Algorithm/GeneticAlg.cpp") CONFIG_FILES="$CONFIG_FILES Genetic_Algorithm/GeneticAlg.cpp" ;;
     "Genetic_Algorithm/GeneticAlg.h") CONFIG_FILES="$CONFIG_FILES Genetic_Algorithm/GeneticAlg.h" ;;
+    "Genetic_Algorithm/Test/Makefile") CONFIG_FILES="$CONFIG_FILES Genetic_Algorithm/Test/Makefile" ;;
+    "Genetic_Algorithm/Test/BitVector_test.cpp") CONFIG_FILES="$CONFIG_FILES Genetic_Algorithm/Test/BitVector_test.cpp" ;;
     "Utilities/Makefile") CONFIG_FILES="$CONFIG_FILES Utilities/Makefile" ;;
     "Utilities/rand.cpp") CONFIG_FILES="$CONFIG_FILES Utilities/rand.cpp" ;;
     "Utilities/rand.h") CONFIG_FILES="$CONFIG_FILES Utilities/rand.h" ;;

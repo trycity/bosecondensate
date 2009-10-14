@@ -1,0 +1,30 @@
+// BitVector_test.cpp
+
+#include <iostream>
+
+#include "Genetic_Algorithm/BitVector.h"
+
+using namespace QMC;
+using namespace std;
+
+int main()
+{
+	int nbits = 101;
+
+	BitVector bitvec1;
+	BitVector bitvec2(nbits);
+
+	int mlen1, mlen2;
+
+	mlen1 = bitvec1.getLen();
+	mlen2 = bitvec2.getLen();
+
+	::std::cout<<"bitvec1 length = "<<mlen1<<::std::endl;
+	::std::cout<<"bitvec2 length = "<<mlen2<<::std::endl;
+	::std::cout<<"Size of bitvec1 = "<<sizeof(bitvec1)<<::std::endl;
+	::std::cout<<"Size of bitvec2 = "<<sizeof(bitvec2)<<::std::endl;
+	
+	return 0;
+
+}
+

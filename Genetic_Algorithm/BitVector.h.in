@@ -36,8 +36,8 @@ namespace QMC{
 		int operator[](int bit) const;
 
 		//accessor methods
-		int getLen();
-		unsigned char* getBitVec();
+		int getLen() const;
+		//unsigned char* getBitVec();
 
 	//private:	
 		// These should be made private.

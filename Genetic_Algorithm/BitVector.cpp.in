@@ -196,3 +196,9 @@ int BitVector::operator[](int bit) const
 {
 	return GetBit(bit);
 }
+
+
+int BitVector::getLen() const
+{
+	return m_Len;
+}
