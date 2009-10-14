@@ -1,0 +1,33 @@
+#Makefile
+#Makefile for performing Genetic Algorithm tests
+
+LIBNAME = Genetic_Algorithm
+
+#CXX = g++
+
+QMC_BUILD_DIR = @BUILD_DIR@
+
+include ../../Makefile.common
+
+CXXFLAGS += $(LIBDIRS)
+
+LIBS += -lQMC$(LIBNAME)
+
+
+VPATH = $(QMC_BUILD_DIR)/$(LIBNAME)/Test
+
+TEST_SOURCES = $(shell ls $(QMC_BUILD_DIR)/$(LIBNAME)/Test/*.cpp | sed "s|$(QMC_BUILD_DIR)/$(LIBNAME)/Test/||g")
+TEST_OBJECTS = $(TEST_SOURCES:.cpp=.o)
+TEST_PROGRAMS = $(TEST_SOURCES:.cpp=)
+
+%: %.o
+	$(CXX) $(CXXFLAGS) -o $@ $< $(RPATH_FLAGS)  $(LIBS)
+
+.PHONY: all clean
+
+all: $(TEST_OBJECTS) $(TEST_PROGRAMS)
+
+clean:
+	$(shell rm $(TEST_OBJECTS) $(TEST_PROGRAMS) *.d)
+
+-include $(TEST_SOURCES:.cpp=.d)
