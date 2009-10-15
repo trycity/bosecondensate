@@ -1,0 +1,36 @@
+// SymHoLocalE_test.cpp
+
+#include <iostream>
+#include <vector>
+
+#include "Energy_Terms/SymHoLocalE.h"
+//#include "@BUILD_DIR@/Utilities/VMCPoint.h"
+
+
+using namespace QMC;
+using namespace std;
+
+
+int main()
+{
+	double alpha = 0.5;
+
+	::std::vector<VMCPoint> points;
+
+	VMCPoint point(3);
+	
+	for(unsigned n=0; n<3; n++) {
+		point[n] = 0.5*n+0.1;
+	}
+
+	points.push_back(point);
+	
+	SymHoLocalE symLocE(alpha);
+	double x = symLocE(points);
+
+	::std::cout<<"symLoE size = "<<sizeof(symLocE)<<::std::endl;
+	::std::cout<<"Energy value = "<<x<<::std::endl;
+	
+
+	return 0;
+}

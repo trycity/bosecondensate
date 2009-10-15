@@ -1,5 +1,7 @@
 // SymHoLocalE.cpp
 
+#include <cmath>
+
 #include "SymHoLocalE.h"
 #include "Configurations/VMCconfig.h"
 

@@ -8,8 +8,7 @@
 
 using namespace QMC;
 
-VMCconfig::VMCconfig(unsigned NParticles, unsigned ndim, const std::valarray<double>& BoxSize, double ParticleRadius): m_NParticles(NParticles),
-			m_NDim(ndim), m_BoxSize(BoxSize), m_radius0(ParticleRadius)
+VMCconfig::VMCconfig(unsigned NParticles, unsigned ndim, const std::valarray<double>& BoxSize, double ParticleRadius): m_NParticles(NParticles), m_NDim(ndim), m_BoxSize(BoxSize), m_radius0(ParticleRadius)
 {
 	m_Seed = -123456789;
 	m_Energy = 0.0;
