@@ -345,3 +345,9 @@ void GeneticAlg::run()
 		mutate();
 	}
 }
+
+
+int GeneticAlg::getLength()const
+{
+	return m_Length;
+}

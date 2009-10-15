@@ -1,0 +1,29 @@
+// GeneticAlg_test.cpp
+
+#include <iostream>
+#include <vector>
+
+#include "Genetic_Algorithm/GeneticAlg.h"
+
+using namespace QMC;
+using namespace std;
+
+int main()
+{
+	unsigned size = 10;
+	unsigned precision = 10;
+	unsigned iterations = 10000;
+
+	::std::vector<double> domain;
+	domain.push_back(0.1);
+	domain.push_back(0.2);
+	domain.push_back(0.3);
+	domain.push_back(0.4);
+
+	GeneticAlg Ga(size, precision, iterations, domain);
+	int length = Ga.getLength();
+
+	::std::cout<<"Ga length = "<<length<<::std::endl;	
+	
+	return 0;
+}

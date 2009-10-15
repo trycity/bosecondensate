@@ -33,6 +33,8 @@ namespace QMC{
 		void mutate();
 		void run();
 
+		int getLength() const;
+
 
 	private:
 		unsigned m_Size;
