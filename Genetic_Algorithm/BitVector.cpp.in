@@ -206,9 +206,9 @@ int BitVector::getLen() const
 }
 
 
-/*
-unsigned char* BitVector::getBitVec()
+
+unsigned char* BitVector::getBitVec() const
 {
-	return &m_BitVec;
+	return m_BitVec;
 }
-*/
+

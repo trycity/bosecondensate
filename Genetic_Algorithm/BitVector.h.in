@@ -25,7 +25,7 @@ namespace QMC{
 		void ToggleBit(int bit);
 		void SetLength(int nbits);
 		int getLen() const;
-		//unsigned char* getBitVec();
+		unsigned char* getBitVec() const;
 
 		BitVector operator&(const BitVector&) const;
 		BitVector& operator&=(const BitVector&);
