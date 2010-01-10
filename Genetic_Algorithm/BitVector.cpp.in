@@ -34,7 +34,7 @@ BitVector::~BitVector()
 	m_BitVec = NULL;
 }
 
-void BitVector::SetBit(int bit, int val)
+void BitVector::SetBit(int bit, bool val)
 {
 	if(bit < 8*m_Len)
 	{
@@ -162,11 +162,13 @@ BitVector& BitVector::operator ^=(const BitVector& b)
 		
 BitVector operator ~(const BitVector& b)
 {
-	BitVector ret(b.m_Len*8);
+	int length = b.getLen();
+	//unsigned char bitvec = *(b.getBitVec());	
+	BitVector ret(length*8);
 	
-	for(int i=0; i < b.m_Len; i++)
+	for(int i=0; i < length; i++)
 	{
-		ret.m_BitVec[i] = ~b.m_BitVec[i];
+		ret.m_BitVec[i] = ~b.m_BitVec[i];//b.m_BitVec[i];
 	}
 
 	return ret;
@@ -202,3 +204,11 @@ int BitVector::getLen() const
 {
 	return m_Len;
 }
+
+
+/*
+unsigned char* BitVector::getBitVec()
+{
+	return &m_BitVec;
+}
+*/

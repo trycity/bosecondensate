@@ -9,7 +9,7 @@ using namespace std;
 
 int main()
 {
-	int nbits = 101;
+	int nbits = 10000;
 
 	BitVector bitvec1;
 	BitVector bitvec2(nbits);

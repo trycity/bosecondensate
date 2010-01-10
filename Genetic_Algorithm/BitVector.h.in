@@ -20,10 +20,12 @@ namespace QMC{
 		BitVector(const BitVector&);
 		~BitVector();
 
-		void SetBit(int bit, int val=1);
+		void SetBit(int bit, bool val=true);
 		int GetBit(int bit) const;
 		void ToggleBit(int bit);
 		void SetLength(int nbits);
+		int getLen() const;
+		//unsigned char* getBitVec();
 
 		BitVector operator&(const BitVector&) const;
 		BitVector& operator&=(const BitVector&);
@@ -36,11 +38,9 @@ namespace QMC{
 		int operator[](int bit) const;
 
 		//accessor methods
-		int getLen() const;
-		//unsigned char* getBitVec();
+		
 
-	//private:	
-		// These should be made private.
+	//protected:	
 		int m_Len;
 		unsigned char* m_BitVec;
 		//static const unsigned char _BV_BITS[8] = {1, 2, 4, 8, 16, 32, 64, 128};
