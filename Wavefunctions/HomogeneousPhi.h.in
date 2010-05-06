@@ -8,7 +8,6 @@ Class depicting homogeneous (System without external potential)
 #define _HOMOGENEOUSPHI_H
 
 #include <valarray>
-
 #include "@BUILD_DIR@/Utilities/VMCPoint.h"
 
 namespace QMC{

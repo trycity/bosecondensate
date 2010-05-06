@@ -7,9 +7,14 @@ CXX = g++
 SOURCES = $(shell ls $(QMC_BUILD_DIR)/$(LIBNAME)/*.cpp | sed "s|$(QMC_BUILD_DIR)/$(LIBNAME)/||g")
 OBJECTS = $(SOURCES:.cpp=.o)
 
+LIBS = -lQMCUtilities
+
 # LD flags
 SHLIBFLAGS = -shared
 SHLIBFLAGS += -m32 
+
+%: %.o
+	$(CXX) $(CXXFLAGS) -o $@ $< $(LIBS)
 
 .PHONY: all clean lib
 

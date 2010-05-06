@@ -15,6 +15,7 @@ GeneticAlg::GeneticAlg(unsigned size, unsigned precision, unsigned iterations, :
 	for(int i=0; i<m_Size; i++)
 	{
 		m_Farm[i] = new int[m_Length];
+		//m_FarmA.push_back(new int[m_Length]);
 	}
 
 	setup();
