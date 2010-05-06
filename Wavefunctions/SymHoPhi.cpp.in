@@ -3,7 +3,7 @@
 #include <valarray>
 #include <cmath>
 #include "SymHoPhi.h"
-#include "@BUILD_DIR@/Utilities/VMCPoint.h"
+#include "Utilities/VMCPoint.h"
 
 using namespace QMC;
 

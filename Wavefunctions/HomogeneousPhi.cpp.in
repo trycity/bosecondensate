@@ -1,7 +1,7 @@
 // Homogeneous.cpp
 
 #include "HomogeneousPhi.h"
-#include "@BUILD_DIR@/Utilities/VMCPoint.h"
+#include "Utilities/VMCPoint.h"
 
 using namespace QMC;
 
