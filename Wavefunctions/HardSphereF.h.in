@@ -1,18 +1,28 @@
 // HardSphereF.h
 
-/*
-class used to describe a hard sphere interaction between particles
-*/
+
 
 #ifndef _HARDSPHEREF_H
 #define _HARDSPHEREf_H
 
 
 namespace QMC{
+	/**
+	 *class used to describe a hard sphere interaction between particles
+	 */
 	class HardSphereF
 	{
 	public:
-		HardSphereF(){}		
+		/**
+		 * Default constructor
+		 */
+		HardSphereF(){}
+		/**
+		 * Creates a hard sphere object
+		 *@param as The s-wave scattering length
+		 *@param healing_distance This distance is derived through boundary conditions
+		 *@param Kconstant This value is related to the amplitude of the hardsphere
+		 */	
 		HardSphereF(double as, double healing_distance, double Kconstant);
 		~HardSphereF();
 
