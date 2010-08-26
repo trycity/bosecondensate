@@ -2,7 +2,6 @@ LIBNAME = Wavefunctions
 
 QMC_BUILD_DIR = @BUILD_DIR@
 
-CXX = g++
 
 include ../Makefile.common
 

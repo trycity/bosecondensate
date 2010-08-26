@@ -2,7 +2,6 @@ LIBNAME = Utilities
 
 QMC_BUILD_DIR = @BUILD_DIR@
 
-CXX = g++
 
 SOURCES = $(shell ls $(QMC_BUILD_DIR)/$(LIBNAME)/*.cpp | sed "s|$(QMC_BUILD_DIR)/$(LIBNAME)/||g")
 OBJECTS = $(SOURCES:.cpp=.o)
