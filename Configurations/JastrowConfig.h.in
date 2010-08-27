@@ -12,7 +12,6 @@ localE, localEsqd are the local energy terms derived from the wavefunctions
 
 #include <iostream>
 #include <valarray>
-
 #include "VMCconfig.h"
 #include "Utilities/rand.h"
 #include "Utilities/VMCPoint.h"
@@ -21,13 +20,13 @@ localE, localEsqd are the local energy terms derived from the wavefunctions
 
 namespace QMC{
 
-        //typedef std::valarray<double> VMCPoint;
+  //typedef std::valarray<double> VMCPoint;
 
-	template <typename Phi, typename InteractionF, typename localE, typename localESqd>
-	class JastrowConfig : public VMCconfig
-	{
-	public:
-		JastrowConfig(unsigned NParticles, unsigned ndim, const std::valarray<double>& BoxSize,               				double ParticleRadius, const Phi& wfnPhi, const InteractionF& wfnF, const localE& LE, 				const localESqd& LESqd): VMCconfig(NParticles, ndim, BoxSize, ParticleRadius), m_wfnPhi(wfnPhi), 					m_wfnF(wfnF), m_localEn(LE), m_localEnSqd(LESqd) {}
+  template <typename Phi, typename InteractionF, typename localE, typename localESqd>
+    class JastrowConfig : public VMCconfig
+     {
+       public:
+                   JastrowConfig(unsigned NParticles, unsigned ndim, const std::valarray<double>& BoxSize, double ParticleRadius, const Phi& wfnPhi, const InteractionF& wfnF, const localE& LE, const localESqd& LESqd): VMCconfig(NParticles, ndim, BoxSize, ParticleRadius), m_wfnPhi(wfnPhi), m_wfnF(wfnF), m_localEn(LE), m_localEnSqd(LESqd) {}
                    			
 		//~JastrowConfig(){}
 					
