@@ -17,7 +17,7 @@ SHLIBFLAGS = -shared
 SHLIBFLAGS += -m32 
 
 %: %.o
-	$(CXX) $(CXXFLAGS) -o $@ $< $(LIBS)
+	$(CXX) $(CXXFLAGS) -o $@ $< #$(LIBS)
 
 .PHONY: all clean lib
 

@@ -1,9 +1,11 @@
-// VMCconfig.cpp
+/** 
+ * VMCconfig.cpp
+ */
 
 //#include <iostream>
 
 #include "VMCconfig.h"
-#include "@BUILD_DIR@/Utilities/rand.h"
+#include "Utilities/rand.h"
 //#include "Utilities/VMCPoint.h"
 
 using namespace QMC;

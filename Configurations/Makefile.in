@@ -5,20 +5,21 @@ QMC_BUILD_DIR = @BUILD_DIR@
 
 include ../Makefile.common
 
-CXXFLAGS += $(LIBDIRS)
+CXXFLAGS += -I$(QMC_BUILD_DIR)/Utilities
 
 SOURCES = $(shell ls $(QMC_BUILD_DIR)/$(LIBNAME)/*.cpp | sed "s|$(QMC_BUILD_DIR)/$(LIBNAME)/||g")
 HEADERS = $(shell ls $(QMC_BUILD_DIR)/$(LIBNAME)/*.h | sed s"|$(QMC_BUILD_DIR)/$(LIBNAME)/||g")
+HEADERS += $(shell ls $(QMC_BUILD_DIR)/Utilities/*.h | sed s"|$(QMC_BUILD_DIR)/Utilities/||g")
 OBJECTS = $(SOURCES:.cpp=.o)
 
-LIBS = -lQMCUtilities
+#LIBS = -lQMCUtilities
 
 # LD flags
 SHLIBFLAGS = -shared
 SHLIBFLAGS += -m32 
 
-%: %.o
-	$(CXX) $(CXXFLAGS) -o $@ $< $(LIBS)
+#%: %.o
+#	$(CXX) $(CXXFLAGS) -o $@ $< #$(LIBS) 
 
 .PHONY: all clean lib
 
