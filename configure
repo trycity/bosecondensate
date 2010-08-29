@@ -1728,6 +1728,8 @@ ac_config_files="$ac_config_files Genetic_Algorithm/Test/BitVector_test.cpp"
 
 ac_config_files="$ac_config_files Genetic_Algorithm/Test/GeneticAlg_test.cpp"
 
+ac_config_files="$ac_config_files Gui/Node.h"
+
 ac_config_files="$ac_config_files Utilities/Makefile"
 
 ac_config_files="$ac_config_files Utilities/rand.cpp"
@@ -2513,6 +2515,7 @@ do
     "Genetic_Algorithm/Test/Makefile") CONFIG_FILES="$CONFIG_FILES Genetic_Algorithm/Test/Makefile" ;;
     "Genetic_Algorithm/Test/BitVector_test.cpp") CONFIG_FILES="$CONFIG_FILES Genetic_Algorithm/Test/BitVector_test.cpp" ;;
     "Genetic_Algorithm/Test/GeneticAlg_test.cpp") CONFIG_FILES="$CONFIG_FILES Genetic_Algorithm/Test/GeneticAlg_test.cpp" ;;
+    "Gui/Node.h") CONFIG_FILES="$CONFIG_FILES Gui/Node.h" ;;
     "Utilities/Makefile") CONFIG_FILES="$CONFIG_FILES Utilities/Makefile" ;;
     "Utilities/rand.cpp") CONFIG_FILES="$CONFIG_FILES Utilities/rand.cpp" ;;
     "Utilities/rand.h") CONFIG_FILES="$CONFIG_FILES Utilities/rand.h" ;;

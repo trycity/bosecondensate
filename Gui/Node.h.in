@@ -1,0 +1,18 @@
+// Node.h
+
+#ifndef _NODE_H
+#define _NODE_H
+
+#include <QGraphicsItem>
+
+class Node : public QGraphicsItem
+{
+   public:
+      Node();
+      ~Node();
+
+   protected:
+      void advance(int step);
+
+};
+#endif

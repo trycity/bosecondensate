@@ -16,11 +16,9 @@ localE, localEsqd are the local energy terms derived from the wavefunctions
 #include "Utilities/rand.h"
 #include "Utilities/VMCPoint.h"
 
-//using namespace QMC;
+
 
 namespace QMC{
-
-  //typedef std::valarray<double> VMCPoint;
 
   template <typename Phi, typename InteractionF, typename localE, typename localESqd>
     class JastrowConfig : public VMCconfig
