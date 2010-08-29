@@ -11,8 +11,15 @@ class Node : public QGraphicsItem
       Node();
       ~Node();
 
-   protected:
-      void advance(int step);
+      void paint(QPainter* painter, 
+                 const QStyleOptionGraphicsItem* option, 
+                 QWidget *widget);
 
+   protected:
+      void advance(bool step);
+
+   private:
+      qreal m_Angle;
+      qreal m_Direction
 };
 #endif
