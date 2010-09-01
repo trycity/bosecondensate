@@ -1,0 +1,26 @@
+// Node.cpp
+
+#include "Node.h"
+
+#include <QGraphicsScene>
+#include <QPainter>
+#include <QStyleOption>
+
+#include <cmath>
+
+Node::Node():m_angle(0), 
+             m_direction(0), 
+             color(qrand() % 256, qrand() % 256, qrand() % 256)
+{
+   setRotation(qrand() % (360 * 16));
+}
+
+Node::~Node()
+{
+}
+
+
+
+
+
+
