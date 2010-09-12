@@ -1,4 +1,8 @@
-// VMCconfig.h
+/**
+ *@file VMCconfig.h
+ *
+ *@author ikhan
+ */
 
 #ifndef _VMCCONFIG_H
 #define _VMCCONFIG_H
@@ -6,8 +10,7 @@
 
 #include <vector>
 #include <valarray>
-//#include <cmath>
-//#include <exception>
+
 
 #include "@BUILD_DIR@/Utilities/VMCPoint.h"
 #include "@BUILD_DIR@/Utilities/rand.h"
@@ -53,11 +56,11 @@ namespace QMC{
 
 		virtual double ComputeEnergy() = 0;
 		virtual double ComputeEnergySqd() = 0;
-				
+
 	private:
 		//VMCconfig(const VMCconfig& rhsConfig);
 		//VMCconfig& operator=(const VMCconfig& rhsConfig);
 	};
-}; //end namespace
+}; //end namespace QMC
 
 #endif
