@@ -2,11 +2,9 @@
  * VMCconfig.cpp
  */
 
-//#include <iostream>
-
 #include "VMCconfig.h"
 #include "Utilities/rand.h"
-//#include "Utilities/VMCPoint.h"
+#include "Utilities/VMCPoint.h"
 
 using namespace QMC;
 
@@ -16,9 +14,8 @@ VMCconfig::VMCconfig(unsigned NParticles, unsigned ndim, const std::valarray<dou
 	m_Energy = 0.0;
 	m_EnergySqd = 0.0;
 	m_EnergyComputed = false;
-	//::std::cout<<"Initialize started..."<<::std::endl;
+
 	Initialize();
-	//::std::cout<<"Initialize complete..."<<::std::endl;
 }
 
 VMCconfig::~VMCconfig()
@@ -27,8 +24,9 @@ VMCconfig::~VMCconfig()
 
 double VMCconfig::GetEnergy()
 {
-	if(!m_EnergyComputed) {
-		ComputeEnergy();
+	if(!m_EnergyComputed) 
+	{
+	  ComputeEnergy();
 	}
 
 	return m_Energy;
@@ -38,7 +36,7 @@ double VMCconfig::GetEnergySqd()
 {
 	if(!m_EnergyComputed) {
 		ComputeEnergySqd();
-	}
+ 	}
 
 	return m_EnergySqd;
 }
@@ -57,28 +55,26 @@ void VMCconfig::Initialize()
 {
 	m_vPoints.clear();
 	VMCPoint point(m_NDim);
-	//::std::cout<<"Initial setup..."<<::std::endl;
-	
-	// set coordinates for first particle
+ 
+   
+	/// set coordinates for first particle
 	for(unsigned n=0; n<m_NDim; n++) {
 		point[n] = (ran2(m_Seed)-0.5)*m_BoxSize[n];
 		
 	}
 	m_vPoints.push_back(point);
-	//::std::cout<<"First point created..."<<::std::endl;
 	
-	//set coordinates for the remaining particles
+	
+	///set coordinates for the remaining particles
 	do{
 		for(unsigned n=0; n<m_NDim; n++){
 			point[n] = (ran2(m_Seed)-0.5)*m_BoxSize[n];
-			//::std::cout<<"Point[n] = "<<point[n]<<::std::endl;
 		}
 		bool Accept = true;
-		//::std::cout<<"Inside do loop..."<<::std::endl;
-		//double r = 0.0;
+		
 		for(unsigned j=0; j<m_vPoints.size(); j++){
 			double r = VmcDistance(point, m_vPoints[j]);
-			//::std::cout<<"r = "<<r<<"    m_radius0 = "<<m_radius0<<::std::endl;
+			
 			if(r < m_radius0){
 				Accept = false;
 				break;
@@ -86,7 +82,7 @@ void VMCconfig::Initialize()
 		}
 		
 		if(Accept){
-			m_vPoints.push_back(point);
+		  m_vPoints.push_back(point);
 		}
-	}while(m_vPoints.size()<m_NParticles);			
+	}while(m_vPoints.size()<m_NParticles);
 }

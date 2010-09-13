@@ -18,9 +18,6 @@
 
 namespace QMC{
 	
-	//VMCPoint used to assign position for each particle
-	//typedef std::valarray<double> VMCPoint; 
-	
 	//VMCconfig used to create basic phase space for monte carlo calculations.
 	class VMCconfig
 	{
