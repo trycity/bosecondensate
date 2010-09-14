@@ -7,14 +7,11 @@
 #ifndef _VMCCONFIG_H
 #define _VMCCONFIG_H
 
-
 #include <vector>
 #include <valarray>
 
-
 #include "@BUILD_DIR@/Utilities/VMCPoint.h"
 #include "@BUILD_DIR@/Utilities/rand.h"
-
 
 namespace QMC{
 	
@@ -32,9 +29,6 @@ namespace QMC{
 		unsigned GetDimension() const;
 		unsigned GetNParticles() const;
 		virtual void Initialize();
-
-		
-		//double VmcDistance(VMCPoint& Pointa, VMCPoint& Pointb);
 
                 int m_Seed;
 

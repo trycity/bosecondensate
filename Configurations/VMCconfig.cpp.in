@@ -1,10 +1,10 @@
-/** 
- * VMCconfig.cpp
+/**
+ *@file VMCconfig.cpp
+ *
+ *@author ikhan
  */
 
 #include "VMCconfig.h"
-#include "Utilities/rand.h"
-#include "Utilities/VMCPoint.h"
 
 using namespace QMC;
 

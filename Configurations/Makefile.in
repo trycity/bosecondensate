@@ -25,7 +25,7 @@ all: $(OBJECTS) lib
 
 lib:
 	@echo $(OBJECTS)
-	$(CXX) $(SHLIBFLAGS) -o libQMC$(LIBNAME).so $(OBJECTS)
+	$(CXX) $(CXXFLAGS) $(SHLIBFLAGS) -o libQMC$(LIBNAME).so $(OBJECTS)
 
 
 clean:
