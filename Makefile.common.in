@@ -7,8 +7,7 @@ CXX = g++
 QMC_SRC_DIR = @abs_top_srcdir@
 QMC_BUILD_DIR = @BUILD_DIR@
 
-INCDIRS = -I.
-INCDIRS += -I$(QMC_SRC_DIR)
+INCDIRS = -I$(QMC_SRC_DIR)
 INCDIRS += -I$(QMC_BUILD_DIR)
 
 
@@ -18,6 +17,7 @@ LIBCXXFLAGS = -fPIC
 # C++ flags
 CXXFLAGS = -MD
 CXXFLAGS += -Wall
+CXXFLAGS += -Werror
 CXXFLAGS += -m32
 ifeq ("$(IS_DEBUG_BUILD)", "y")
 CXXFLAGS += -g

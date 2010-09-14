@@ -5,7 +5,7 @@ QMC_BUILD_DIR = @BUILD_DIR@
 
 include ../Makefile.common
 
-CXXFLAGS += $(LIBDIRS)
+CXXFLAGS += -I$(QMC_BUILD_DIR)/Utilities
 
 SOURCES = $(shell ls $(QMC_BUILD_DIR)/$(LIBNAME)/*.cpp | sed "s|$(QMC_BUILD_DIR)/$(LIBNAME)/||g")
 #HEADERS = $(shell ls $(QMC_BUILD_DIR)/$(LIBNAME)/*.h | sed s"|$(QMC_BUILD_DIR)/$(LIBNAME)/||g")
