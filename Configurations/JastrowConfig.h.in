@@ -1,4 +1,8 @@
-// JastrowConfig.h
+/**
+ *@file JastrowConfig.h
+ *
+ *@author ikhan
+ */
 
 /*
 Class used to create a jastrow configuration,
@@ -10,8 +14,8 @@ localE, localEsqd are the local energy terms derived from the wavefunctions
 #ifndef _JASTROWCONFIG_H
 #define _JASTROWCONFIG_H
 
-#include <iostream>
 #include <valarray>
+
 #include "VMCconfig.h"
 #include "Utilities/rand.h"
 #include "Utilities/VMCPoint.h"
@@ -19,105 +23,114 @@ localE, localEsqd are the local energy terms derived from the wavefunctions
 
 
 namespace QMC{
-
-  template <typename Phi, typename InteractionF, typename localE, typename localESqd>
-    class JastrowConfig : public VMCconfig
-     {
-       public:
-                   JastrowConfig(unsigned NParticles, unsigned ndim, const std::valarray<double>& BoxSize, double ParticleRadius, const Phi& wfnPhi, const InteractionF& wfnF, const localE& LE, const localESqd& LESqd): VMCconfig(NParticles, ndim, BoxSize, ParticleRadius), m_wfnPhi(wfnPhi), m_wfnF(wfnF), m_localEn(LE), m_localEnSqd(LESqd) {}
+template <typename Phi, typename InteractionF, typename localE, typename localESqd>
+class JastrowConfig : public VMCconfig
+{
+public:
+ JastrowConfig(unsigned NParticles, unsigned ndim, double ParticleRadius, const std::valarray<double>& BoxSize, const Phi& wfnPhi, const InteractionF& wfnF, const localE& LE, const localESqd& LESqd): 
+  VMCconfig(NParticles, ndim, ParticleRadius, BoxSize), m_wfnPhi(wfnPhi), m_wfnF(wfnF), m_localEn(LE), m_localEnSqd(LESqd) {}
                    			
-		//~JastrowConfig(){}
+   //~JastrowConfig(){}
 					
-		int TrialMove(unsigned* pnWalked, VMCPoint& endPoint, double* pdq)
-		{
-			// pick one particle at random
-			unsigned k = (unsigned)(ran2(m_Seed)*m_NParticles);
+   void TrialMove(unsigned* pnWalked, VMCPoint& endPoint, double* pdq)
+   {
+      /// pick one particle at random
+      unsigned k = (unsigned)(ran2(m_Seed)*m_NParticles);
 			
-			// this is the one to be moved
-			*pnWalked = k;
+      /// this is the one to be moved
+      *pnWalked = k;
 			
-			// compute its distance to other particles
-			std::valarray<double> rki(m_NParticles-1);
-			for(unsigned i=0; i<k; i++){
-				rki[i] = VmcDistance(m_vPoints[k], m_vPoints[i]);
-			}
-			for(unsigned i=k+1; i<m_NParticles; i++){
-				rki[i-1] = VmcDistance(m_vPoints[k], m_vPoints[i]);
-			}
-			
-			// make a trial move and re-compute distances to other particles
-			endPoint.resize(m_NDim);
-			std::valarray<double> rkiT(m_NParticles-1);
-			bool Accept = true;
-			do{
-				for(unsigned n=0; n<m_NDim; n++){
-					endPoint[n] = (ran2(m_Seed)-0.5)*m_BoxSize[n];
-				}
-				
-				for(unsigned i=0; i<k; i++){
-					rkiT[i] = VmcDistance(endPoint, m_vPoints[i]);
-					if(rkiT[i] < m_radius0){
-						Accept = false;
-						break;
-					}
-				}
-				if(Accept){
-					for(unsigned i=k+1; i<m_NParticles; i++){
-						rkiT[i-1] = VmcDistance(endPoint, m_vPoints[i]);
-						if(rkiT[i-1] < m_radius0){
-							Accept = false;
-							break;
-						}
-					}
-				}		
-			}while(!Accept);
-			
-			double w=1.0;
-			w *= m_wfnPhi(endPoint)/m_wfnPhi(m_vPoints[k]);
-			for(unsigned i=0; i<m_NParticles; i++){
-				w *= m_wfnF(rkiT[i])/m_wfnF(rki[i]);
-			}
-			
-			*pdq = w*w;
-			
-			return 0;
-		}
-		
-		int Move(unsigned k, const VMCPoint& newPoint, bool bComputeE){
-			//if(k>m_vPoints.size()){
-				//THROW_EXCEPTION("EXCEPTION: particle chosen is greater than total number of particles");
-			//}
-			
-			m_vPoints[k] = newPoint;
-			
-			if(bComputeE && k<m_MaxCorrelation){
-				ComputeEnergy();
-				ComputeEnergySqd();
-			}
-			
-			return 0;
-		}
-	protected:
+      /// compute its distance to other particles
+      std::valarray<double> rki(m_NParticles-1);
+      for(unsigned i=0; i<k; i++)
+      {
+         rki[i] = VmcDistance(m_vPoints[k], m_vPoints[i]);
+      }
 
-		double ComputeEnergy(){
-			m_Energy = m_localEn(m_vPoints);
-			m_EnergyComputed = true;
+      for(unsigned i=k+1; i<m_NParticles; i++)
+      {
+         rki[i-1] = VmcDistance(m_vPoints[k], m_vPoints[i]);
+      }
 			
-			return m_Energy;
-		}
-		
-		double ComputeEnergySqd(){
-			m_EnergySqd = m_localEnSqd(m_vPoints);
+      /// make a trial move and re-compute distances to other particles
+      endPoint.resize(m_NDim);
+      std::valarray<double> rkiT(m_NParticles-1);
+      bool Accept = true;
+      do
+      {
+         for(unsigned n=0; n<m_NDim; n++)
+         {
+       	    endPoint[n] = (ran2(m_Seed)-0.5)*m_BoxSize[n];
+	 }
+	 
+         for(unsigned i=0; i<k; i++)
+         {
+	    rkiT[i] = VmcDistance(endPoint, m_vPoints[i]);
+	    if(rkiT[i] < m_radius0)
+            {
+	       Accept = false;
+	       break;
+	    }
+	 }
 
-			return m_EnergySqd;
-		}	
+         if(Accept)
+         {
+            for(unsigned i=k+1; i<m_NParticles; i++)
+            {
+	       rkiT[i-1] = VmcDistance(endPoint, m_vPoints[i]);
+	       if(rkiT[i-1] < m_radius0)
+               {
+	          Accept = false;
+	          break;
+	       }
+	    }
+	 }
+      }while(!Accept);
+
+      double w=1.0;
+      w *= m_wfnPhi(endPoint)/m_wfnPhi(m_vPoints[k]);
+      for(unsigned i=0; i<m_NParticles; i++)
+      {
+         w *= m_wfnF(rkiT[i])/m_wfnF(rki[i]);
+      }
+			
+      *pdq = w*w;
+   }
+		
+   void Move(unsigned k, const VMCPoint& newPoint, bool bComputeE)
+   {			
+      m_vPoints[k] = newPoint;
+      
+      if(bComputeE && k<m_MaxCorrelation)
+      {
+         ComputeEnergy();
+	 ComputeEnergySqd();
+      }
+   }
+	
+protected:
+
+   double ComputeEnergy()
+   {
+      m_Energy = m_localEn(m_vPoints);
+      m_EnergyComputed = true;
+			
+      return m_Energy;
+   }
+		
+   double ComputeEnergySqd()
+   {
+      m_EnergySqd = m_localEnSqd(m_vPoints);
+      
+      return m_EnergySqd;
+   }	
 					
-		Phi m_wfnPhi;
-		InteractionF m_wfnF;
-		localE m_localEn;
-		localESqd m_localEnSqd;
-		static const unsigned m_MaxCorrelation = 3;		
-	}; // end of class definition
+   Phi m_wfnPhi;
+   InteractionF m_wfnF;
+   localE m_localEn;
+   localESqd m_localEnSqd;
+   static const unsigned m_MaxCorrelation = 3;		
+};
 }; // end of namespace
 
 #endif

@@ -35,8 +35,9 @@ int main()
         ::std::cout<<"Wavefunctions and energy terms created..."<<::std::endl;
 
 	JastrowConfig< SymHoPhi, NonInteractingF, SymHoLocalE, SymHoLocalESqd>
-            configi(NAtoms, NDIM, BOXSIZES, r0, phi, F, localE, localESqd);
+            configi(NAtoms, NDIM, r0, BOXSIZES, phi, F, localE, localESqd);
         ::std::cout<<"JastrowConfig created.."<<::std::endl;
 
 	return 0;
 }
+

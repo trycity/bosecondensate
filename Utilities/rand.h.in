@@ -8,7 +8,7 @@
 double ran2(int& idum);
 
 // Returns a normally distributed deviate with zero mean and unit variance
-double gasdev(int& idum);
+double gasdev(const int& idum);
 
 
 #endif // RAND_H

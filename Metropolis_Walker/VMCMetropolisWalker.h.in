@@ -15,8 +15,6 @@ Class describes behaviour of a variational Monte Carlo (VMC) Metropolis walker, 
 
 namespace QMC{
 
-	//VMCPoint used to assign position for each particle
-	//typedef std::valarray<double> VMCPoint;
 	
 	//typename Config should have behaviour as defined by Configurations/VMCconfig.h
 	template <typename Config>

@@ -8,81 +8,87 @@
 
 using namespace QMC;
 
-VMCconfig::VMCconfig(unsigned NParticles, unsigned ndim, const std::valarray<double>& BoxSize, double ParticleRadius): m_NParticles(NParticles), m_NDim(ndim), m_BoxSize(BoxSize), m_radius0(ParticleRadius)
+VMCconfig::VMCconfig(unsigned NParticles, unsigned ndim, double ParticleRadius, const std::valarray<double>& BoxSize): 
+   m_NParticles(NParticles), m_NDim(ndim), m_radius0(ParticleRadius), m_BoxSize(BoxSize)
 {
-	m_Seed = -123456789;
-	m_Energy = 0.0;
-	m_EnergySqd = 0.0;
-	m_EnergyComputed = false;
+   m_Seed = -1234567890;
+   m_Energy = 0.0;
+   m_EnergySqd = 0.0;
+   m_EnergyComputed = false;
 
-	Initialize();
+   Initialize();
 }
 
 VMCconfig::~VMCconfig()
 {
 }
 
-double VMCconfig::GetEnergy()
+double VMCconfig::getEnergy()
 {
-	if(!m_EnergyComputed) 
-	{
-	  ComputeEnergy();
-	}
+   if(!m_EnergyComputed) 
+   {
+      ComputeEnergy();
+   }
 
-	return m_Energy;
+   return m_Energy;
 }
 
-double VMCconfig::GetEnergySqd()
+double VMCconfig::getEnergySqd()
 {
-	if(!m_EnergyComputed) {
-		ComputeEnergySqd();
- 	}
+   if(!m_EnergyComputed) 
+   {
+      ComputeEnergySqd();
+   }
 
-	return m_EnergySqd;
+   return m_EnergySqd;
 }
 
-unsigned VMCconfig::GetDimension() const
+unsigned VMCconfig::getDimension() const
 {
-	return m_NDim;
+   return m_NDim;
 }
 
-unsigned VMCconfig::GetNParticles() const
+unsigned VMCconfig::getNParticles() const
 {
-	return m_NParticles;
+   return m_NParticles;
 }
 
 void VMCconfig::Initialize()
 {
-	m_vPoints.clear();
-	VMCPoint point(m_NDim);
- 
-   
-	/// set coordinates for first particle
-	for(unsigned n=0; n<m_NDim; n++) {
-		point[n] = (ran2(m_Seed)-0.5)*m_BoxSize[n];
-		
-	}
-	m_vPoints.push_back(point);
+   m_vPoints.clear();
+   VMCPoint point(m_NDim);
+    
+   /// set coordinates for first particle
+   for(unsigned n=0; n<m_NDim; n++)
+   {
+      point[n] = (ran2(m_Seed)-0.5)*m_BoxSize[n];
+   }
+
+   m_vPoints.push_back(point);
 	
-	
-	///set coordinates for the remaining particles
-	do{
-		for(unsigned n=0; n<m_NDim; n++){
-			point[n] = (ran2(m_Seed)-0.5)*m_BoxSize[n];
-		}
-		bool Accept = true;
+   ///set coordinates for the remaining particles
+   do
+   {
+      for(unsigned n=0; n<m_NDim; n++)
+      {
+         point[n] = (ran2(m_Seed)-0.5)*m_BoxSize[n];
+      }
+      bool Accept = true;
 		
-		for(unsigned j=0; j<m_vPoints.size(); j++){
-			double r = VmcDistance(point, m_vPoints[j]);
+      for(unsigned j=0; j<m_vPoints.size(); j++)
+      {
+         double r = VmcDistance(point, m_vPoints[j]);
 			
-			if(r < m_radius0){
-				Accept = false;
-				break;
-			}
-		}
+         if(r < m_radius0)
+         {
+            Accept = false;
+            break;
+         }
+      }
 		
-		if(Accept){
-		  m_vPoints.push_back(point);
-		}
-	}while(m_vPoints.size()<m_NParticles);
+      if(Accept)
+      {
+         m_vPoints.push_back(point);
+      }
+   }while(m_vPoints.size()<m_NParticles);
 }
