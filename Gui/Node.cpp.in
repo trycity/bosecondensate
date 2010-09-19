@@ -19,8 +19,50 @@ Node::~Node()
 {
 }
 
+QRectF Node::boundingRect() const
+{
+   qreal adjust = 0.5;
+   
+   return QRectF(-18 - adjust, -22 - adjust,
+                   36 + adjust, 60 + adjust);
+}
 
+QPainterPath Node::Shape() const
+{
+   QPainterPath path;
+   path.addRect(-10, -20, 20, 40);
+   
+   return path;
+}
 
+void Node::paint(QPainter* painter, const QStyleOptionGraphics* option, QWidget* widget)
+{
+   painter->setBrush(QT::green);
 
+   QPointF point;
+   point.setX(0.0);
+   point.setY(0.0);
+   painter->drawEllipse(point, 8, 8);
 
+   paint->setBrush(QT::NoBrush);
+}
 
+qreal Node::normalizaAngle(qreal angle)
+{
+   while (angle < 0)
+     {
+      angle += TwoPi;
+     }
+
+   while (angle > TwoPi)
+     {
+        angle -= TwoPi;
+     }
+     
+   return angle;
+}
+
+void Node::advance(int step)
+{
+
+}
