@@ -1,27 +1,51 @@
-// SymHoLocalESqd.h
+/**
+ *@file SymHoLocalESqd.h
+ *
+ *@author ikhan
+ */
 
 #ifndef _SYMHOLOCALESQD_H
 #define _SYMHOLOCALESQD_H
 
-#include <valarray>
 #include <vector>
 
-#include "@BUILD_DIR@/Utilities/VMCPoint.h"
+#include "Utilities/VMCPoint.h"
 
-namespace QMC{
+namespace QMC
+{
+  /**
+   *@brief Class used to describe local energy squared of non-Interacting particles
+   */
+   class SymHoLocalESqd
+   {
+   public:
+      /**
+      * Creates a SymHoLocalESqd object
+      *
+      *@param The variational parameter alpha
+      */
+      explicit SymHoLocalESqd(double alpha);
 
-	//typedef std::valarray<double> VMCPoint;
-	class SymHoLocalESqd
-	{
-	public:
-		SymHoLocalESqd(double alpha);
-		~SymHoLocalESqd();
+      /**
+       * Destroys a SymHoLocalESqd object
+       */
+      ~SymHoLocalESqd();
+
+      /**
+       * Overloaded method call operator
+       *
+       *@param An array representing the positions of the particles
+       *
+       *@return The value of the local energy squared
+       */		
+      double operator()(const ::std::vector<VMCPoint>& vPoints);
 		
-		double operator()(const ::std::vector<VMCPoint>& vPoints);
-		
-	private:
-		double m_Alpha;
-	};
+   private:
+      /**
+       *This data member is the variational parameter
+       */
+      double m_Alpha;
+   };
 };
 
 #endif
