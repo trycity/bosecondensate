@@ -1,9 +1,12 @@
-// SymHoLocalE.cpp
+/**
+ *@file SymHoLocalE.cpp
+ *
+ *@author ikhan
+ */
 
-#include <cmath>
+#include <valarray>
 
 #include "SymHoLocalE.h"
-#include "Configurations/VMCconfig.h"
 
 using namespace QMC;
 
@@ -17,10 +20,10 @@ SymHoLocalE::~SymHoLocalE()
 
 double SymHoLocalE::operator()(const std::vector<VMCPoint>& vPoints)
 {
-	//unsigned N = (unsigned)vPoints.size();
-	::std::valarray<double> y = vPoints[0]*vPoints[0];
-	double r1sqd = y.sum();
-	double e = 3.0*m_Alpha+0.5*(1.0-4.0*m_Alpha*m_Alpha)*r1sqd;
+   //unsigned N = (unsigned)vPoints.size();
+   ::std::valarray<double> y = vPoints[0]*vPoints[0];
+   double r1sqd = y.sum();
+   double e = 3.0*m_Alpha+0.5*(1.0-4.0*m_Alpha*m_Alpha)*r1sqd;
 	
-	return e;
+   return e;
 }

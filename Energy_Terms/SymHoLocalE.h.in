@@ -1,31 +1,50 @@
-// SymHoLocalE.h
-
-/*
-Class used to describe local energy of non-Interacting particles
-*/
+/**
+ *@file SymHoLocalE.h
+ *
+ *@author ikhan
+ */
 
 #ifndef _SYMHOLOCALE_H
 #define _SYMHOLOCALE_H
 
-#include <valarray>
 #include <vector>
 
-#include "@BUILD_DIR@/Utilities/VMCPoint.h"
+#include "Utilities/VMCPoint.h"
 
-namespace QMC{
+namespace QMC
+{
+   /**
+   *@brief Class used to describe local energy of non-Interacting particles
+   */
+   class SymHoLocalE
+   {
+   public:
+     /**
+      * Creates a SymHoLocalE object
+      *
+      *@param The variational parameter alpha
+      */
+      explicit SymHoLocalE(double alpha);
 
-	//typedef std::valarray<double> VMCPoint;
-	class SymHoLocalE
-	{
-	public:
-		SymHoLocalE(double alpha);
-		~SymHoLocalE();
-		
-		double operator()(const ::std::vector<VMCPoint>& vPoints);
+      /**
+       * Destroys a SymHoLocalE object
+       */
+      ~SymHoLocalE();
+      /**
+       * Overloaded method call operator
+       *
+       *@param An array representing the positions of the particles
+       *
+       *@return The value of the local energy
+       */		
+      double operator()(const ::std::vector<VMCPoint>& vPoints);
 	
-	private:
-		double m_Alpha;
-	};
+   private:
+      /**
+       *This data member is the variational parameter
+       */ 
+      double m_Alpha;
+   };
 };
 
 #endif
