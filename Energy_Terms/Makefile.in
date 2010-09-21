@@ -12,7 +12,6 @@ SOURCES = $(shell ls $(QMC_BUILD_DIR)/$(LIBNAME)/*.cpp | sed "s|$(QMC_BUILD_DIR)
 OBJECTS = $(SOURCES:.cpp=.o)
 
 LIBS = -lQMCUtilities
-LIBS += -lQMCConfigurations
 
 # LD flags
 SHLIBFLAGS = -shared
