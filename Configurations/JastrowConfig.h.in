@@ -20,20 +20,31 @@ localE, localEsqd are the local energy terms derived from the wavefunctions
 #include "Utilities/rand.h"
 #include "Utilities/VMCPoint.h"
 
+#include "Wavefunctions/Phi.h"
+#include "Wavefunctions/InteractionF.h"
+#include "Energy_Terms/localE.h"
+#include "Energy_Terms/localESqd.h"
 
-
-namespace QMC{
-template <typename Phi, typename InteractionF, typename localE, typename localESqd>
+namespace QMC
+{
+  //template <typename Phi, typename InteractionF, typename localE, typename localESqd>
 class JastrowConfig : public VMCconfig
 {
 public:
- JastrowConfig(unsigned NParticles, unsigned ndim, double ParticleRadius, const std::valarray<double>& BoxSize, const Phi& wfnPhi, const InteractionF& wfnF, const localE& LE, const localESqd& LESqd): 
-  VMCconfig(NParticles, ndim, ParticleRadius, BoxSize), m_wfnPhi(wfnPhi), m_wfnF(wfnF), m_localEn(LE), m_localEnSqd(LESqd) {}
+   JastrowConfig(unsigned NParticles, 
+                 unsigned ndim, 
+                 double ParticleRadius, 
+                 const std::valarray<double>& BoxSize, 
+                 const Phi& wfnPhi, 
+                 const InteractionF& wfnF, 
+                 const localE& LE, 
+                 const localESqd& LESqd);
+   //VMCconfig(NParticles, ndim, ParticleRadius, BoxSize), m_wfnPhi(wfnPhi), m_wfnF(wfnF), m_localEn(LE), m_localEnSqd(LESqd) {}
                    			
-   //~JastrowConfig(){}
+  ~JastrowConfig();
 					
-   void TrialMove(unsigned* pnWalked, VMCPoint& endPoint, double* pdq)
-   {
+  void TrialMove(unsigned* pnWalked, VMCPoint& endPoint, double* pdq);
+     /*   {
       /// pick one particle at random
       unsigned k = (unsigned)(ran2(m_Seed)*m_NParticles);
 			
@@ -95,10 +106,10 @@ public:
       }
 			
       *pdq = w*w;
-   }
+      }*/
 		
-   void Move(unsigned k, const VMCPoint& newPoint, bool bComputeE)
-   {			
+  void Move(unsigned k, const VMCPoint& newPoint, bool bComputeE);
+  /* {			
       m_vPoints[k] = newPoint;
       
       if(bComputeE && k<m_MaxCorrelation)
@@ -106,24 +117,24 @@ public:
          ComputeEnergy();
 	 ComputeEnergySqd();
       }
-   }
+      }*/
 	
 protected:
 
-   double ComputeEnergy()
-   {
+  double ComputeEnergy();
+     /* {
       m_Energy = m_localEn(m_vPoints);
       m_EnergyComputed = true;
 			
       return m_Energy;
-   }
+      }*/
 		
-   double ComputeEnergySqd()
-   {
+  double ComputeEnergySqd();
+     /* {
       m_EnergySqd = m_localEnSqd(m_vPoints);
       
       return m_EnergySqd;
-   }	
+      }	*/
 					
    Phi m_wfnPhi;
    InteractionF m_wfnF;

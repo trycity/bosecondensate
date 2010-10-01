@@ -7,35 +7,20 @@ class used as a wrapper to create the 1-body external potential wavefunction ter
 #ifndef _PHI_H
 #define _PHI_H
 
-#include <string>
-#include <vector>
-
 #include "@BUILD_DIR@/Utilities/VMCPoint.h"
-#include "@BUILD_DIR@/Utilities/StringUtilities.h"
 
 namespace QMC{
-	class HomogeneousPhi;
-	class SymHoPhi;
+class Phi
+{
+public:
+   virtual ~Phi() {}
 
-	//typedef ::std::vector< ::std::string > ArgType;
-    	//typedef ArgType::const_iterator ArgItr;
+   virtual double operator()(const VMCPoint& x)const
+   {
+     return 1.0;
+   }
 
-	class Phi
-	{
-	public:
-		explicit Phi(::std::string TypeOfPhi);
-		~Phi();
-
-		void setVariationParams(const ArgType& args);
-		double getVariationParams();
-		::std::string getTypePhi();
-				
-		double operator()(const VMCPoint& x)const;
-
-	private:
-		//Phi();
-		::std::string m_TypeOfPhi;
-	};
+};
 };
 
 #endif 

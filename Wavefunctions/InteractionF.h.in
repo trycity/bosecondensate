@@ -1,0 +1,25 @@
+// InteractionF.h
+
+
+
+#ifndef _INTERACTIONF_H
+#define _INTERACTIONF_H
+
+#include "@BUILD_DIR@/Utilities/VMCPoint.h"
+
+namespace QMC{
+class InteractionF
+{
+public:
+   virtual ~InteractionF() {}
+
+   virtual double operator()(double rij)const
+   {
+     return 1.0;
+   }
+
+};
+};
+
+#endif
+

@@ -1,0 +1,126 @@
+/**
+ *@file JastrowConfig.cpp
+ *
+ *@author ikhan
+ */
+
+#include <valarray>
+
+#include "JastrowConfig.h"
+
+using namespace QMC;
+
+JastrowConfig::JastrowConfig(unsigned NParticles, 
+                             unsigned ndim, 
+                             double ParticleRadius, 
+                             const std::valarray<double>& BoxSize, 
+                             const Phi& wfnPhi, 
+                             const InteractionF& wfnF, 
+                             const localE& LE, 
+                             const localESqd& LESqd):VMCconfig(NParticles,
+                                                               ndim,
+                                                               ParticleRadius,
+                                                               BoxSize), 
+                                                     m_wfnPhi(wfnPhi), 
+                                                     m_wfnF(wfnF), 
+                                                     m_localEn(LE), 
+                                                     m_localEnSqd(LESqd)
+{
+
+}
+
+JastrowConfig::~JastrowConfig()
+{
+
+}
+
+void JastrowConfig::TrialMove(unsigned* pnWalked, VMCPoint& endPoint, double* pdq)
+{
+   /// pick one particle at random
+   unsigned k = (unsigned)(ran2(m_Seed)*m_NParticles);
+			
+   /// this is the one to be moved
+   *pnWalked = k;
+			
+   /// compute its distance to other particles
+   std::valarray<double> rki(m_NParticles-1);
+   for(unsigned i=0; i<k; i++)
+   {
+      rki[i] = VmcDistance(m_vPoints[k], m_vPoints[i]);
+   }
+
+   for(unsigned i=k+1; i<m_NParticles; i++)
+   {
+      rki[i-1] = VmcDistance(m_vPoints[k], m_vPoints[i]);
+   }
+			
+   /// make a trial move and re-compute distances to other particles
+   endPoint.resize(m_NDim);
+   std::valarray<double> rkiT(m_NParticles-1);
+   bool Accept = true;
+   do
+   {
+      for(unsigned n=0; n<m_NDim; n++)
+      {
+         endPoint[n] = (ran2(m_Seed)-0.5)*m_BoxSize[n];
+      }
+	 
+      for(unsigned i=0; i<k; i++)
+      {
+         rkiT[i] = VmcDistance(endPoint, m_vPoints[i]);
+	 if(rkiT[i] < m_radius0)
+         {
+	    Accept = false;
+	    break;
+	 }
+      }
+
+      if(Accept)
+      {
+         for(unsigned i=k+1; i<m_NParticles; i++)
+         {
+	    rkiT[i-1] = VmcDistance(endPoint, m_vPoints[i]);
+	    if(rkiT[i-1] < m_radius0)
+            {
+	       Accept = false;
+	       break;
+	    }
+	 }
+      }
+   }while(!Accept);
+
+   double w=1.0;
+   w *= m_wfnPhi(endPoint)/m_wfnPhi(m_vPoints[k]);
+   for(unsigned i=0; i<m_NParticles; i++)
+   {
+      w *= m_wfnF(rkiT[i])/m_wfnF(rki[i]);
+   }
+			
+   *pdq = w*w;
+}
+
+void JastrowConfig::Move(unsigned k, const VMCPoint& newPoint, bool bComputeE)
+{
+   m_vPoints[k] = newPoint;
+      
+   if(bComputeE && k<m_MaxCorrelation)
+   {
+      ComputeEnergy();
+      ComputeEnergySqd();
+   }
+}
+
+double JastrowConfig::ComputeEnergy()
+{
+   m_Energy = m_localEn(m_vPoints);
+   m_EnergyComputed = true;
+			
+   return m_Energy;
+}
+
+double JastrowConfig::ComputeEnergySqd()
+{
+   m_EnergySqd = m_localEnSqd(m_vPoints);
+      
+   return m_EnergySqd;
+}

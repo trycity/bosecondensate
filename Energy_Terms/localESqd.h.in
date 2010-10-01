@@ -1,0 +1,23 @@
+// localESqd.h
+
+#ifndef _LOCALESQD_H
+#define _LOCALESQD_H
+
+#include <vector>
+
+#include "Utilities/VMCPoint.h"
+
+namespace QMC
+{
+class localESqd
+{
+ public:
+  virtual ~localESqd(){}
+
+  virtual double operator()(const std::vector<VMCPoint>& vPoints)
+   {
+     return 1.0;
+   }
+};
+};
+#endif

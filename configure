@@ -1692,6 +1692,8 @@ ac_config_files="$ac_config_files Configurations/VMCconfig.cpp"
 
 ac_config_files="$ac_config_files Configurations/VMCconfig.h"
 
+ac_config_files="$ac_config_files Configurations/JastrowConfig.cpp"
+
 ac_config_files="$ac_config_files Configurations/JastrowConfig.h"
 
 ac_config_files="$ac_config_files Configurations/Test/JastrowConfig_Test.cpp"
@@ -1699,6 +1701,10 @@ ac_config_files="$ac_config_files Configurations/Test/JastrowConfig_Test.cpp"
 ac_config_files="$ac_config_files Configurations/Test/Makefile"
 
 ac_config_files="$ac_config_files Energy_Terms/Makefile"
+
+ac_config_files="$ac_config_files Energy_Terms/localE.h"
+
+ac_config_files="$ac_config_files Energy_Terms/localESqd.h"
 
 ac_config_files="$ac_config_files Energy_Terms/SymHoLocalE.cpp"
 
@@ -1760,11 +1766,11 @@ ac_config_files="$ac_config_files Wavefunctions/HomogeneousPhi.cpp"
 
 ac_config_files="$ac_config_files Wavefunctions/HomogeneousPhi.h"
 
+ac_config_files="$ac_config_files Wavefunctions/InteractionF.h"
+
 ac_config_files="$ac_config_files Wavefunctions/NonInteractingF.cpp"
 
 ac_config_files="$ac_config_files Wavefunctions/NonInteractingF.h"
-
-ac_config_files="$ac_config_files Wavefunctions/Phi.cpp"
 
 ac_config_files="$ac_config_files Wavefunctions/Phi.h"
 
@@ -2497,10 +2503,13 @@ do
     "Configurations/Makefile") CONFIG_FILES="$CONFIG_FILES Configurations/Makefile" ;;
     "Configurations/VMCconfig.cpp") CONFIG_FILES="$CONFIG_FILES Configurations/VMCconfig.cpp" ;;
     "Configurations/VMCconfig.h") CONFIG_FILES="$CONFIG_FILES Configurations/VMCconfig.h" ;;
+    "Configurations/JastrowConfig.cpp") CONFIG_FILES="$CONFIG_FILES Configurations/JastrowConfig.cpp" ;;
     "Configurations/JastrowConfig.h") CONFIG_FILES="$CONFIG_FILES Configurations/JastrowConfig.h" ;;
     "Configurations/Test/JastrowConfig_Test.cpp") CONFIG_FILES="$CONFIG_FILES Configurations/Test/JastrowConfig_Test.cpp" ;;
     "Configurations/Test/Makefile") CONFIG_FILES="$CONFIG_FILES Configurations/Test/Makefile" ;;
     "Energy_Terms/Makefile") CONFIG_FILES="$CONFIG_FILES Energy_Terms/Makefile" ;;
+    "Energy_Terms/localE.h") CONFIG_FILES="$CONFIG_FILES Energy_Terms/localE.h" ;;
+    "Energy_Terms/localESqd.h") CONFIG_FILES="$CONFIG_FILES Energy_Terms/localESqd.h" ;;
     "Energy_Terms/SymHoLocalE.cpp") CONFIG_FILES="$CONFIG_FILES Energy_Terms/SymHoLocalE.cpp" ;;
     "Energy_Terms/SymHoLocalE.h") CONFIG_FILES="$CONFIG_FILES Energy_Terms/SymHoLocalE.h" ;;
     "Energy_Terms/SymHoLocalESqd.cpp") CONFIG_FILES="$CONFIG_FILES Energy_Terms/SymHoLocalESqd.cpp" ;;
@@ -2531,9 +2540,9 @@ do
     "Wavefunctions/HardSphereF.h") CONFIG_FILES="$CONFIG_FILES Wavefunctions/HardSphereF.h" ;;
     "Wavefunctions/HomogeneousPhi.cpp") CONFIG_FILES="$CONFIG_FILES Wavefunctions/HomogeneousPhi.cpp" ;;
     "Wavefunctions/HomogeneousPhi.h") CONFIG_FILES="$CONFIG_FILES Wavefunctions/HomogeneousPhi.h" ;;
+    "Wavefunctions/InteractionF.h") CONFIG_FILES="$CONFIG_FILES Wavefunctions/InteractionF.h" ;;
     "Wavefunctions/NonInteractingF.cpp") CONFIG_FILES="$CONFIG_FILES Wavefunctions/NonInteractingF.cpp" ;;
     "Wavefunctions/NonInteractingF.h") CONFIG_FILES="$CONFIG_FILES Wavefunctions/NonInteractingF.h" ;;
-    "Wavefunctions/Phi.cpp") CONFIG_FILES="$CONFIG_FILES Wavefunctions/Phi.cpp" ;;
     "Wavefunctions/Phi.h") CONFIG_FILES="$CONFIG_FILES Wavefunctions/Phi.h" ;;
     "Wavefunctions/SymHoPhi.cpp") CONFIG_FILES="$CONFIG_FILES Wavefunctions/SymHoPhi.cpp" ;;
     "Wavefunctions/SymHoPhi.h") CONFIG_FILES="$CONFIG_FILES Wavefunctions/SymHoPhi.h" ;;

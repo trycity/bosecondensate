@@ -1,0 +1,23 @@
+// localE.h
+
+#ifndef _LOCALE_H
+#define _LOCALE_H
+
+#include <vector>
+
+#include "Utilities/VMCPoint.h"
+
+namespace QMC
+{
+class localE
+{
+ public:
+  virtual ~localE(){}
+
+  virtual double operator()(const std::vector<VMCPoint>& vPoints)
+   {
+     return 1.0;
+   }
+};
+};
+#endif
