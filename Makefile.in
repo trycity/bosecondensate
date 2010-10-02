@@ -18,9 +18,9 @@ TARGETS = $(CPP_TARGETS)
 
 
 COMMON_DIRS = Utilities
-COMMON_DIRS += Configurations
 COMMON_DIRS += Wavefunctions
 COMMON_DIRS += Energy_Terms
+COMMON_DIRS += Configurations
 COMMON_DIRS += Genetic_Algorithm
 
 

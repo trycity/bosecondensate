@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "Energy_Terms/SymHoLocalE.h"
+#include "Energy_Terms/localE.h"
 //#include "@BUILD_DIR@/Utilities/VMCPoint.h"
 
 

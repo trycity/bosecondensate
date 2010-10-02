@@ -5,10 +5,10 @@
 #include <cmath>
 
 #include "Configurations/JastrowConfig.h"
-#include "Wavefunctions/SymHoPhi.h"
-#include "Wavefunctions/NonInteractingF.h"
-#include "Energy_Terms/SymHoLocalE.h"
-#include "Energy_Terms/SymHoLocalESqd.h"
+#include "Wavefunctions/Phi.h"
+#include "Wavefunctions/InteractionF.h"
+#include "Energy_Terms/localE.h"
+#include "Energy_Terms/localESqd.h"
 
 
 using namespace QMC;
@@ -17,7 +17,7 @@ using namespace std;
 
 int main()
 {
-	double alpha = 0.5;
+  //double alpha = 0.5;
         unsigned NAtoms = 5;
         unsigned NDIM = 3;
         ::std::valarray<double> BOXSIZES(NDIM);
@@ -26,16 +26,14 @@ int main()
         BOXSIZES[2] = 2.5;
         double r0 = 0.00433;
 	
-	SymHoPhi phi(alpha);
-	NonInteractingF F;
-
-        SymHoLocalE localE(alpha);
-        SymHoLocalESqd localESqd(alpha);
+	Phi phi;
+	InteractionF F;
+        localE localE1;
+        localESqd localESqd1;
 
         ::std::cout<<"Wavefunctions and energy terms created..."<<::std::endl;
 
-	JastrowConfig< SymHoPhi, NonInteractingF, SymHoLocalE, SymHoLocalESqd>
-            configi(NAtoms, NDIM, r0, BOXSIZES, phi, F, localE, localESqd);
+	JastrowConfig  configi(NAtoms, NDIM, r0, BOXSIZES, phi, F, localE1, localESqd1);
         ::std::cout<<"JastrowConfig created.."<<::std::endl;
 
 	return 0;

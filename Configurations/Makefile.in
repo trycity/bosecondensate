@@ -6,18 +6,22 @@ QMC_BUILD_DIR = @BUILD_DIR@
 include ../Makefile.common
 
 CXXFLAGS += -I$(QMC_BUILD_DIR)/Utilities
+CXXFLAGS += -I$(QMC_BUILD_DIR)/Wavefunctions
+CXXFLAGS += -I$(QMC_BUILD_DIR)/Energy_Terms
 
 SOURCES = $(shell ls $(QMC_BUILD_DIR)/$(LIBNAME)/*.cpp | sed "s|$(QMC_BUILD_DIR)/$(LIBNAME)/||g")
 OBJECTS = $(SOURCES:.cpp=.o)
 
 LIBS = -lQMCUtilities
+LIBS += -lQMCWavefunctions
+LIBS += -lQMCEnergy_Terms
 
 # LD flags
 SHLIBFLAGS = -shared
 SHLIBFLAGS += -m32 
 
 %: %.o
-	$(CXX) $(CXXFLAGS) -o $@ $< #$(LIBS) 
+	$(CXX) $(CXXFLAGS) -o $@ $< $(LIBS) 
 
 .PHONY: all clean lib
 

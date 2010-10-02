@@ -1,5 +1,4 @@
-#Makefile
-#Makefile for performing wavefunction tests
+#Makefile for performing Configuration tests
 
 LIBNAME = Configurations
 
@@ -9,7 +8,11 @@ QMC_BUILD_DIR = @BUILD_DIR@
 
 include ../../Makefile.common
 
+CXXFLAGS += -I$(QMC_BUILD_DIR)/Utilities
+CXXFLAGS += -I$(QMC_BUILD_DIR)/Wavefunctions
+CXXFLAGS += -I$(QMC_BUILD_DIR)/Energy_Terms
 CXXFLAGS += $(LIBDIRS)
+
 
 LIBS += -lQMC$(LIBNAME)
 LIBS += -lQMCUtilities

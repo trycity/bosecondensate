@@ -1716,6 +1716,8 @@ ac_config_files="$ac_config_files Energy_Terms/SymHoLocalESqd.h"
 
 ac_config_files="$ac_config_files Energy_Terms/Test/Makefile"
 
+ac_config_files="$ac_config_files Energy_Terms/Test/localE_test.cpp"
+
 ac_config_files="$ac_config_files Energy_Terms/Test/SymHoLocalE_test.cpp"
 
 ac_config_files="$ac_config_files Genetic_Algorithm/Makefile"
@@ -2509,6 +2511,7 @@ do
     "Energy_Terms/SymHoLocalESqd.cpp") CONFIG_FILES="$CONFIG_FILES Energy_Terms/SymHoLocalESqd.cpp" ;;
     "Energy_Terms/SymHoLocalESqd.h") CONFIG_FILES="$CONFIG_FILES Energy_Terms/SymHoLocalESqd.h" ;;
     "Energy_Terms/Test/Makefile") CONFIG_FILES="$CONFIG_FILES Energy_Terms/Test/Makefile" ;;
+    "Energy_Terms/Test/localE_test.cpp") CONFIG_FILES="$CONFIG_FILES Energy_Terms/Test/localE_test.cpp" ;;
     "Energy_Terms/Test/SymHoLocalE_test.cpp") CONFIG_FILES="$CONFIG_FILES Energy_Terms/Test/SymHoLocalE_test.cpp" ;;
     "Genetic_Algorithm/Makefile") CONFIG_FILES="$CONFIG_FILES Genetic_Algorithm/Makefile" ;;
     "Genetic_Algorithm/BitVector.cpp") CONFIG_FILES="$CONFIG_FILES Genetic_Algorithm/BitVector.cpp" ;;
