@@ -1748,6 +1748,10 @@ ac_config_files="$ac_config_files Utilities/StringUtilities.h"
 
 ac_config_files="$ac_config_files Utilities/VMCPoint.h"
 
+ac_config_files="$ac_config_files Metropolis_Walker/Makefile"
+
+ac_config_files="$ac_config_files Metropolis_Walker/VMCMetropolisWalker.cpp"
+
 ac_config_files="$ac_config_files Metropolis_Walker/VMCMetropolisWalker.h"
 
 ac_config_files="$ac_config_files Metropolis_Walker/Test/Makefile"
@@ -2527,6 +2531,8 @@ do
     "Utilities/rand.h") CONFIG_FILES="$CONFIG_FILES Utilities/rand.h" ;;
     "Utilities/StringUtilities.h") CONFIG_FILES="$CONFIG_FILES Utilities/StringUtilities.h" ;;
     "Utilities/VMCPoint.h") CONFIG_FILES="$CONFIG_FILES Utilities/VMCPoint.h" ;;
+    "Metropolis_Walker/Makefile") CONFIG_FILES="$CONFIG_FILES Metropolis_Walker/Makefile" ;;
+    "Metropolis_Walker/VMCMetropolisWalker.cpp") CONFIG_FILES="$CONFIG_FILES Metropolis_Walker/VMCMetropolisWalker.cpp" ;;
     "Metropolis_Walker/VMCMetropolisWalker.h") CONFIG_FILES="$CONFIG_FILES Metropolis_Walker/VMCMetropolisWalker.h" ;;
     "Metropolis_Walker/Test/Makefile") CONFIG_FILES="$CONFIG_FILES Metropolis_Walker/Test/Makefile" ;;
     "Metropolis_Walker/Test/walker_test.cpp") CONFIG_FILES="$CONFIG_FILES Metropolis_Walker/Test/walker_test.cpp" ;;

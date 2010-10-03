@@ -12,97 +12,50 @@ Class describes behaviour of a variational Monte Carlo (VMC) Metropolis walker, 
 
 #include "Utilities/rand.h"
 #include "Utilities/VMCPoint.h"
+#include "Configurations/JastrowConfig.h"
 
-namespace QMC{
-
-	
-	//typename Config should have behaviour as defined by Configurations/VMCconfig.h
-	template <typename Config>
-	class VMCMetropolisWalker
-	{
-	public:
-               /* Config m_Config;
-		unsigned m_nConfig;
-		double m_EAve;
-		double m_EAveSqd;
-		double m_EDev;*/
-
-		VMCMetropolisWalker(const Config configi):m_Config(configi)
-		{
-			m_nConfig = 0;
-			m_EAve = 0.0;
-			m_EAveSqd = 0.0;
-			m_EDev = 0.0;
-		}
+namespace QMC
+{
+class VMCMetropolisWalker
+{
+public:
+  VMCMetropolisWalker(const JastrowConfig& configi);
+  ~VMCMetropolisWalker();
 		
-		// Run the Walker
-		unsigned Run(unsigned nConfigInit, unsigned nConfigRun)
-		{
-			//if(nConfig !> 0)
-			//{
-				//THROW_EXCEPTION("EXCEPTION: Number of Runs must be greater than zero");
-			//}
-			
-			unsigned n;
-			VMCPoint endPoint;
-			double q;
-			
-			// moving without computing energy
-			for(unsigned i=0; i< nConfigInit; i++)
-			{
-				m_Config.TrialMove(&n, endPoint, &q);
-				if(q>ran2(m_Config.m_Seed))
-				{
-					m_Config.Move(n, endPoint, false);
-				}
-			}
-			
-			// moving and computing energy
-			double Energy = 0.0;
-			double EnergySqd = 0.0;
-			double EnergySum = 0.0;
-			double EnergySqdSum = 0.0;
-			for(m_nConfig=0; m_nConfig<nConfigRun; m_nConfig++)
-			{
-				m_Config.TrialMove(&n, endPoint, &q);
-				if(q>ran2(m_Config.m_Seed))
-				{
-					m_Config.Move(n, endPoint, true);
-				}
-				
-				Energy = m_Config.GetEnergy();
-				EnergySqd = m_Config.GetEnergySqd();
-				EnergySum += Energy;
-				EnergySqdSum += EnergySqd;
-			}
-			
-			m_EAve = EnergySum/m_nConfig;
-			m_EAveSqd = EnergySqdSum/m_nConfig;
-			m_EDev = sqrt(m_EAveSqd/m_nConfig - m_EAve*m_EAve);
-			
-			return m_nConfig;
-		}
+  void Run(unsigned nConfigInit, unsigned nConfigRun);
+  double getEAve() const;
+  double getEDev() const;
+  double getEAveSqd() const;
+  unsigned getNConfig() const;
 		
-            double GetEAve() const
-            { return m_EAve; }
-
-            double GetEDev() const
-            { return m_EDev; }
-
-            double GetEAveSqd() const
-            { return m_EAveSqd;}
-
-            unsigned GetNConfig() const
-            { return m_nConfig; }
-		
-	private:
-		Config m_Config;
-		unsigned m_nConfig;
-		double m_EAve;
-		double m_EAveSqd;
-		double m_EDev;
-                
-	};
+private:
+   JastrowConfig m_Config;
+   unsigned m_nConfig;
+   double m_EAve;
+   double m_EAveSqd;
+   double m_EDev;
 };
-	
+
+
+inline double VMCMetropolisWalker::getEAve() const
+{
+   return m_EAve; 
+}
+
+inline double VMCMetropolisWalker::getEDev() const
+{
+   return m_EDev; 
+}
+
+inline double VMCMetropolisWalker::getEAveSqd() const
+{
+   return m_EAveSqd;
+}
+
+inline unsigned VMCMetropolisWalker::getNConfig() const
+{ 
+   return m_nConfig; 
+}
+
+};	
 #endif

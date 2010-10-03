@@ -1,0 +1,64 @@
+/**
+ *@file VMCMetropolisWalker.cpp
+ *
+ *@author ikhan
+ */
+
+#include "VMCMetropolisWalker.h"
+
+using namespace QMC;
+
+VMCMetropolisWalker::VMCMetropolisWalker(const JastrowConfig& configi):m_Config(configi)
+{
+  m_nConfig = 0;
+  m_EAve = 0.0;
+  m_EAveSqd = 0.0;
+  m_EDev = 0.0;
+}
+
+VMCMetropolisWalker::~VMCMetropolisWalker()
+{
+
+}
+
+void VMCMetropolisWalker::Run(unsigned nConfigInit, unsigned nConfigRun)
+{
+   unsigned n = 0;
+   VMCPoint endPoint;
+   double q = 0.0;
+			
+   // moving without computing energy
+   for(unsigned i=0; i< nConfigInit; i++)
+   {
+      m_Config.TrialMove(&n, endPoint, &q);
+      if(q>ran2(m_Config.m_Seed))
+      {
+         m_Config.Move(n, endPoint, false);
+      }
+   }
+			
+   // moving and computing energy
+   double Energy = 0.0;
+   double EnergySqd = 0.0;
+   double EnergySum = 0.0;
+   double EnergySqdSum = 0.0;
+   for(m_nConfig=0; m_nConfig<nConfigRun; m_nConfig++)
+   {
+      m_Config.TrialMove(&n, endPoint, &q);
+      if(q>ran2(m_Config.m_Seed))
+      {
+         m_Config.Move(n, endPoint, true);
+      }
+				
+      Energy = m_Config.getEnergy();
+      EnergySqd = m_Config.getEnergySqd();
+      EnergySum += Energy;
+      EnergySqdSum += EnergySqd;
+   }
+			
+   m_EAve = EnergySum/m_nConfig;
+   m_EAveSqd = EnergySqdSum/m_nConfig;
+   m_EDev = sqrt(m_EAveSqd/m_nConfig - m_EAve*m_EAve);
+   			
+   //return m_nConfig;
+}

@@ -5,10 +5,10 @@
 #include <cmath>
 
 #include "Configurations/JastrowConfig.h"
-#include "Wavefunctions/SymHoPhi.h"
-#include "Wavefunctions/NonInteractingF.h"
-#include "Energy_Terms/SymHoLocalE.h"
-#include "Energy_Terms/SymHoLocalESqd.h"
+#include "Wavefunctions/Phi.h"
+#include "Wavefunctions/InteractionF.h"
+#include "Energy_Terms/localE.h"
+#include "Energy_Terms/localESqd.h"
 #include "Metropolis_Walker/VMCMetropolisWalker.h"
 
 using namespace QMC;
@@ -21,7 +21,6 @@ int main()
 	static unsigned nConfigs = 100000;
 	static unsigned nRuns = 300;
 
-	double alpha = 0.5;
         unsigned NAtoms = 10;
         unsigned NDIM = 3;
         ::std::valarray<double> BOXSIZES(NDIM);
@@ -30,33 +29,32 @@ int main()
         BOXSIZES[2] = 5.1;
         double r0 = 0.0;
 	
-	SymHoPhi phi(alpha);
-	NonInteractingF F;
+	Phi phi;
+	InteractionF F;
 
-        SymHoLocalE localE(alpha);
-        SymHoLocalESqd localESqd(alpha);
+        localE localE1;
+        localESqd localESqd1;
 
         ::std::cout<<"Wavefunctions and energy terms created..."<<::std::endl;
 
-	JastrowConfig< SymHoPhi, NonInteractingF, SymHoLocalE, SymHoLocalESqd>
-            configi(NAtoms, NDIM, BOXSIZES, r0, phi, F, localE, localESqd);
+	JastrowConfig configi(NAtoms, NDIM, r0, BOXSIZES, phi, F, localE1, localESqd1);
         ::std::cout<<"JastrowConfig created.."<<::std::endl;
 
-	VMCMetropolisWalker< JastrowConfig<SymHoPhi, NonInteractingF, SymHoLocalE, SymHoLocalESqd> > walker(configi);
+	VMCMetropolisWalker walker(configi);
 	::std::cout<<"Walker created.."<<::std::endl;
 
 	// Initial run
 	walker.Run(nConfigInit,nConfigs);
-	double Eave = walker.GetEAve();
-	double Edev = walker.GetEDev();
+	double Eave = walker.getEAve();
+	  //double Edev = walker.getEDev();
 	double EaveSum = Eave;
 	double Eave2Sum = Eave*Eave;
-	double EdevSum = Edev;
-	double Edev2Sum = Edev*Edev;
-	for(unsigned i=1;i<nRuns;i++) {
+	  //double EdevSum = Edev;
+	  //double Edev2Sum = Edev*Edev;
+	  /*for(unsigned i=1;i<nRuns;i++) {
 		walker.Run(0,nConfigs);
-		Eave = walker.GetEAve();
-		Edev = walker.GetEDev();
+		Eave = walker.getEAve();
+		Edev = walker.getEDev();
 //		cout << "For Run #" << i << endl;
 //		cout << "Eave = " << Eave << endl;
 //		cout << "Edev = " << Edev << endl;
@@ -65,11 +63,11 @@ int main()
 		EdevSum += Edev;
 		Edev2Sum += Edev*Edev;
 		::std::cout<<"nRuns = "<<i<<::std::endl;
-	}
+		}*/
 	double AveEave = EaveSum/nRuns;
 	double VarEave = sqrt(Eave2Sum/nRuns-AveEave*AveEave);
-	double AveEdev = EdevSum/nRuns;
-	double VarEdev = sqrt(Edev2Sum/nRuns-AveEdev*AveEdev);
+	  //double AveEdev = EdevSum/nRuns;
+	  //double VarEdev = sqrt(Edev2Sum/nRuns-AveEdev*AveEdev);
 
 	::std::cout<<"AveEave = "<<AveEave<<::std::endl;
 	::std::cout<<"Variance = "<<VarEave<<::std::endl;
