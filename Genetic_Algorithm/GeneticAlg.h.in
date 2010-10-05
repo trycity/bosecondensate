@@ -7,15 +7,16 @@ Header file for genetic algortihm
 #ifndef _GENETICALG_H
 #define _GENETICALG_H
 
-#include "BitVector.h"
 #include <vector>
+
+#include "BitVector.h"
+
 
 namespace QMC{
 	class GeneticAlg
 	{
 	public:
 		GeneticAlg(unsigned size, unsigned precision, unsigned iterations, ::std::vector<double> domain);
-		// GeneticAlg(unsigned size, unsigned precision, unsigned iterations, unsigned NParams, ::std::vector<double> domain);
 		~GeneticAlg();
 		
 		int calcLength();

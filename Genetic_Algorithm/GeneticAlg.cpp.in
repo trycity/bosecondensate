@@ -12,7 +12,7 @@ GeneticAlg::GeneticAlg(unsigned size, unsigned precision, unsigned iterations, :
 {
 	m_Length = calcLength();
 	m_Farm = new int*[m_Size];
-	for(int i=0; i<m_Size; i++)
+	for(unsigned i=0; i<m_Size; i++)
 	{
 		m_Farm[i] = new int[m_Length];
 		//m_FarmA.push_back(new int[m_Length]);
@@ -24,7 +24,7 @@ GeneticAlg::GeneticAlg(unsigned size, unsigned precision, unsigned iterations, :
 
 GeneticAlg::~GeneticAlg()
 {
-	for(int k=0; k<m_Size; k++)
+	for(unsigned k=0; k<m_Size; k++)
 	{
 		delete[] m_Farm[k];
 	}
@@ -61,7 +61,7 @@ void GeneticAlg::setup()
 {
 	srand((unsigned long) time(NULL));
 
-	for(int i=0; i<m_Size; i++)
+	for(unsigned i=0; i<m_Size; i++)
 	{
 		for(int j=0; j<m_Length; j++)
 		{
@@ -103,8 +103,8 @@ double GeneticAlg::yValue(int* chromosome, int yLength)
 
 double GeneticAlg::fitnessValue(int* chromosome, int xLength, int yLength)
 {
-	double x = xValue(chromosome, xLength);
-	double y = yValue(chromosome, yLength);
+  //double x = xValue(chromosome, xLength);
+  //	double y = yValue(chromosome, yLength);
 
 	double result = 0.0;//func(x, y);
 
@@ -114,7 +114,7 @@ double GeneticAlg::fitnessValue(int* chromosome, int xLength, int yLength)
 
 void GeneticAlg::roulette(int xLength, int yLength)
 {
-	int i = 0;
+	unsigned i = 0;
 	int j = 0;
 
 	// fitness matrix contains the fitness of each individual chromosome on farm
@@ -209,8 +209,8 @@ void GeneticAlg::roulette(int xLength, int yLength)
 
 void GeneticAlg::crossing()
 {
-	int i = 0;
-	int count = 0;
+	unsigned i = 0;
+	unsigned count = 0;
 
 	int* chosen = new int[m_Size];
 	double* randomVector = new double[m_Size];
@@ -337,7 +337,7 @@ void GeneticAlg::run()
 	int xLength = cLength(m_Domain[0], m_Domain[1]);
 	int yLength = cLength(m_Domain[2], m_Domain[3]);
 	
-	for(int t=0; t<m_Iterations; t++)
+	for(unsigned t=0; t<m_Iterations; t++)
 	{
 		roulette(xLength, yLength);
 		crossing();

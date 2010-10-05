@@ -23,6 +23,7 @@ ifeq ("$(IS_DEBUG_BUILD)", "y")
 CXXFLAGS += -g
 else
 CXXFLAGS += -DNDEBUG
+CXXFLAGS += -O2
 endif
 CXXFLAGS += $(INCDIRS)
 
