@@ -11,6 +11,7 @@ Header file for genetic algortihm
 
 #include "Metropolis_Walker/VMCMetropolis_Walker.h"
 #include "BitVector.h"
+//#include "Utilities/rand.h"
 
 
 namespace QMC{
@@ -45,7 +46,8 @@ namespace QMC{
 		::std::vector<double> m_Domain;
 		int m_Length;
 		int** m_Farm;
-		::std::vector< ::std::vector<int> > m_FarmA;
+		std::vector< ::std::vector<BitVector> > m_FarmA;
+		
 	};
 };
 
