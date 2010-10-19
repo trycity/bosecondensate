@@ -1,0 +1,354 @@
+// GeneticAlg.cpp
+
+#include "GeneticAlg.h"
+#include <cmath>
+#include <ctime>
+#include <cstdlib>
+
+using namespace QMC;
+
+GeneticAlg::GeneticAlg(unsigned size, unsigned precision, unsigned iterations, ::std::vector<double> domain):
+	m_Size(size), m_Precision(precision), m_Iterations(iterations), m_Domain(domain)
+{
+	m_Length = calcLength();
+	m_Farm = new int*[m_Size];
+	for(unsigned i=0; i<m_Size; i++)
+	{
+		m_Farm[i] = new int[m_Length];
+		//m_FarmA.push_back(new int[m_Length]);
+	}
+
+	setup();
+}
+
+
+GeneticAlg::~GeneticAlg()
+{
+	for(unsigned k=0; k<m_Size; k++)
+	{
+		delete[] m_Farm[k];
+	}
+	
+	delete m_Farm;
+	m_Farm = 0;
+}
+
+
+int GeneticAlg::calcLength()
+{
+	int xLength = cLength(m_Domain[0], m_Domain[1]);
+	int yLength = cLength(m_Domain[2], m_Domain[3]);
+	
+	return (xLength + yLength);
+}
+
+
+int GeneticAlg::cLength(double rangeStart, double rangeEnd)
+{
+	int length = 0;
+	double total = (rangeEnd - rangeStart)*pow(10.0, m_Precision);
+
+	while(total > pow(2.0, length))
+	{
+		length++;
+	}
+
+	return length;
+}
+
+
+void GeneticAlg::setup()
+{
+	srand((unsigned long) time(NULL));
+
+	for(unsigned i=0; i<m_Size; i++)
+	{
+		for(int j=0; j<m_Length; j++)
+		{
+			m_Farm[i][j] = rand()%2;
+		}
+	}
+}
+
+
+double GeneticAlg::xValue(int* chromosome, int xLength)
+{
+	double m = 0.0;
+	
+	for(int i=0; i<xLength; i++)
+	{
+		m += chromosome[xLength-i-1]*pow(2.0, i);
+	}
+
+	double x = m_Domain[0] + m*(m_Domain[1] - m_Domain[0])/(pow(2.0, xLength)-1.0);
+
+	return x;
+}
+
+
+double GeneticAlg::yValue(int* chromosome, int yLength)
+{
+	double m = 0.0;
+
+	for(int i=0; i<yLength; i++)
+	{
+		m += chromosome[m_Length-i-1]*pow(2.0, i);
+	}
+
+	double y = m_Domain[2] + m*(m_Domain[3] - m_Domain[2])/(pow(2.0, yLength)-1.0);
+
+	return y;
+}
+
+
+double GeneticAlg::fitnessValue(int* chromosome, int xLength, int yLength)
+{
+  //double x = xValue(chromosome, xLength);
+  //	double y = yValue(chromosome, yLength);
+
+	double result = 0.0;//func(x, y);
+
+	return result;
+}
+
+
+void GeneticAlg::roulette(int xLength, int yLength)
+{
+	unsigned i = 0;
+	int j = 0;
+
+	// fitness matrix contains the fitness of each individual chromosome on farm
+	// fitnessVector contains the fitness of each individual chromosome of the farm
+	double* fitnessVector = new double[m_Size];
+
+	for(i=0; i<m_Size; i++)
+	{
+		fitnessVector[i] = fitnessValue(m_Farm[i], xLength, yLength);
+	}
+
+	double totalFitness = 0.0;
+
+	for(i=0; i<m_Size; i++)
+	{
+		totalFitness += fitnessVector[i];
+	}
+
+	// calculate the probability vector
+	double* probabilityVector = new double[m_Size];
+	double cumulativeProb = 0.0;			// cumulative probability
+	double* cum_prob_Vector = new double[m_Size];	// cumulative probability vector
+
+	for(i=0; i<m_Size; i++)
+	{
+		probabilityVector[i] = fitnessVector[i]/totalFitness;
+		cumulativeProb += probabilityVector[i];
+		cum_prob_Vector[i] = cumulativeProb;
+	}
+
+	// setup random vector
+	double* randomVector = new double[m_Size];
+	srand((unsigned long) time(NULL));
+
+	for(i=0; i<m_Size; i++)
+	{
+		randomVector[i] = rand()/double(RAND_MAX);
+	}
+
+	// create new population
+	int count;
+	int** newFarm = new int*[m_Size];
+
+	for(i=0; i<m_Size; i++)
+	{
+		newFarm[i] = new int[m_Length];
+	}
+
+	for(i=0; i<m_Size; i++)
+	{
+		count = 0;
+		while(randomVector[i] > cum_prob_Vector[count])
+		{
+			count++;
+		}
+
+		for(j=0; j<m_Length; j++)
+		{
+			newFarm[i][j] = m_Farm[count][j];
+		}
+	}
+
+	for(i=0; i<m_Size; i++)
+	{
+		for(j=0; j<m_Length; j++)
+		{
+			m_Farm[i][j] = newFarm[i][j];
+		}
+	}
+
+	delete[] fitnessVector;
+	fitnessVector = NULL;
+
+	delete[] probabilityVector;
+	probabilityVector = NULL;
+
+	delete[] cum_prob_Vector;
+	cum_prob_Vector = NULL;
+
+	delete[] randomVector;
+	randomVector = NULL;
+
+	for(i=0; i<m_Size; i++)
+	{
+		delete[] newFarm[i];
+	}
+
+	delete[] newFarm;
+	newFarm = NULL;
+}
+
+
+void GeneticAlg::crossing()
+{
+	unsigned i = 0;
+	unsigned count = 0;
+
+	int* chosen = new int[m_Size];
+	double* randomVector = new double[m_Size];
+
+	srand((unsigned long) time(NULL));
+
+	for(i=0; i<m_Size; i++)
+	{
+		randomVector[i] = rand()/double(RAND_MAX);
+	}
+
+	// fill chosen with indexes of all random values < 0.25
+
+	for(i=0; i<m_Size; i++)
+	{
+		if(randomVector[i] < 0.25)
+		{
+			chosen[count] = i;
+			count++;
+		}
+	}
+
+	// if chosen contains an odd number of chromosomes, then one more chromosome is to be selected
+	if((count%2 != 0) || (count == 1))
+	{
+		int index = 0;
+		while(randomVector[index] < 0.25)
+		{
+			index++;
+		}
+		count++;
+		chosen[count-1] = index;
+	}
+
+	// cross chromosomes with index given in chosen
+	int** temp = new int*[2];
+	for(i=0; i<2; i++)
+	{
+		temp[i] = new int[m_Length];
+	}
+
+	for(i=0; i<count; i=i+2)
+	{
+		for(int j=0; j<m_Length; j++)
+		{
+			temp[0][j] = m_Farm[chosen[i]][j];
+			temp[1][j] = m_Farm[chosen[i+1]][j];
+		}
+		
+		int position = rand()%m_Length;
+
+		for(int k=position; k<m_Length; k++)
+		{
+			temp[0][k] = m_Farm[chosen[i+1]][k];
+			temp[1][k] = m_Farm[chosen[i]][k];
+		}
+
+		for(int m=0; m < m_Length; m++)
+		{
+			m_Farm[chosen[i]][m] = temp[0][m];
+			m_Farm[chosen[i+1]][m] = temp[0][m];
+		}
+	}
+
+	delete[] chosen;
+	chosen = NULL;
+
+	delete[] randomVector;
+	randomVector = NULL;
+
+	for(i=0; i<2; i++)
+	{
+		delete[] temp[i];
+	}
+	delete[] temp;
+	temp = NULL;	
+}
+		
+
+void GeneticAlg::mutate()
+{
+	int totalbits = m_Size*m_Length;
+	double* randomVector = new double[totalbits];
+
+	srand((unsigned long) time(NULL));
+
+	for(int i=0; i<totalbits; i++)
+	{
+		randomVector[i] = rand()/double(RAND_MAX);
+	}
+
+	int a = 0, b = 0;
+	for(int i=0; i<totalbits; i++)
+	{
+		if(randomVector[i] < 0.01)
+		{
+			if(i >= m_Length)
+			{
+				a = i/m_Length;
+				b = i%m_Length;
+			}else
+			{
+				a = 0;
+				b = i;
+			}
+
+			if(m_Farm[a][b] == 0)
+			{
+				m_Farm[a][b] = 1;
+			}else
+			{
+				m_Farm[a][b] = 0;
+			}
+		}
+	}
+
+	delete[] randomVector;
+	randomVector = NULL;
+}
+
+
+void GeneticAlg::run()
+{
+	int xLength = cLength(m_Domain[0], m_Domain[1]);
+	int yLength = cLength(m_Domain[2], m_Domain[3]);
+	
+	for(unsigned t=0; t<m_Iterations; t++)
+	{
+		roulette(xLength, yLength);
+		crossing();
+
+		roulette(xLength, yLength);
+		mutate();
+	}
+}
+
+
+int GeneticAlg::getLength()const
+{
+	return m_Length;
+}
