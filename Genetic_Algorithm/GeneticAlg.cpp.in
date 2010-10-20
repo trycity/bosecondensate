@@ -1,9 +1,12 @@
 // GeneticAlg.cpp
 
-#include "GeneticAlg.h"
 #include <cmath>
 #include <ctime>
 #include <cstdlib>
+
+#include "GeneticAlg.h"
+//#include "Utilities/rand.h"
+
 
 using namespace QMC;
 
@@ -14,8 +17,8 @@ GeneticAlg::GeneticAlg(unsigned size, unsigned precision, unsigned iterations, :
 	m_Farm = new int*[m_Size];
 	for(unsigned i=0; i<m_Size; i++)
 	{
+	  //m_Farm.push_back(std::vector<BitVector>());
 		m_Farm[i] = new int[m_Length];
-		//m_FarmA.push_back(new int[m_Length]);
 	}
 
 	setup();
