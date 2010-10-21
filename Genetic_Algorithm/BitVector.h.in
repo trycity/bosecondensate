@@ -1,49 +1,70 @@
-// BitVector.h
-
-/*
-BitVector header file
+/**
+ *@file BitVector.h
+ *
+ *@author ikhan
 */
 
 #ifndef _BITVECTOR_H
 #define _BITVECTOR_H
 
 
-
 static const unsigned char _BV_BITS[8] = {1, 2, 4, 8, 16, 32, 64, 128};
 
-namespace QMC{
-	class BitVector
-	{
-	public:
-		BitVector();
-		BitVector(int nbits);
-		BitVector(const BitVector&);
-		~BitVector();
+namespace QMC
+{
+  /**
+   *@brief BitVector used to create basic genome in genetic algorithm.
+   */
 
+   class BitVector
+   {
+   public:
+     /**
+      *Creates a BitVector object (default constructor)
+      */
+     BitVector();
 
-		//accessor methods
-		void SetBit(int bit, bool val=true);
-		int GetBit(int bit) const;
-		void ToggleBit(int bit);
-		void SetLength(int nbits);
-		int getLen() const;
-		unsigned char* getBitVec() const;
-		//unsigned char* getBitveci(int i) const;
+     /**
+      *Creates a BitVector object with a fixed number of bit
+      *
+      *@param The number of bits
+      */
+     BitVector(int nbits);
 
-		BitVector operator&(const BitVector&) const;
-		BitVector& operator&=(const BitVector&);
-		BitVector operator | (const BitVector&) const;
-		BitVector& operator |=(const BitVector&);
-		BitVector operator ^(const BitVector&) const;
-		BitVector& operator ^=(const BitVector&);
-		friend BitVector operator ~(const BitVector&);
-		BitVector& operator = (const BitVector&);
-		int operator[](int bit) const;		
+     /**
+      *Copy constructor
+      *
+      *@param A constant reference to a BitVector object
+      */
+     BitVector(const BitVector&);
 
-	//protected:	
-		int m_Len;
-		unsigned char* m_BitVec;
-	};
+     /**
+      *Destroys a BitVector object
+      */
+     ~BitVector();
+
+     //accessor methods
+     void SetBit(int bit, bool val=true);
+     int GetBit(int bit) const;
+     void ToggleBit(int bit);
+     void SetLength(int nbits);
+     int getLen() const;
+     unsigned char* getBitVec() const;
+        
+     BitVector operator&(const BitVector&) const;
+     BitVector& operator&=(const BitVector&);
+     BitVector operator | (const BitVector&) const;
+     BitVector& operator |=(const BitVector&);
+     BitVector operator ^(const BitVector&) const;
+     BitVector& operator ^=(const BitVector&);
+     friend BitVector operator ~(const BitVector&);
+     BitVector& operator = (const BitVector&);
+     int operator[](int bit) const;		
+     
+     //protected:	
+     int m_Len;
+     unsigned char* m_BitVec;
+};
 };
 
 #endif

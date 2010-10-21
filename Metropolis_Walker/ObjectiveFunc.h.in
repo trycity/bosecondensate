@@ -1,0 +1,33 @@
+/**
+ *@file ObjectiveFunc.h
+ *
+ *@author ikhan
+ */
+
+#ifndef _OBJECTIVEFUNC_H
+#define _OBJECTIVEFUNC_H
+
+#include "Metropolis_Walker/VMCMetropolisWalker.h"
+
+namespace QMC
+{
+   class ObjectiveFunc
+   {
+   public:
+     ObjectiveFunc(const VMCMetropolisWalker& walker, unsigned nRuns, unsigned nSteps);
+     ~ObjectiveFunc();
+
+     void run();
+     void setParameters(double param1, double param2);
+     double getVariance();
+
+   private:
+     unsigned m_NRuns;
+     unsigned m_NSteps;
+     double m_Param1;
+     double m_Param2;
+     double m_Variance;
+     VMCMetropolisWalker m_Walker;
+};
+
+#endif
