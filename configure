@@ -1770,10 +1770,6 @@ ac_config_files="$ac_config_files Wavefunctions/HardSphereF.cpp"
 
 ac_config_files="$ac_config_files Wavefunctions/HardSphereF.h"
 
-ac_config_files="$ac_config_files Wavefunctions/HomogeneousPhi.cpp"
-
-ac_config_files="$ac_config_files Wavefunctions/HomogeneousPhi.h"
-
 ac_config_files="$ac_config_files Wavefunctions/InteractionF.h"
 
 ac_config_files="$ac_config_files Wavefunctions/NonInteractingF.cpp"
@@ -1787,8 +1783,6 @@ ac_config_files="$ac_config_files Wavefunctions/SymHoPhi.cpp"
 ac_config_files="$ac_config_files Wavefunctions/SymHoPhi.h"
 
 ac_config_files="$ac_config_files Wavefunctions/Test/Makefile"
-
-ac_config_files="$ac_config_files Wavefunctions/Test/HomogeneousPhi_test.cpp"
 
 ac_config_files="$ac_config_files Wavefunctions/Test/SymHoPhi_test.cpp"
 
@@ -2544,8 +2538,6 @@ do
     "Wavefunctions/EffectiveRangeF.h") CONFIG_FILES="$CONFIG_FILES Wavefunctions/EffectiveRangeF.h" ;;
     "Wavefunctions/HardSphereF.cpp") CONFIG_FILES="$CONFIG_FILES Wavefunctions/HardSphereF.cpp" ;;
     "Wavefunctions/HardSphereF.h") CONFIG_FILES="$CONFIG_FILES Wavefunctions/HardSphereF.h" ;;
-    "Wavefunctions/HomogeneousPhi.cpp") CONFIG_FILES="$CONFIG_FILES Wavefunctions/HomogeneousPhi.cpp" ;;
-    "Wavefunctions/HomogeneousPhi.h") CONFIG_FILES="$CONFIG_FILES Wavefunctions/HomogeneousPhi.h" ;;
     "Wavefunctions/InteractionF.h") CONFIG_FILES="$CONFIG_FILES Wavefunctions/InteractionF.h" ;;
     "Wavefunctions/NonInteractingF.cpp") CONFIG_FILES="$CONFIG_FILES Wavefunctions/NonInteractingF.cpp" ;;
     "Wavefunctions/NonInteractingF.h") CONFIG_FILES="$CONFIG_FILES Wavefunctions/NonInteractingF.h" ;;
@@ -2553,7 +2545,6 @@ do
     "Wavefunctions/SymHoPhi.cpp") CONFIG_FILES="$CONFIG_FILES Wavefunctions/SymHoPhi.cpp" ;;
     "Wavefunctions/SymHoPhi.h") CONFIG_FILES="$CONFIG_FILES Wavefunctions/SymHoPhi.h" ;;
     "Wavefunctions/Test/Makefile") CONFIG_FILES="$CONFIG_FILES Wavefunctions/Test/Makefile" ;;
-    "Wavefunctions/Test/HomogeneousPhi_test.cpp") CONFIG_FILES="$CONFIG_FILES Wavefunctions/Test/HomogeneousPhi_test.cpp" ;;
     "Wavefunctions/Test/SymHoPhi_test.cpp") CONFIG_FILES="$CONFIG_FILES Wavefunctions/Test/SymHoPhi_test.cpp" ;;
     "Wavefunctions/Test/EffectiveRangeF_test.cpp") CONFIG_FILES="$CONFIG_FILES Wavefunctions/Test/EffectiveRangeF_test.cpp" ;;
     "Wavefunctions/Test/NonInteractingF_test.cpp") CONFIG_FILES="$CONFIG_FILES Wavefunctions/Test/NonInteractingF_test.cpp" ;;
