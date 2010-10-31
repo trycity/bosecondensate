@@ -8,6 +8,9 @@
 #define _OBJECTIVEFUNC_H
 
 #include "Metropolis_Walker/VMCMetropolisWalker.h"
+#include "Configurations/JastrowConfig.h"
+#include "Wavefunctions/Phi.h"
+#include "Wavefunctions/InteractionF.h"
 
 namespace QMC
 {
@@ -18,16 +21,16 @@ namespace QMC
      ~ObjectiveFunc();
 
      void run();
-     void setParameters(double param1, double param2);
+     void setVariationParams(double param1, double param2);
      double getVariance();
 
    private:
+     VMCMetropolisWalker m_Walker;
      unsigned m_NRuns;
      unsigned m_NSteps;
      double m_Param1;
      double m_Param2;
      double m_Variance;
-     VMCMetropolisWalker m_Walker;
 };
 
 #endif

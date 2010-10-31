@@ -15,6 +15,7 @@ class Phi
 public:
    virtual ~Phi() {}
 
+   virtual void setParam(double alpha){}
    virtual double operator()(const VMCPoint& x)const
    {
      return 1.0;

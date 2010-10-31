@@ -13,6 +13,7 @@ class InteractionF
 public:
    virtual ~InteractionF() {}
 
+   virtual void setParam(double beta){}
    virtual double operator()(double rij)const
    {
      return 1.0;

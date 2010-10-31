@@ -1758,6 +1758,8 @@ ac_config_files="$ac_config_files Metropolis_Walker/Test/Makefile"
 
 ac_config_files="$ac_config_files Metropolis_Walker/Test/walker_test.cpp"
 
+ac_config_files="$ac_config_files System/ObjectiveFunc.h"
+
 ac_config_files="$ac_config_files Wavefunctions/Makefile"
 
 ac_config_files="$ac_config_files Wavefunctions/EffectiveRangeF.cpp"
@@ -2536,6 +2538,7 @@ do
     "Metropolis_Walker/VMCMetropolisWalker.h") CONFIG_FILES="$CONFIG_FILES Metropolis_Walker/VMCMetropolisWalker.h" ;;
     "Metropolis_Walker/Test/Makefile") CONFIG_FILES="$CONFIG_FILES Metropolis_Walker/Test/Makefile" ;;
     "Metropolis_Walker/Test/walker_test.cpp") CONFIG_FILES="$CONFIG_FILES Metropolis_Walker/Test/walker_test.cpp" ;;
+    "System/ObjectiveFunc.h") CONFIG_FILES="$CONFIG_FILES System/ObjectiveFunc.h" ;;
     "Wavefunctions/Makefile") CONFIG_FILES="$CONFIG_FILES Wavefunctions/Makefile" ;;
     "Wavefunctions/EffectiveRangeF.cpp") CONFIG_FILES="$CONFIG_FILES Wavefunctions/EffectiveRangeF.cpp" ;;
     "Wavefunctions/EffectiveRangeF.h") CONFIG_FILES="$CONFIG_FILES Wavefunctions/EffectiveRangeF.h" ;;
