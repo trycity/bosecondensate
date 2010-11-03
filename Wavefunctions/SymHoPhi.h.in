@@ -8,13 +8,12 @@ Class depicting symmetric harmonic oscillator Phi (SymHoPhi)
 #define _SYMHOPHI_H
 
 #include <valarray>
-
+//#include "Phi.h"
 #include "Utilities/VMCPoint.h"
 
 namespace QMC{
-	//typedef ::std::valarray<double> VMCPoint;
-	
-	class SymHoPhi
+		
+  class SymHoPhi
 	{
 	public:
 		SymHoPhi(){}

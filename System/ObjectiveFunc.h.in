@@ -11,13 +11,17 @@
 #include "Configurations/JastrowConfig.h"
 #include "Wavefunctions/Phi.h"
 #include "Wavefunctions/InteractionF.h"
+#include "Energy_Terms/localE.h"
+#include "Energy_Terms/localESqd.h"
 
 namespace QMC
 {
    class ObjectiveFunc
    {
    public:
-     ObjectiveFunc(const VMCMetropolisWalker& walker, unsigned nRuns, unsigned nSteps);
+     ObjectiveFunc(const Phi& phi, const InteractionF& intF,
+		   const localE& locE, const localESqd& locESqd,
+		   unsigned NAtoms, double radius, unsigned nRuns, unsigned nSteps);
      ~ObjectiveFunc();
 
      void run();
@@ -26,6 +30,7 @@ namespace QMC
 
    private:
      VMCMetropolisWalker m_Walker;
+     JastrowConfig m_Config;
      unsigned m_NRuns;
      unsigned m_NSteps;
      double m_Param1;
