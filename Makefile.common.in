@@ -19,6 +19,7 @@ CXXFLAGS = -MD
 CXXFLAGS += -Wall
 CXXFLAGS += -Werror
 CXXFLAGS += -m32
+CXXFLAGS += -fopenmp
 ifeq ("$(IS_DEBUG_BUILD)", "y")
 CXXFLAGS += -g
 else

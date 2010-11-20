@@ -44,11 +44,14 @@ void JastrowConfig::TrialMove(unsigned* pnWalked, VMCPoint& endPoint, double* pd
 			
    /// compute its distance to other particles
    std::valarray<double> rki(m_NParticles-1);
+
+   #pragma omp parallel for
    for(unsigned i=0; i<k; i++)
    {
       rki[i] = VmcDistance(m_vPoints[k], m_vPoints[i]);
    }
 
+   #pragma omp parallel for
    for(unsigned i=k+1; i<m_NParticles; i++)
    {
       rki[i-1] = VmcDistance(m_vPoints[k], m_vPoints[i]);
@@ -91,6 +94,8 @@ void JastrowConfig::TrialMove(unsigned* pnWalked, VMCPoint& endPoint, double* pd
 
    double w=1.0;
    w *= m_wfnPhi(endPoint)/m_wfnPhi(m_vPoints[k]);
+
+   #pragma omp parallel for
    for(unsigned i=0; i<m_NParticles; i++)
    {
       w *= m_wfnF(rkiT[i])/m_wfnF(rki[i]);
