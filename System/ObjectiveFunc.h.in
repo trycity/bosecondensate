@@ -21,7 +21,7 @@ namespace QMC
    public:
      ObjectiveFunc(const Phi& phi, const InteractionF& intF,
 		   const localE& locE, const localESqd& locESqd,
-		   unsigned NAtoms, double radius, unsigned nRuns, unsigned nSteps);
+		   double radius, unsigned NAtoms, unsigned nRuns, unsigned nSteps);
      ~ObjectiveFunc();
 
      void run();
@@ -31,6 +31,8 @@ namespace QMC
    private:
      VMCMetropolisWalker m_Walker;
      JastrowConfig m_Config;
+     double m_Radius;
+     unsigned m_NParticles;
      unsigned m_NRuns;
      unsigned m_NSteps;
      double m_Param1;
