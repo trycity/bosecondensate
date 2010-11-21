@@ -1,0 +1,35 @@
+/**
+ *@file ObjectiveFunc.cpp
+ *
+ *@author ikhan
+ */
+
+#include "ObjectiveFunc.h"
+
+ObjectiveFunc::ObjectiveFunc(const Phi& phi, 
+			     const InteractionF& intF,
+			     const localE& locE,
+			     const localESqd& locESqd,
+			     double radius, 
+			     unsigned NAtoms, unsigned nRuns, unsigned nSteps):
+  m_Radius(radius), m_NParticles(NAtoms), m_NRuns(nRuns), m_NSteps(nSteps)
+{
+}
+
+ObjectiveFunc::~ObjectiveFunc()
+{
+}
+
+void ObjectiveFunc::run()
+{
+}
+
+void ObjectiveFunc::setVariationParams(double param1, double param2)
+{
+}
+
+double ObjectiveFunc::getVariance()
+{
+  return 0;
+}
+  
