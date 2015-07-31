@@ -1,0 +1,1 @@
+Software designed to perform mainly atomic (quantum mechanical) calculations.  Software written in C++.
